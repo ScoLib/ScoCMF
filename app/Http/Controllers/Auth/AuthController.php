@@ -2,7 +2,7 @@
 
 namespace Sco\Http\Controllers\Auth;
 
-use Sco\User;
+use Sco\Models\User;
 use Validator;
 use Sco\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;

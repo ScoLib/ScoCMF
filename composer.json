@@ -1,9 +1,21 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "name": "ScoCMF",
+    "description": "天蝎内容管理框架（Sco Content Management Framework）",
+    "keywords": ["ScoCMF", "cmf"],
+    "license": "Apache-2.0",
+    "homepage": "http://www.scophp.com/",
     "type": "project",
+    "authors" : [
+        {
+            "name": "klgd",
+            "email": "slice1213@gmail.com",
+            "homepage": "http://www.scophp.com/",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "source": "https://git.oschina.net/klgd/ScoCMF.git"
+    },
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*"
