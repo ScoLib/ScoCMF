@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh_cn',
 
     /*
     |--------------------------------------------------------------------------
@@ -144,6 +144,8 @@ return [
         Sco\Providers\AuthServiceProvider::class,
         Sco\Providers\EventServiceProvider::class,
         Sco\Providers\RouteServiceProvider::class,
+        
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],
 
