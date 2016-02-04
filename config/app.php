@@ -155,7 +155,9 @@ return [
         Sco\Providers\AuthServiceProvider::class,
         Sco\Providers\EventServiceProvider::class,
         Sco\Providers\RouteServiceProvider::class,
-        
+        Sco\Providers\FrontendServiceProvider::class,
+        Sco\Providers\BackendServiceProvider::class,
+
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
     ],

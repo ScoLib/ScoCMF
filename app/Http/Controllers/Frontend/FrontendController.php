@@ -1,7 +1,9 @@
 <?php
 
 
-namespace Sco\Http\Controllers;
+namespace Sco\Http\Controllers\Frontend;
+
+use Sco\Http\Controllers\Controller;
 
 
 /**
@@ -9,7 +11,7 @@ namespace Sco\Http\Controllers;
  *
  * @package Sco\Http\Controllers
  */
-class HomeController extends Controller
+class FrontendController extends Controller
 {
 
     protected function render($view, $params = [])

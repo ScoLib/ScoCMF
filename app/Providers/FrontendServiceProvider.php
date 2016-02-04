@@ -4,20 +4,20 @@ namespace Sco\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class FrontendServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * Bootstrap the application services.
      *
      * @return void
      */
     public function boot()
     {
-        
+        //
     }
 
     /**
-     * Register any application services.
+     * Register the application services.
      *
      * @return void
      */

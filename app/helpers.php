@@ -34,9 +34,9 @@ function resources($path = '', $secure = null)
  *
  * @return string
  */
-function admin_action($url, $parameters = [], $secure = true)
+function backend_action($url, $parameters = [], $secure = true)
 {
-    $path = '';
+    $path = 'Backend\\';
     if (!empty($url)) {
         list($controllers, $action) = explode('@', strtolower($url));
         if (!$action) {
@@ -46,7 +46,7 @@ function admin_action($url, $parameters = [], $secure = true)
         $controller = array_pop($paths);
         $module     = empty($paths) ? '' : array_pop($paths);
         if (!empty($module)) {
-            $path .= ucfirst($module) . '\\Admin\\';
+            $path .= ucfirst($module) . '\\';
         }
         $path .= ucfirst($controller) . 'Controller@' . $action;
     }

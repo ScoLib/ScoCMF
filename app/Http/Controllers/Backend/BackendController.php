@@ -1,7 +1,9 @@
 <?php
 
 
-namespace Sco\Http\Controllers;
+namespace Sco\Http\Controllers\Backend;
+
+use Sco\Http\Controllers\Controller;
 
 
 /**
@@ -10,13 +12,12 @@ namespace Sco\Http\Controllers;
  *
  * @package Sco\Http\Controllers
  */
-class AdminController extends Controller
+class BackendController extends Controller
 {
 
     public function __construct()
     {
-        // 后台模板目录（空间）
-        view()->addNamespace('admin', base_path('resources/admin'));
+
     }
 
     /**
@@ -39,7 +40,7 @@ class AdminController extends Controller
      */
     protected function render($view, $params = [])
     {
-        return parent::render('admin::' . $view, $params);
+        return parent::render('backend::' . $view, $params);
     }
 
 }
