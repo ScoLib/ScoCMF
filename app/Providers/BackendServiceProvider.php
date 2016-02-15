@@ -13,9 +13,10 @@ class BackendServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // 后台模板目录（空间）
-        view()->addNamespace('backend', base_path('resources/backend'));
-        app('translator')->addNamespace('Backend', base_path('resources/lang/backend'));
+        // 后台模板目录
+        $this->loadViewsFrom(base_path('resources/backend'), 'backend');
+        // 后台语言包目录
+        $this->loadTranslationsFrom(base_path('resources/lang/backend'), 'Backend');
     }
 
     /**

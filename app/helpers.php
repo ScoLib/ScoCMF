@@ -22,7 +22,11 @@ function resources_path($path = '')
  */
 function resources($path = '', $secure = null)
 {
-    return app('url')->asset('resources/' . $path, $secure);
+    $resourcesUrl = config('domain.resources_site_url');
+    if (empty($path)) {
+        return $resourcesUrl;
+    }
+    return app('url')->assetFrom($resourcesUrl, $path, $secure);
 }
 
 /**
@@ -38,7 +42,7 @@ function backend_action($url, $parameters = [], $secure = true)
 {
     $path = 'Backend\\';
     if (!empty($url)) {
-        list($controllers, $action) = explode('@', strtolower($url));
+        list($controllers, $action) = explode('@', $url);
         if (!$action) {
             $action = 'index';
         }
@@ -52,4 +56,40 @@ function backend_action($url, $parameters = [], $secure = true)
     }
 
     return action($path, $parameters, $secure);
+}
+
+/**
+ * 后台语言包
+ *
+ * @param string $id
+ * @param array  $parameters
+ * @param string $domain
+ * @param string $locale
+ *
+ * @return string|\Symfony\Component\Translation\TranslatorInterface
+ */
+function backend_trans($id = null, $parameters = [], $domain = 'messages', $locale = null)
+{
+    return trans($id !== null ? 'Backend::' . $id : $id, $parameters, $domain, $locale);
+}
+
+function success($message = '操作成功', $data = [])
+{
+    return callback(true, $message, $data);
+}
+
+function error($message = '操作失败', $data = [])
+{
+    return callback(false, $message, $data);
+}
+
+function callback($state, $message = '', $data = [])
+{
+    $result = [
+        'state'   => $state,
+        'message' => $message,
+        'data'    => $data
+
+    ];
+    return $result;
 }

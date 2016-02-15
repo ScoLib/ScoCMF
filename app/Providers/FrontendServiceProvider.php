@@ -13,7 +13,8 @@ class FrontendServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // 前台语言包目录
+        $this->loadTranslationsFrom(base_path('resources/lang/frontend'), 'Frontend');
     }
 
     /**
