@@ -30,35 +30,6 @@ function resources($path = '', $secure = null)
 }
 
 /**
- * 生成后台操作URL
- *
- * @param string $url        模块/控制器@操作
- * @param array  $parameters 参数
- * @param bool   $secure     绝对地址
- *
- * @return string
- */
-function backend_action($url, $parameters = [], $secure = true)
-{
-    $path = 'Backend\\';
-    if (!empty($url)) {
-        list($controllers, $action) = explode('@', $url);
-        if (!$action) {
-            $action = 'index';
-        }
-        $paths      = explode('/', $controllers);
-        $controller = array_pop($paths);
-        $module     = empty($paths) ? '' : array_pop($paths);
-        if (!empty($module)) {
-            $path .= ucfirst($module) . '\\';
-        }
-        $path .= ucfirst($controller) . 'Controller@' . $action;
-    }
-
-    return action($path, $parameters, $secure);
-}
-
-/**
  * 后台语言包
  *
  * @param string $id

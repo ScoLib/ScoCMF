@@ -16,13 +16,13 @@ class IndexController extends BackendController
         $this->config = $config;
     }
 
-    public function index()
+    public function getIndex()
     {
         $configs = $this->config->getConfigs();
         return $this->render('system.index', compact('configs'));
     }
 
-    public function saveSite(Request $request)
+    public function postIndex(Request $request)
     {
         $configs = $request->input('configs');
         $this->config->saveConfigs($configs);

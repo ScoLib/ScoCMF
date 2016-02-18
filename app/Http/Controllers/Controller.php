@@ -40,7 +40,7 @@ abstract class Controller extends BaseController
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected function render($view, $params)
+    protected function render($view, $params = [])
     {
         if (!empty($this->params)) {
             $params = array_merge($this->params, $params);

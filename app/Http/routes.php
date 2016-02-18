@@ -1,47 +1,55 @@
 <?php
 $routes = [
     [
-        //'prefix' => 'admin',
-        'domain' => 'admin.scocmf.t',
-        'list' => [
+        [
+            'prefix'     => 'backend',
+            //'domain' => 'backend.scocmf.t',
+            'middleware' => ['web'],
+            'namespace'  => 'Backend',
+            'as' => 'backend.'
+        ],
+        [
+            ['get', 'login', 'AuthController@getLogin'],
+            ['post', 'login', 'AuthController@postLogin'],
+            ['get', 'logout', 'AuthController@getLogout'],
+            ['get', '/', 'BackendController@welcome'],
+            ['get', 'system', 'System\IndexController@getIndex'],
+            ['post', 'system', 'System\IndexController@postIndex'],
+            ['get', 'system/edit', 'System\IndexController@edit']
+        ],
+
+
+    ],
+    [
+        [
+            'domain' => 'www.scocmf.t',
+            'middleware' => ['web'],
+            'namespace'  => 'Frontend'
+        ],
+        [
             [
-                'method' => 'get',
-                'uri' => '/',
-                'controller' => 'Backend\BackendController@welcome',
-            ],
-            [
-                'method' => 'get',
-                'uri' => 'system',
-                'controller' => 'Backend\System\IndexController@index',
-            ],
-            [
-                'method' => 'post',
-                'uri' => 'system/savesite',
-                'controller' => 'Backend\System\IndexController@saveSite',
-            ],
-            [
-                'method' => 'get',
-                'uri' => 'system/edit',
-                'controller' => 'Backend\System\IndexController@edit',
+                'get', '/', function () {
+                echo 'hello';
+            }
             ]
         ]
     ]
 ];
 
 foreach ($routes as $route) {
-    $group = [];
-    if (isset($route['prefix'])) {
-        $group['prefix'] = $route['prefix'];
-    } elseif (isset($route['domain'])) {
-        $group['domain'] = $route['domain'];
-    }
-
-    $group['middleware'] = ['web'];
-    $list = $route['list'];
+    list($group, $list) = $route;
     Route::group($group, function () use ($list) {
         foreach ($list as $item) {
-            $method = $item['method'];
-            Route::$method($item['uri'], $item['controller']);
+            list($method, $uri, $controller) = $item;
+            if ($uri == '/') {
+                $name = 'index';
+            } else {
+                $name = str_replace('/', '.', $uri);
+            }
+
+            Route::$method($uri, $controller)->name($name);
+
+
         }
     });
 }

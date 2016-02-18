@@ -3,6 +3,7 @@
 
 namespace Sco\Http\Controllers\Backend;
 
+use Auth;
 use Sco\Http\Controllers\Controller;
 
 
@@ -15,9 +16,13 @@ use Sco\Http\Controllers\Controller;
 class BackendController extends Controller
 {
 
+    //protected $user;
+
     public function __construct()
     {
-
+        //dd($this->getRouter());
+        $this->middleware('auth:admin');
+        $this->user = Auth::guard('admin')->user();
     }
 
     /**
