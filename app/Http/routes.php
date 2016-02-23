@@ -15,10 +15,9 @@ $routes = [
             ['get', '/', 'BackendController@welcome'],
             ['get', 'system', 'System\IndexController@getIndex'],
             ['post', 'system', 'System\IndexController@postIndex'],
-            ['get', 'system/edit', 'System\IndexController@edit']
+            ['get', 'system/admin', 'System\AdminController@getIndex'],
+            ['get', 'system/admin/add/admin', 'System\AdminController@getAddAdmin'],
         ],
-
-
     ],
     [
         [
@@ -27,11 +26,11 @@ $routes = [
             'namespace'  => 'Frontend'
         ],
         [
-            [
-                'get', '/', function () {
-                echo 'hello';
-            }
-            ]
+            //[
+            //    'get', '/', function () {
+            //    echo 'hello';
+            //}
+            //]
         ]
     ]
 ];

@@ -2,14 +2,16 @@
 
 namespace Sco\Repositories;
 
+use Prettus\Repository\Eloquent\BaseRepository;
 use Sco\Models\Config;
 use Cache;
 
 class ConfigRepository extends BaseRepository
 {
-    public function __construct(Config $model)
+
+    public function model()
     {
-        $this->model = $model;
+        return Config::class;
     }
 
     /**

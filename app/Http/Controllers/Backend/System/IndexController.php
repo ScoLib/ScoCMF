@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Sco\Http\Controllers\Backend\BackendController;
 use Sco\Repositories\ConfigRepository;
 
+/**
+ * 站点设置
+ *
+ * @package Sco\Http\Controllers\Backend\System
+ */
 class IndexController extends BackendController
 {
     private $config;
@@ -19,7 +24,7 @@ class IndexController extends BackendController
     public function getIndex()
     {
         $configs = $this->config->getConfigs();
-        return $this->render('system.index', compact('configs'));
+        return $this->render('system.index.index', compact('configs'));
     }
 
     public function postIndex(Request $request)
@@ -29,8 +34,4 @@ class IndexController extends BackendController
         return response()->json(success());
     }
 
-    public function edit()
-    {
-        return $this->render('system.edit')->renderSections()['content'];
-    }
 }
