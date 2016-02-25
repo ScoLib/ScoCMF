@@ -2,12 +2,17 @@
 
 namespace Sco\Repositories;
 
+use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
+use Prettus\Repository\Events\RepositoryEntityUpdated;
+use Prettus\Repository\Traits\CacheableRepository;
 use Sco\Models\Config;
-use Cache;
 
-class ConfigRepository extends BaseRepository
+class ConfigRepository extends BaseRepository implements CacheableInterface
 {
+    use CacheableRepository;
+
+    protected $cacheExcept = ['all'];
 
     public function model()
     {
@@ -21,26 +26,24 @@ class ConfigRepository extends BaseRepository
      */
     public function getConfigs()
     {
-        $list = Cache::rememberForever('configs', function () {
+        $key   = $this->getCacheKey('configs');
+        $value = $this->getCacheRepository()->rememberForever($key, function () {
             $collection = collect();
-            $this->model->all()->each(function ($item) use ($collection) {
+            $this->all()->each(function ($item) use ($collection) {
                 $collection->put($item->name, $item->value);
             });
             return $collection->all();
         });
-        return $list;
+
+        return $value;
+
     }
 
     public function saveConfigs($configs)
     {
         foreach ($configs as $name => $value) {
-            $config = $this->model->firstOrNew(['name' => $name]);
-            if ($config) {
-                $config->value = $value;
-                $config->save();
-            }
+            $this->update(['value' => $value], $name);
         }
-        Cache::forget('configs');
         return true;
     }
 

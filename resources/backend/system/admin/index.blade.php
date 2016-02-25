@@ -30,6 +30,7 @@
                                 <span class="lbl"></span>
                             </label>
                         </th>
+                        <th>ID</th>
                         <th>用户名</th>
                         <th>上次登录</th>
                         <th class="hidden-480">上次登录IP</th>
@@ -40,63 +41,66 @@
                     </thead>
 
                     <tbody>
-                    <tr>
-                        <td class="center">
-                            <label class="pos-rel">
-                                <input type="checkbox" class="ace"/>
-                                <span class="lbl"></span>
-                            </label>
-                        </td>
+                    @foreach ($list as $admin)
+                        <tr>
+                            <td class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace"/>
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
 
-                        <td>Admin
-                        </td>
-                        <td>2016-02-22 21:43:46</td>
-                        <td class="hidden-480">127.0.0.1</td>
-                        <td>超管</td>
+                            <td>{{ $admin->id }}</td>
+                            <td>{{ $admin->username }}</td>
+                            <td>2016-02-22 21:43:46</td>
+                            <td class="hidden-480">127.0.0.1</td>
+                            <td>{{ $admin->group_id }}</td>
 
 
-                        <td>
-                            <div class="hidden-sm hidden-xs btn-group">
+                            <td>
+                                <div class="hidden-sm hidden-xs btn-group">
 
-                                <button class="btn btn-xs btn-info" title="编辑">
-                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                </button>
-
-                                <button class="btn btn-xs btn-danger" title="删除">
-                                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                </button>
-
-                            </div>
-
-                            <div class="hidden-md hidden-lg">
-                                <div class="inline pos-rel">
-                                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"
-                                            data-position="auto">
-                                        <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                    <button class="btn btn-xs btn-info" title="编辑">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
                                     </button>
 
-                                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                    <button class="btn btn-xs btn-danger" title="删除">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </button>
 
-                                        <li>
-                                            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                </div>
+
+                                <div class="hidden-md hidden-lg">
+                                    <div class="inline pos-rel">
+                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"
+                                                data-position="auto">
+                                            <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                        </button>
+
+                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+
+                                            <li>
+                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
 											    <span class="green">
 												    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 												</span>
-                                            </a>
-                                        </li>
+                                                </a>
+                                            </li>
 
-                                        <li>
-                                            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <li>
+                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
 											    <span class="red">
 												    <i class="ace-icon fa fa-trash-o bigger-120"></i>
 												</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+
+                    @endforeach
 
                     </tbody>
                 </table>

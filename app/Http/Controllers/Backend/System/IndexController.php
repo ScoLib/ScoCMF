@@ -4,7 +4,7 @@ namespace Sco\Http\Controllers\Backend\System;
 
 use Illuminate\Http\Request;
 use Sco\Http\Controllers\Backend\BackendController;
-use Sco\Repositories\ConfigRepository;
+use Repository;
 
 /**
  * 站点设置
@@ -13,24 +13,17 @@ use Sco\Repositories\ConfigRepository;
  */
 class IndexController extends BackendController
 {
-    private $config;
-
-    public function __construct(ConfigRepository $config)
-    {
-        parent::__construct();
-        $this->config = $config;
-    }
 
     public function getIndex()
     {
-        $configs = $this->config->getConfigs();
+        $configs = Repository::create('Config')->getConfigs();
         return $this->render('system.index.index', compact('configs'));
     }
 
     public function postIndex(Request $request)
     {
         $configs = $request->input('configs');
-        $this->config->saveConfigs($configs);
+        Repository::create('Config')->saveConfigs($configs);
         return response()->json(success());
     }
 

@@ -158,6 +158,7 @@ return [
         Sco\Providers\FrontendServiceProvider::class,
         Sco\Providers\BackendServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
@@ -209,7 +210,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        'Captcha'   => Mews\Captcha\Facades\Captcha::class,
+        // 自定义门面
+        'Captcha'    => Mews\Captcha\Facades\Captcha::class,
+        'Repository' => Sco\Facades\Repository::class,
 
     ],
 

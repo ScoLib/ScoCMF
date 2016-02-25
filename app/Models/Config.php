@@ -17,6 +17,6 @@ class Config extends Model
     //
     public $incrementing = false;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'value'];
 
 }
