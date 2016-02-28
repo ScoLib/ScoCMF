@@ -67,9 +67,9 @@
 
                         <div class="col-xs-4">
                             <div class="switch">
-                                <input type="radio" class="switch-input" name="configs[site_close]" value="1" id="site_close_on">
+                                <input type="radio" class="switch-input" name="site_close" value="1" id="site_close_on">
                                 <label for="site_close_on" class="switch-label switch-label-on">开始</label>
-                                <input type="radio" class="switch-input" name="configs[site_close]" value="0" id="site_close_off" checked>
+                                <input type="radio" class="switch-input" name="site_close" value="0" id="site_close_off" checked>
                                 <label for="site_close_off" class="switch-label switch-label-off">关闭</label>
                                 <span class="switch-selection"></span>
 
@@ -104,7 +104,7 @@
 
     <script type="text/javascript">
         $(function() {
-            $(':input[name="configs\[site_close\]"][value="{{ $configs['site_close'] }}"]').prop('checked', true);
+            {{--$(':input[name="configs\[site_close\]"][value="{{ $configs['site_close'] }}"]').prop('checked', true);--}}
             $('#config-form').validate({
 
                 rules: {

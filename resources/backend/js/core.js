@@ -17,11 +17,11 @@
 
     //sometimes the only good way to work around browser's pecularities is to detect them using user-agents
     //though it's not accurate
-    var agent = navigator.userAgent
-    ace.vars['webkit'] = !!agent.match(/AppleWebKit/i)
+    var agent = navigator.userAgent;
+    ace.vars['webkit'] = !!agent.match(/AppleWebKit/i);
     ace.vars['safari'] = !!agent.match(/Safari/i) && !agent.match(/Chrome/i);
-    ace.vars['android'] = ace.vars['safari'] && !!agent.match(/Android/i)
-    ace.vars['ios_safari'] = !!agent.match(/OS ([4-9])(_\d)+ like Mac OS X/i) && !agent.match(/CriOS/i)
+    ace.vars['android'] = ace.vars['safari'] && !!agent.match(/Android/i);
+    ace.vars['ios_safari'] = !!agent.match(/OS ([4-9])(_\d)+ like Mac OS X/i) && !agent.match(/CriOS/i);
 
     ace.vars['ie'] = window.navigator.msPointerEnabled || (document.all && document.querySelector);//8-11
     ace.vars['old_ie'] = document.all && !document.addEventListener;//8 and below
@@ -59,6 +59,9 @@ jQuery(function($) {
     bsCollapseToggle();
     smallDeviceDropdowns();
 
+    initAjax();
+    checkAll();
+
     ////////////////////////////
 
     function basics() {
@@ -83,7 +86,6 @@ jQuery(function($) {
             'sub_scroll_style': 'no-track scroll-thin scroll-margin scroll-visible'
         });
     }
-
 
 
     /////////////////////////////
@@ -248,7 +250,6 @@ jQuery(function($) {
     }
 
 
-
     //in small devices display navbar dropdowns like modal boxes
     function smallDeviceDropdowns() {
         if(ace.vars['old_ie']) return;
@@ -374,143 +375,135 @@ jQuery(function($) {
         }
     }
 
-    ///////////////////////////
-    /**
-     * submit button
-     * target-form-class && (url | href | action)
-     *
-     */
-    $.fn.ajaxPost = function() {
-        var _this, target, params, form;
-        _this = this;
-        //console.log($(this).context);
-        //return false;
-        if ($(this).attr('type') == 'submit'
-            || (target = $(this).attr('href'))
-            || (target = $(this).attr('url'))
-        ) {
-            if ($(this).attr('target-form') !== undefined) {
-                form = $('.' + $(this).attr('target-form'));
+    function initAjax() {
+        ///////////////////////////
+        /**
+         * submit button
+         * target-form && (url | href | action)
+         *
+         */
+        $.fn.ajaxPost = function() {
+            var _this, target, params, form;
+            _this = this;
+            if ($(this).attr('type') == 'submit'
+                || (target = $(this).attr('href'))
+                || (target = $(this).attr('url'))
+            ) {
+                if ($(this).attr('target-form') !== undefined) {
+                    form = $('.' + $(this).attr('target-form'));
+                } else {
+                    form = $(this).parents('form');
+                }
+                if (form.get(0).nodeName == 'FORM') {
+                    if ($(this).attr('url') !== undefined) {
+                        target = $(this).attr('url');
+                    } else {
+                        target = form.get(0).action;
+                    }
+                    params = form.serialize();
+                } else if (form.get(0).nodeName == 'INPUT') {
+
+                    params = form.serialize();
+                }
+                $(_this).addClass('disabled').prop('disabled', true);
+                layer.load(2);
+                $.post(target, params).success(function(result) {
+                    layer.closeAll();
+                    if (result.state) {
+                        var message = result.message || '操作成功';
+                        layer.msg(message, {'title' : '提示信息', 'icon': 1, time : 1500}, function() {
+                            if (result.data.url) {
+                                location.href = result.data.url;
+                            } else if($(_this).hasClass('no-refresh')) {
+                                // 什么也不做
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        var message = result.message || '操作失败';
+                        layer.msg(message, {'title' : '错误信息', 'icon': 2, time : 2000}, function() {
+                            if (result.data && typeof result.data.url !== 'undefined') {
+                                location.href = result.data.url;
+                            }
+                            $(_this).removeClass('disabled').prop('disabled', false);
+                        });
+                    }
+                });
+            }
+        };
+
+        $.fn.ajaxGet = function() {
+            var target, _this = this;
+            if ((target = $(this).attr('href')) || (target = $(this).attr('url'))) {
+                layer.load(2);
+                $.get(target).success(function(result) {
+                    layer.closeAll();
+                    if (result.state) {
+                        var message = result.message || '操作成功';
+                        layer.msg(message, {'title' : '提示信息', 'icon': 1, time : 1500}, function() {
+                            if (result.data.url) {
+                                location.href = result.data.url;
+                            } else if($(_this).hasClass('no-refresh')) {
+                                // 什么也不做
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        var message = result.message || '操作失败';
+                        layer.msg(message, {'title' : '错误信息', 'icon': 2, time : 2000}, function() {
+                            if (result.data && typeof result.data.url !== 'undefined') {
+                                location.href = result.data.url;
+                            }
+                        });
+                    }
+                });
+            }
+            return false;
+        }
+
+        // ajax get 方法
+        $(document).on('click', '.ajax-get', function() {
+            var _this = this;
+            if ($(this).hasClass('confirm')) {
+                var text = $(this).attr('data-confirm') || '确认要执行该操作吗?';
+                layer.confirm(text, {icon: 3, title : '提示'}, function(index) {
+                    layer.close(index);
+                    $(_this).ajaxGet();
+                });
             } else {
-                form = $(this).parents('form');
+                $(this).ajaxGet();
+
             }
-            if (form.get(0).nodeName == 'FORM') {
-                if ($(this).attr('url') !== undefined) {
-                    target = $(this).attr('url');
-                } else {
-                    target = form.get(0).action;
-                }
-                params = form.serialize();
-            } else if (form.get(0).nodeName == 'INPUT') {
-
-                params = form.serialize();
-            }
-            $(_this).addClass('disabled').prop('disabled', true);
-            layer.load(2);
-            $.post(target, params).success(function(result) {
-                layer.closeAll();
-                if (result.state) {
-                    var message = result.message || '操作成功';
-                    layer.msg(message, {'title' : '提示信息', 'icon': 1, time : 1500}, function() {
-                        if (result.data.url) {
-                            location.href = result.data.url;
-                        } else if($(_this).hasClass('no-refresh')) {
-                            // 什么也不做
-                        } else {
-                            location.reload();
-                        }
-                    });
-                } else {
-                    layer.msg(result.message, {'title' : '错误信息', 'icon': 2, time : 2000}, function() {
-                        if (typeof result.data.url !== 'undefined') {
-                            location.href = result.data.url;
-                        }
-                        $(_this).removeClass('disabled').prop('disabled', false);
-                    });
-                }
-            });
-        }
-    };
-
-    $.fn.ajaxGet = function() {
-        var target, _this = this;
-        if ((target = $(this).attr('href')) || (target = $(this).attr('url'))) {
-            layer.load(2);
-            $.get(target).success(function(result) {
-                layer.closeAll();
-                if (result.state) {
-                    var message = result.message || '操作成功';
-                    layer.msg(message, {'title' : '提示信息', 'icon': 1, time : 1500}, function() {
-                        if (result.data.url) {
-                            location.href = result.data.url;
-                        } else if($(_this).hasClass('no-refresh')) {
-                            // 什么也不做
-                        } else {
-                            location.reload();
-                        }
-                    });
-                } else {
-                    layer.msg(result.message, {'title' : '错误信息', 'icon': 2, time : 2000}, function() {
-                        if (typeof result.data.url !== 'undefined') {
-                            location.href = result.data.url;
-                        }
-                    });
-                }
-            });
-        }
-        return false;
-    }
-
-    $.topAlert = $('#top-alert');
-
-    $.updateAlert = function(text, cls, sec) {
-        console.log(sec);
-        cls = 'alert-' + cls;
-        $.topAlert.find('.alert-content').text(text);
-        if (!$.topAlert.hasClass('block')) {
-            $.topAlert.addClass('block').slideDown(200);
-        }
-        $.topAlert.removeClass('alert-error alert-success').addClass(cls);
-
-        $.topAlert.find('.close').on('click', function () {
-            $.topAlert.removeClass('block').slideUp(200);
+            return false;
         });
-        if (sec > 0) {
-
-        }
     }
 
     // 全选
-    $(".check-all").click(function () {
-        $(".ids").prop("checked", this.checked);
-    });
-    $(".ids").click(function () {
-        var option = $(".ids");
-        option.each(function (i) {
-            if (!this.checked) {
-                $(".check-all").prop("checked", false);
-                return false;
+    function checkAll() {
+        var active_class = 'active';
+        $(".check-all").click(function () {
+            var chk = this.checked;
+            $(this).closest('table').find('tbody > tr').each(function() {
+                if (chk) {
+                    $(this).addClass(active_class).find(':checkbox').prop('checked', true);
+                } else {
+                    $(this).removeClass(active_class).find(':checkbox').prop('checked', false);
+
+                }
+            });
+        });
+        $(".ids").click(function () {
+            var row = $(this).closest('tr');
+            if (this.checked) {
+                $(row).addClass(active_class);
             } else {
-                $(".check-all").prop("checked", true);
+                $(row).removeClass(active_class);
             }
         });
-    });
+    }
 
-    // ajax get 方法
-    $(document).on('click', '.ajax-get', function() {
-        var _this = this;
-        if ($(this).hasClass('confirm')) {
-            var text = $(this).attr('data-confirm') || '确认要执行该操作吗?';
-            layer.confirm(text, {icon: 3, title : '提示'}, function(index) {
-                layer.close(index);
-                $(_this).ajaxGet();
-            });
-        } else {
-            $(this).ajaxGet();
-
-        }
-        return false;
-    });
 
     if ($.validator) {
         $.validator.setDefaults({

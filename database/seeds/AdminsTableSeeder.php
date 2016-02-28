@@ -13,10 +13,11 @@ class AdminsTableSeeder extends Seeder
     public function run()
     {
         DB::table('admins')->insert([
-            'username'   => 'admin',
-            'password'   => bcrypt('123456'),
-            //'login_time' => Carbon::now(),
-            'group_id'   => 0
+            'username'        => 'admin',
+            'password'        => bcrypt('123456'),
+            'group_id'        => 0,
+            'updated_at'      => Carbon::now(),
+            'created_at'      => Carbon::now(),
         ]);
     }
 }

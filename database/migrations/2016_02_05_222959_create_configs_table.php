@@ -13,7 +13,7 @@ class CreateConfigsTable extends Migration
     public function up()
     {
         Schema::create('configs', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+            $table->engine = 'InnoDB COMMENT="系统配置表"';
             $table->string('name', 30)->comment('配置名称');
             $table->text('value')->comment('配置值');
             $table->primary('name');

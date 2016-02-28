@@ -2,14 +2,14 @@
 
 namespace Sco\Http\Controllers;
 
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 abstract class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function __construct()
+    {
+    }
 
     /**
      * 视图参数
@@ -28,6 +28,16 @@ abstract class Controller extends BaseController
     {
         if (!property_exists($this, $name)) {
             $this->params[$name] = $value;
+        }
+
+    }
+
+    public function __get($name)
+    {
+        if (property_exists($this, $name)) {
+            return $this->$name;
+        } else {
+            return isset($this->params[$name]) ? $this->params[$name] : null;
         }
 
     }

@@ -10085,11 +10085,11 @@ input.ace + .lbl.padding-0::before {
   border-top-left-radius: 3px;
 }
 .switch .switch-input:checked + .switch-label-off {
-  color: #333;
+  color: #ffffff;
 }
 .switch .switch-input:checked + .switch-label-off ~ .switch-selection {
   left: 60px;
-  background: #eeeeee;
+  background: #888;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
   /* Note: left: 50% doesn't transition in WebKit */

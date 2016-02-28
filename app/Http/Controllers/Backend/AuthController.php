@@ -4,13 +4,15 @@
 namespace Sco\Http\Controllers\Backend;
 
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Sco\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    use ThrottlesLogins;
+    use ThrottlesLogins, ValidatesRequests;
 
     //private $maxLoginAttempts = 2;
 
@@ -42,6 +44,8 @@ class AuthController extends Controller
         }
 
         if (Auth::guard('admin')->attempt($request->only(['username', 'password']))) {
+            $this->updateLogin();
+
             return redirect()->route('backend.index');
         }
         return redirect()->back()
@@ -59,6 +63,15 @@ class AuthController extends Controller
     protected function loginUsername()
     {
         return 'username';
+    }
+
+    private function updateLogin()
+    {
+        $user = Auth::guard('admin')->user();
+
+        $user->last_login_ip   = request()->ip();
+        $user->last_login_time = Carbon::now();
+        $user->save();
     }
 
 

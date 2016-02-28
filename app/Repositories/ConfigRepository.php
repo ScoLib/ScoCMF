@@ -2,17 +2,12 @@
 
 namespace Sco\Repositories;
 
-use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Events\RepositoryEntityUpdated;
-use Prettus\Repository\Traits\CacheableRepository;
 use Sco\Models\Config;
 
-class ConfigRepository extends BaseRepository implements CacheableInterface
+class ConfigRepository extends BaseRepository
 {
-    use CacheableRepository;
-
-    protected $cacheExcept = ['all'];
+    private $configs = null;
 
     public function model()
     {
@@ -26,16 +21,15 @@ class ConfigRepository extends BaseRepository implements CacheableInterface
      */
     public function getConfigs()
     {
-        $key   = $this->getCacheKey('configs');
-        $value = $this->getCacheRepository()->rememberForever($key, function () {
-            $collection = collect();
-            $this->all()->each(function ($item) use ($collection) {
-                $collection->put($item->name, $item->value);
-            });
-            return $collection->all();
-        });
+        if ($this->configs) {
+            return $this->configs;
+        }
 
-        return $value;
+        $collection = collect();
+        $this->all()->each(function ($item) use ($collection) {
+            $collection->put($item->name, $item->value);
+        });
+        return $this->configs = $collection->all();
 
     }
 
@@ -44,20 +38,15 @@ class ConfigRepository extends BaseRepository implements CacheableInterface
         foreach ($configs as $name => $value) {
             $this->update(['value' => $value], $name);
         }
+        $this->flushConfigFile();
         return true;
     }
 
-    /**
-     * 获取配置值
-     *
-     * @param string $name
-     *
-     * @return string|null
-     */
-    public function getConfigValue($name)
+    private function flushConfigFile()
     {
         $configs = $this->getConfigs();
-        return isset($configs[$name]) ? $configs[$name] : null;
+        $file = config_path('sco.php');
+        file_put_contents($file, sprintf('<?php return %s;', var_export($configs, true)));
     }
 
 }

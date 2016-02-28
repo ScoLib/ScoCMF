@@ -11,6 +11,6 @@ class Admin extends Authenticatable
 
     public function group()
     {
-        //return $this->hasOne('App\Models\')
+        return $this->belongsTo('Sco\Models\AdminGroup', 'group_id', 'group_id');
     }
 }

@@ -26,7 +26,7 @@
                     <tr>
                         <th class="center">
                             <label class="pos-rel">
-                                <input type="checkbox" class="ace"/>
+                                <input type="checkbox" class="check-all ace ace-checkbox-2"/>
                                 <span class="lbl"></span>
                             </label>
                         </th>
@@ -45,58 +45,61 @@
                         <tr>
                             <td class="center">
                                 <label class="pos-rel">
-                                    <input type="checkbox" class="ace"/>
+                                    <input type="checkbox" class="ids ace ace-checkbox-2" {{ $admin->group_id ? '' : 'disabled' }}/>
                                     <span class="lbl"></span>
                                 </label>
                             </td>
 
                             <td>{{ $admin->id }}</td>
                             <td>{{ $admin->username }}</td>
-                            <td>2016-02-22 21:43:46</td>
-                            <td class="hidden-480">127.0.0.1</td>
-                            <td>{{ $admin->group_id }}</td>
-
+                            <td>{{ $admin->last_login_time ?: '从未登录' }}</td>
+                            <td class="hidden-480">{{ $admin->last_login_ip }}</td>
+                            <td>{{ $admin->group_id && $admin->group ? $admin->group->group_name : '' }}</td>
 
                             <td>
-                                <div class="hidden-sm hidden-xs btn-group">
+                                @if ($admin->group_id)
+                                    <div class="hidden-sm hidden-xs btn-group">
 
-                                    <button class="btn btn-xs btn-info" title="编辑">
-                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                    </button>
+                                        <a href="{{ route('backend.system.admin.edit.admin.{id}', ['id' => $admin->id]) }}" class="btn btn-xs btn-info" title="编辑">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
 
-                                    <button class="btn btn-xs btn-danger" title="删除">
-                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                    </button>
+                                        <a href="" class="btn btn-xs btn-danger" title="删除">
+                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        </a>
 
-                                </div>
+                                    </div>
 
-                                <div class="hidden-md hidden-lg">
-                                    <div class="inline pos-rel">
-                                        <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown"
-                                                data-position="auto">
-                                            <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                                        </button>
+                                    <div class="hidden-md hidden-lg">
+                                        <div class="inline pos-rel">
+                                            <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                            </button>
 
-                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 
-                                            <li>
-                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                <li>
+                                                    <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
 											    <span class="green">
 												    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 												</span>
-                                                </a>
-                                            </li>
+                                                    </a>
+                                                </li>
 
-                                            <li>
-                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                <li>
+                                                    <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
 											    <span class="red">
 												    <i class="ace-icon fa fa-trash-o bigger-120"></i>
 												</span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    超管不可编辑
+                                @endif
+
                             </td>
                         </tr>
 

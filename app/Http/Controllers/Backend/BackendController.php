@@ -5,7 +5,8 @@ namespace Sco\Http\Controllers\Backend;
 
 use Auth;
 use Sco\Http\Controllers\Controller;
-
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 /**
  * 后台基础控制器
@@ -16,11 +17,14 @@ use Sco\Http\Controllers\Controller;
 class BackendController extends Controller
 {
 
+    use AuthorizesRequests, ValidatesRequests;
+
     //protected $user;
 
     public function __construct()
     {
-        //dd($this->getRouter());
+        parent::__construct();
+
         $this->middleware('auth:admin');
         $this->user = Auth::guard('admin')->user();
     }
