@@ -88,8 +88,8 @@
 
     <!-- inline scripts related to this page -->
     <script type="text/javascript">
-        jQuery(function ($) {
-        });
+//        jQuery(function ($) {
+//        });
 
     </script>
     </body>

@@ -29,21 +29,6 @@ function resources($path = '', $secure = null)
     return app('url')->assetFrom($resourcesUrl, $path, $secure);
 }
 
-/**
- * 后台语言包
- *
- * @param string $id
- * @param array  $parameters
- * @param string $domain
- * @param string $locale
- *
- * @return string|\Symfony\Component\Translation\TranslatorInterface
- */
-function backend_trans($id = null, $parameters = [], $domain = 'messages', $locale = null)
-{
-    return trans($id !== null ? 'Backend::' . $id : $id, $parameters, $domain, $locale);
-}
-
 function success($message = '操作成功', $data = [])
 {
     return callback(true, $message, $data);

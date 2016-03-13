@@ -103,13 +103,13 @@
             $('#config-form').validate({
 
                 rules: {
-                    site_name : {
+                    'configs[site_name]' : {
                         required:true
                     }
                 },
                 messages : {
-                    site_name: {
-                        required: '{{ backend_trans('system.site_name_required') }}'
+                    'configs[site_name]': {
+                        required: '{{ trans('backend.system.site_name_required') }}'
                     }
                 }
             });

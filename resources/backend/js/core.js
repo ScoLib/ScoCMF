@@ -511,7 +511,8 @@ jQuery(function($) {
             errorPlacement: function(error, element) {
                 element.parent().prev().append(error);
             },
-            focusInvalid: false,
+            //focusInvalid: false,
+            onkeyup: false,
             ignore: "",
             highlight: function (e) {
                 $(e).closest('.form-group').removeClass('has-info').addClass('has-error');

@@ -30,7 +30,7 @@ class AdminController extends BackendController
         return $this->render('system.admin.addadmin');
     }
 
-    public function postAddAdmin()
+    public function postAddAdmin(Request $request)
     {
 
     }
@@ -44,7 +44,18 @@ class AdminController extends BackendController
     public function postCheck(Request $request)
     {
         if ($request->has('username')) {
+            $condition = [
+                'username' => $request->input('username')
+            ];
+            if ($request->has('id')) {
+                $condition[] = ['id', '!=', $request->input('id')];
+            }
 
+            if (Repository::create('Admin')->findWhere($condition)->isEmpty()) {
+                exit('true');
+            } else {
+                exit('false');
+            }
         }
     }
 }
