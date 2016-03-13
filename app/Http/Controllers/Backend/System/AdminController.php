@@ -6,6 +6,7 @@ namespace Sco\Http\Controllers\Backend\System;
 
 use Sco\Http\Controllers\Backend\BackendController;
 use Repository;
+use Illuminate\Http\Request;
 
 /**
  * 权限管理
@@ -25,6 +26,7 @@ class AdminController extends BackendController
 
     public function getAddAdmin()
     {
+        $this->groups = Repository::create('AdminGroup')->all();
         return $this->render('system.admin.addadmin');
     }
 
@@ -37,5 +39,12 @@ class AdminController extends BackendController
     {
         $info = Repository::create('Admin')->find($id);
         return $this->render('system.admin.editadmin');
+    }
+
+    public function postCheck(Request $request)
+    {
+        if ($request->has('username')) {
+
+        }
     }
 }

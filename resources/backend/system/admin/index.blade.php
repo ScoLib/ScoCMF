@@ -2,8 +2,6 @@
 
 @section('content')
 
-
-
     <div class="widget-box transparent">
         <div class="widget-header">
 
@@ -111,10 +109,5 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 
 @endsection

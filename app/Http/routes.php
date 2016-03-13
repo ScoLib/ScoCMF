@@ -19,6 +19,7 @@ $routes = [
             ['get', 'system/admin/add/admin', 'System\AdminController@getAddAdmin'],
             ['post', 'system/admin/add/admin', 'System\AdminController@postAddAdmin'],
             ['get', 'system/admin/edit/admin/{id}', 'System\AdminController@getEditAdmin'],
+            ['post', 'system/admin/check', 'System\AdminController@postCheck'],
         ],
     ],
     [

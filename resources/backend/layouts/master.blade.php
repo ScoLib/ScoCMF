@@ -18,10 +18,12 @@
     <link rel="stylesheet" href="{{ resources('backend/css/ace.min.css') }}" />
     @show
 
-    @section('script.header')
-        <script src="{{ resources('js/jquery-1.12.0.min.js') }}"></script>
-        <script src="{{ resources('js/bootstrap/js/bootstrap.js') }}"></script>
-    @show
+    <script>
+        window.App = window.App || {};
+        App.baseSiteUrl = '{{ config('domain.base_site_url') }}';
+        App.appUrl = '{{ url('/') }}';
+        App.resourcesUrl = '{{ resources('') }}';
+    </script>
 
 </head>
 @yield('body')

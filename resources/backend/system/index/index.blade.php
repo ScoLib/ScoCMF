@@ -1,11 +1,5 @@
 @extends('backend::layouts.layout')
 
-@section('script.header')
-    @parent
-
-    <script src="{{ resources('js/jquery.validate.js') }}"></script>
-@endsection
-
 @section('content')
     <div class="widget-box transparent">
         <div class="widget-header">
@@ -101,6 +95,7 @@
 
 @section('script.footer')
     @parent
+    <script src="{{ resources('js/jquery.validate.js') }}"></script>
 
     <script type="text/javascript">
         $(function() {

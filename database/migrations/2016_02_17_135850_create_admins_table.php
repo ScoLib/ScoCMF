@@ -22,7 +22,6 @@ class CreateAdminsTable extends Migration
             $table->char('last_login_ip', 15)->nullable()->comment('上次登录IP');
             $table->integer('group_id')->comment('权限组ID');
             $table->rememberToken()->comment('remember me');
-            $table->timestamps();
 
             $table->unique('username');
         });

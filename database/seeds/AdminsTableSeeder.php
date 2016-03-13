@@ -16,8 +16,6 @@ class AdminsTableSeeder extends Seeder
             'username'        => 'admin',
             'password'        => bcrypt('123456'),
             'group_id'        => 0,
-            'updated_at'      => Carbon::now(),
-            'created_at'      => Carbon::now(),
         ]);
     }
 }

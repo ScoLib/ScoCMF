@@ -1,19 +1,5 @@
 @extends('backend::layouts.master')
 
-@section('script.header')
-    @parent
-
-    <script>
-        window.App = window.App || {};
-        App.baseSiteUrl = '{{ config('domain.base_site_url') }}';
-        App.appUrl = '{{ url('/') }}';
-        App.resourcesUrl = '{{ resources('') }}';
-    </script>
-
-    <script src="{{ resources('js/layer/layer.js') }}"></script>
-    <script src="{{ resources('backend/js/core.js') }}"></script>
-@endsection
-
 @section('body')
     <body class="no-skin">
     <!-- #section:basics/navbar.layout -->
@@ -361,7 +347,13 @@
     </div><!-- /.main-container -->
 
     @section('script.footer')
-            <!-- basic scripts -->
+    <!-- basic scripts -->
+    <script src="{{ resources('js/jquery-1.12.0.min.js') }}"></script>
+    <script src="{{ resources('js/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ resources('js/layer/layer.js') }}"></script>
+
+    <script src="{{ resources('backend/js/core.js') }}"></script>
+
     <script src="{{ resources('backend/js/elements.scroller.js') }}"></script>
     <script src="{{ resources('backend/js/ace.sidebar.js') }}"></script>
     @show
