@@ -33,8 +33,6 @@ class AuthController extends Controller
         $this->validate($request, [
             'username' => 'required',
             'password' => 'required',
-        ], [
-            'required' => '请输入您的用户名和密码',
         ]);
 
         if ($lockedOut = $this->hasTooManyLoginAttempts($request)) {

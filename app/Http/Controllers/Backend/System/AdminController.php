@@ -6,6 +6,7 @@ namespace Sco\Http\Controllers\Backend\System;
 
 use Sco\Http\Controllers\Backend\BackendController;
 use Repository;
+use Validator;
 use Illuminate\Http\Request;
 
 /**
@@ -32,7 +33,13 @@ class AdminController extends BackendController
 
     public function postAddAdmin(Request $request)
     {
-
+        $this->validate($request, [
+            'username' => 'required|between:3,15|unique:admins,username',
+            'password' => 'required|between:6,20',
+            'repassword' => 'same:password',
+            'group_id' => 'required'
+        ]);
+        
     }
 
     public function getEditAdmin($id)
@@ -44,7 +51,10 @@ class AdminController extends BackendController
     public function postCheck(Request $request)
     {
         if ($request->has('username')) {
-            $condition = [
+            $rules = [
+                'username' => 'required|unique:admins,username'
+            ];
+            /*$condition = [
                 'username' => $request->input('username')
             ];
             if ($request->has('id')) {
@@ -55,7 +65,15 @@ class AdminController extends BackendController
                 exit('true');
             } else {
                 exit('false');
+            }*/
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                exit('false');
+            } else {
+                exit('true');
             }
+
         }
+
     }
 }
