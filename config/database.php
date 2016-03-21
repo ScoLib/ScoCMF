@@ -62,6 +62,7 @@ return [
             'collation' => 'utf8_general_ci',
             'prefix'    => env('DB_PREFIX', 'sco_'),
             'strict'    => false,
+            'engine'    => null,
         ],
 
         'pgsql' => [

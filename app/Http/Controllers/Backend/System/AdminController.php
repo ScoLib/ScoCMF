@@ -39,7 +39,7 @@ class AdminController extends BackendController
             'repassword' => 'same:password',
             'group_id' => 'required'
         ]);
-        
+
     }
 
     public function getEditAdmin($id)
