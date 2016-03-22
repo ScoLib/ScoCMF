@@ -244,7 +244,7 @@
 
             <ul class="nav nav-list">
                 <li class="">
-                    <a href="{{ route('backend.system') }}">
+                    <a href="{{ route('backend.system.site') }}">
                         <i class="menu-icon fa fa-circle-o"></i>
                         <span class="menu-text"> 站点设置 </span>
                     </a>
@@ -252,7 +252,7 @@
                     <b class="arrow"></b>
                 </li>
                 <li class="">
-                    <a href="{{ route('backend.system.admin') }}">
+                    <a href="{{ route('backend.system.auth') }}">
                         <i class="menu-icon fa fa-circle-o"></i>
                         <span class="menu-text"> 权限设置 </span>
                     </a>

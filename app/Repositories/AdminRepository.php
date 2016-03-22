@@ -6,7 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Sco\Models\Admin;
 
 /**
- * Interface AdminRepository
+ * 管理员
  *
  * @package namespace Sco\Repositories;
  */

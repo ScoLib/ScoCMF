@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
  *
  * @package Sco\Http\Controllers\Backend\System
  */
-class AdminController extends BackendController
+class AuthController extends BackendController
 {
 
 
@@ -22,13 +22,13 @@ class AdminController extends BackendController
     {
         $this->list = Repository::create('Admin')->all();
         //dd($this->params);
-        return $this->render('system.admin.index');
+        return $this->render('system.auth.index');
     }
 
     public function getAddAdmin()
     {
         $this->groups = Repository::create('AdminGroup')->all();
-        return $this->render('system.admin.addadmin');
+        return $this->render('system.auth.addadmin');
     }
 
     public function postAddAdmin(Request $request)
@@ -45,7 +45,7 @@ class AdminController extends BackendController
     public function getEditAdmin($id)
     {
         $info = Repository::create('Admin')->find($id);
-        return $this->render('system.admin.editadmin');
+        return $this->render('system.site.editadmin');
     }
 
     public function postCheck(Request $request)

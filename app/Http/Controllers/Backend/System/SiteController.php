@@ -11,13 +11,13 @@ use Repository;
  *
  * @package Sco\Http\Controllers\Backend\System
  */
-class IndexController extends BackendController
+class SiteController extends BackendController
 {
 
     public function getIndex()
     {
         $configs = Repository::create('Config')->getConfigs();
-        return $this->render('system.index.index', compact('configs'));
+        return $this->render('system.site.index', compact('configs'));
     }
 
     public function postIndex(Request $request)

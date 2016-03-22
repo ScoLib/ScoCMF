@@ -8,10 +8,10 @@
             <div class="widget-toolbar no-border">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="{{ route('backend.system.admin') }}">管理员</a>
+                        <a href="{{ route('backend.system.auth') }}">管理员</a>
                     </li>
                     <li>
-                        <a href="{{ route('backend.system.admin.add.admin') }}">添加管理员</a>
+                        <a href="{{ route('backend.system.auth.add.admin') }}">添加管理员</a>
                     </li>
                 </ul>
             </div>

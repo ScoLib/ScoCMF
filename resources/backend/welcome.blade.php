@@ -2,5 +2,5 @@
 
 @section('content')
 welcome scocmf
-<a href="{{ route('backend.system') }}" class="ajax-get confirm">ajax get</a>
+<a href="{{ route('backend.system.site') }}" class="ajax-get confirm">ajax get</a>
 @endsection

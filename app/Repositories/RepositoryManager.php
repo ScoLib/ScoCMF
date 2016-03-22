@@ -5,6 +5,11 @@ namespace Sco\Repositories;
 
 use InvalidArgumentException;
 
+/**
+ * Repository管理
+ *
+ * @package Sco\Repositories
+ */
 class RepositoryManager
 {
     /**

@@ -16,7 +16,7 @@
 
         <div class="widget-body">
             <div class="widget-main padding-12 no-padding-left no-padding-right">
-                <form id="config-form" action="{{ route('backend.system') }}" method="post">
+                <form id="config-form" action="{{ route('backend.system.site') }}" method="post">
                     {!! csrf_field() !!}
                     <div class="form-group row">
                             <div class="col-xs-12">
