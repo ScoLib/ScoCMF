@@ -58,11 +58,11 @@
                                 @if ($admin->group_id)
                                     <div class="hidden-sm hidden-xs btn-group">
 
-                                        <a href="{{ route('backend.system.admin.edit.admin.{id}', ['id' => $admin->id]) }}" class="btn btn-xs btn-info" title="编辑">
+                                        <a href="{{ route('backend.system.auth.edit.admin.{id}', ['id' => $admin->id]) }}" class="btn btn-xs btn-info" title="编辑">
                                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                                         </a>
 
-                                        <a href="" class="btn btn-xs btn-danger" title="删除">
+                                        <a href="{{ route('backend.system.auth.del.admin.{id}', ['id' => $admin->id]) }}" class="ajax-get confirm btn btn-xs btn-danger" title="删除">
                                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                         </a>
 

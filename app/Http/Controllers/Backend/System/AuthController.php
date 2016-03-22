@@ -39,13 +39,28 @@ class AuthController extends BackendController
             'repassword' => 'same:password',
             'group_id' => 'required'
         ]);
-
+        $admin = Repository::create('Admin')->create([
+            'username' => $request->input('username'),
+            'password' => bcrypt($request->input('password')),
+            'group_id' => $request->input('group_id'),
+        ]);
+        dd($admin);
     }
 
     public function getEditAdmin($id)
     {
         $info = Repository::create('Admin')->find($id);
         return $this->render('system.site.editadmin');
+    }
+
+    public function postEditAdmin(Request $request)
+    {
+
+    }
+
+    public function delAdmin($id)
+    {
+        
     }
 
     public function postCheck(Request $request)
