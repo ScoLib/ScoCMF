@@ -33,6 +33,13 @@ class ConfigRepository extends BaseRepository
 
     }
 
+    /**
+     * 保存配置
+     *
+     * @param array $configs 配置
+     *
+     * @return boolean
+     */
     public function saveConfigs($configs)
     {
         foreach ($configs as $name => $value) {
@@ -42,6 +49,9 @@ class ConfigRepository extends BaseRepository
         return true;
     }
 
+    /**
+     * 刷新配置缓存文件
+     */
     private function flushConfigFile()
     {
         $configs = $this->getConfigs();

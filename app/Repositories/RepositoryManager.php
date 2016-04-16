@@ -38,10 +38,10 @@ class RepositoryManager
      *
      * @return \Prettus\Repository\Contracts\RepositoryInterface
      */
-    public function create($name)
+    /*public function create($name)
     {
         return $this->repositories[$name] = $this->get($name);
-    }
+    }*/
 
     /**
      * Attempt to get the repository from the local cache.
@@ -72,6 +72,12 @@ class RepositoryManager
             throw new InvalidArgumentException("Repository [{$name}] is not defined.");
         }
 
+    }
+
+    public function __call($name, $args)
+    {
+        $name = ucfirst($name);
+        return $this->repositories[$name] = $this->get($name);
     }
 
 }

@@ -35,13 +35,14 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        // 登录失败次数限制
         if ($lockedOut = $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
         }
 
-        if (Auth::guard('admin')->attempt($request->only(['username', 'password']))) {
+        if (Auth::guard('admin')->attempt($request->only(['username', 'password']), true)) {
             $this->updateLogin();
 
             return redirect()->route('backend.index');

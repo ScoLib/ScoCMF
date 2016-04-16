@@ -16,14 +16,14 @@ class SiteController extends BackendController
 
     public function getIndex()
     {
-        $configs = Repository::create('Config')->getConfigs();
+        $configs = Repository::config()->getConfigs();
         return $this->render('system.site.index', compact('configs'));
     }
 
     public function postIndex(Request $request)
     {
         $configs = $request->input('configs');
-        Repository::create('Config')->saveConfigs($configs);
+        Repository::config()->saveConfigs($configs);
         return response()->json(success());
     }
 
