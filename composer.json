@@ -20,7 +20,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "mews/captcha": "^2.1",
-        "prettus/l5-repository": "^2.1"
+        "prettus/l5-repository": "^2.1",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -55,11 +56,11 @@
             "php artisan key:generate"
         ],
         "post-install-cmd": [
-            "php artisan clear-compiled",
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize"
         ],
         "post-update-cmd": [
-            "php artisan clear-compiled",
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
         ]
     },

@@ -8,7 +8,6 @@ class Kernel extends HttpKernel
 {
     /**
      * The application's global HTTP middleware stack.
-     *
      * These middleware are run during every request to your application.
      *
      * @var array
@@ -38,15 +37,19 @@ class Kernel extends HttpKernel
 
     /**
      * The application's route middleware.
-     *
      * These middleware may be assigned to groups or used individually.
      *
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Sco\Http\Middleware\Authenticate::class,
+        'auth'       => \Sco\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \Sco\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'can'        => \Illuminate\Foundation\Http\Middleware\Authorize::class,
+        'guest'      => \Sco\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+        //'role'       => \Zizaco\Entrust\Middleware\EntrustRole::class,
+        //'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
+        //'ability'    => \Zizaco\Entrust\Middleware\EntrustAbility::class,
     ];
 }
