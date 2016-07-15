@@ -156,7 +156,7 @@ return [
         Sco\Providers\EventServiceProvider::class,
         Sco\Providers\RouteServiceProvider::class,
         Sco\Providers\FrontendServiceProvider::class,
-        Sco\Providers\BackendServiceProvider::class,
+        Sco\Providers\AdminServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,

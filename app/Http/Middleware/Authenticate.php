@@ -19,7 +19,7 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next, $guard = null)
     {
-        $url = $guard == 'admin' ? route('backend.login') : '/login';
+        $url = $guard == 'admin' ? route('admin.login') : '/login';
         if (Auth::guard($guard)->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);

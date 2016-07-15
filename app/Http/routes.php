@@ -2,17 +2,17 @@
 $routes = [
     [
         [
-            'prefix'     => 'backend',
+            'prefix'     => 'admin',
             //'domain' => 'backend.scocmf.t',
             'middleware' => ['web'],
-            'namespace'  => 'Backend',
-            'as' => 'backend.'
+            'namespace'  => 'Admin',
+            'as' => 'admin.'
         ],
         [
             ['get', 'login', 'AuthController@getLogin'],
             ['post', 'login', 'AuthController@postLogin'],
             ['get', 'logout', 'AuthController@getLogout'],
-            ['get', '/', 'BackendController@welcome'],
+            ['get', '/', 'BaseController@welcome'],
             ['get', 'system/site', 'System\SiteController@getIndex'],
             ['post', 'system/site', 'System\SiteController@postIndex'],
             ['get', 'system/auth', 'System\AuthController@getIndex'],
@@ -27,7 +27,7 @@ $routes = [
         [
             'domain' => 'www.scocmf.t',
             'middleware' => ['web'],
-            'namespace'  => 'Frontend'
+            'namespace'  => 'Home'
         ],
         [
             //[
