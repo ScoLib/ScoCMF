@@ -1,6 +1,6 @@
 <?php
 
-namespace Sco\Http\Controllers\Auth;
+namespace Sco\Http\Controllers\Home\Auth;
 
 use Sco\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;

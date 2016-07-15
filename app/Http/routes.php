@@ -9,9 +9,9 @@ $routes = [
             'as' => 'admin.'
         ],
         [
-            ['get', 'login', 'AuthController@getLogin'],
-            ['post', 'login', 'AuthController@postLogin'],
-            ['get', 'logout', 'AuthController@getLogout'],
+            ['get', 'login', 'Auth\AuthController@showLoginForm'],
+            ['post', 'login', 'Auth\AuthController@login'],
+            ['get', 'logout', 'Auth\AuthController@logout'],
             ['get', '/', 'BaseController@welcome'],
             ['get', 'system/site', 'System\SiteController@getIndex'],
             ['post', 'system/site', 'System\SiteController@postIndex'],
@@ -42,6 +42,7 @@ $routes = [
 foreach ($routes as $route) {
     list($group, $list) = $route;
     Route::group($group, function () use ($list) {
+        //Route::auth();
         foreach ($list as $item) {
             list($method, $uri, $controller) = $item;
             if ($uri == '/') {

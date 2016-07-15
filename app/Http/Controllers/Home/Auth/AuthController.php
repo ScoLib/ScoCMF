@@ -1,6 +1,6 @@
 <?php
 
-namespace Sco\Http\Controllers\Auth;
+namespace Sco\Http\Controllers\Home\Auth;
 
 use Sco\Models\User;
 use Validator;
