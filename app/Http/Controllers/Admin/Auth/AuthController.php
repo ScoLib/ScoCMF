@@ -5,23 +5,25 @@ namespace Sco\Http\Controllers\Admin\Auth;
 
 use Auth;
 use Carbon\Carbon;
-//use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-//use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Sco\Http\Controllers\Controller;
-use Route;
 
 class AuthController extends Controller
 {
-    use ThrottlesLogins, AuthenticatesUsers;
+    use ThrottlesLogins, AuthenticatesUsers, ValidatesRequests;
 
     //private $maxLoginAttempts = 2;
 
     //private $lockoutTime = 10;
 
+    protected $guard = 'admin';
+
     protected $loginView = 'admin::auth.login';
+
+    protected $redirectTo = 'admin.index';
 
     public function __construct()
     {
