@@ -4,7 +4,7 @@ namespace Sco\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class FrontendServiceProvider extends ServiceProvider
+class HomeServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -14,7 +14,7 @@ class FrontendServiceProvider extends ServiceProvider
     public function boot()
     {
         // 前台语言包目录
-        $this->loadTranslationsFrom(base_path('resources/lang/frontend'), 'Frontend');
+        //$this->loadTranslationsFrom(base_path('resources/lang/frontend'), 'Frontend');
     }
 
     /**

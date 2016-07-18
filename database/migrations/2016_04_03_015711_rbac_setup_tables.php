@@ -37,8 +37,8 @@ class RbacSetupTables extends Migration
         });
 
         // Create table for storing permissions
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->engine = "InnoDB COMMENT='权限（路由）表'";
+        Schema::create('routes', function (Blueprint $table) {
+            $table->engine = "InnoDB COMMENT='路由（权限）表'";
             //$table->increments('id');
             //$table->string('name')->unique();
             //$table->string('display_name')->nullable();
@@ -50,13 +50,14 @@ class RbacSetupTables extends Migration
             $table->integer('pid')->comment('父ID');
             $table->string('icon', 100)->comment('图标class');
             $table->string('title', 200)->comment('路由标题');
-            $table->string('name', 100)->unique()->comment('路由名称');
-            $table->string('uri', 200)->unique()->comment('uri');
+            $table->string('name', 100)->comment('路由名称');
+            $table->string('uri', 200)->comment('uri');
             $table->string('action', 255)->comment('控制方法');
-            $table->enum('method', ['get', 'post', 'put', 'delete', 'patch', 'options', 'any'])->comment('请求方式');
+            $table->enum('method', ['get', 'post', 'put', 'delete', 'patch', 'options', 'any'])
+                  ->comment('请求方式')->default('get');
             $table->tinyInteger('type')->comment('类型：0仅路由、1仅菜单、2菜单加权限')->default('0');
             $table->tinyInteger('sort')->comment('排序');
-            $table->string('description')->nullable();
+            $table->string('description')->nullable()->comment('描述');
             $table->timestamps();
             $table->index('pid');
 
@@ -65,17 +66,17 @@ class RbacSetupTables extends Migration
         });
 
         // Create table for associating permissions to roles (Many-to-Many)
-        Schema::create('permission_role', function (Blueprint $table) {
-            $table->engine = "InnoDB COMMENT='权限与角色对应表'";
-            $table->integer('permission_id')->unsigned();
+        Schema::create('route_role', function (Blueprint $table) {
+            $table->engine = "InnoDB COMMENT='路由（权限）与角色对应表'";
+            $table->integer('route_id')->unsigned();
             $table->integer('role_id')->unsigned();
 
-            /*$table->foreign('permission_id')->references('id')->on('permissions')
+            /*$table->foreign('route_id')->references('id')->on('routes')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')
                 ->onUpdate('cascade')->onDelete('cascade');*/
 
-            $table->primary(['permission_id', 'role_id']);
+            $table->primary(['route_id', 'role_id']);
         });
     }
 
@@ -86,8 +87,8 @@ class RbacSetupTables extends Migration
      */
     public function down()
     {
-        Schema::drop('permission_role');
-        Schema::drop('permissions');
+        Schema::drop('route_role');
+        Schema::drop('routes');
         Schema::drop('role_user');
         Schema::drop('roles');
     }

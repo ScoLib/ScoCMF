@@ -155,7 +155,7 @@ return [
         Sco\Providers\AuthServiceProvider::class,
         Sco\Providers\EventServiceProvider::class,
         Sco\Providers\RouteServiceProvider::class,
-        Sco\Providers\FrontendServiceProvider::class,
+        //Sco\Providers\HomeServiceProvider::class,
         Sco\Providers\AdminServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,

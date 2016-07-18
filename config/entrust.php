@@ -40,7 +40,7 @@ return [
     | Update the permission if it is in a different namespace.
     |
     */
-    'permission' => 'Sco\Models\Permission',
+    'permission' => 'Sco\Models\Route',
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     | database.
     |
     */
-    'permissions_table' => 'permissions',
+    'permissions_table' => 'routes',
 
     /*
     |--------------------------------------------------------------------------
@@ -62,7 +62,7 @@ return [
     | between permissions and roles to the database.
     |
     */
-    'permission_role_table' => 'permission_role',
+    'permission_role_table' => 'route_role',
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Role Foreign key on Entrust's role_user Table (Pivot)
+    | Role Foreign key on Entrust's role_user and permission_role Tables (Pivot)
     |--------------------------------------------------------------------------
     */
     'role_foreign_key' => 'role_id',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Permission Foreign key on Entrust's permission_role Table (Pivot)
+    |--------------------------------------------------------------------------
+    */
+    'permission_foreign_key' => 'route_id',
 ];

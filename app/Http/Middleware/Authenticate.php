@@ -5,6 +5,8 @@ namespace Sco\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Auth;
+use Route;
+use URL;
 
 class Authenticate
 {
@@ -21,12 +23,23 @@ class Authenticate
     {
         $url = $guard == 'admin' ? route('admin.login')  :  '/login';
         if (Auth::guard($guard)->guest()) {
-            if ($request->ajax()) {
+            if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->guest($url);
             }
         }
+
+        /*if ($guard == 'admin') {
+            if (!Auth::guard('admin')->user()->can(Route::currentRouteName())) {
+                if ($request->ajax() || $request->wantsJson()) {
+                    return response('Forbidden.', 403);
+                } else {
+                    $previousUrl = URL::previous();
+                    return view('admin::errors.403', compact('previousUrl'));
+                }
+            }
+        }*/
 
         return $next($request);
     }

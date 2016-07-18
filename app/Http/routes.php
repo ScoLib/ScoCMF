@@ -2,32 +2,32 @@
 $routes = [
     [
         [
-            'prefix'     => 'admin',
+            //'prefix'     => 'admin',
             //'domain' => 'backend.scocmf.t',
-            'middleware' => ['web'],
+            //'middleware' => ['web'],
             'namespace'  => 'Admin',
-            'as' => 'admin.'
+            //'as' => 'admin.'
         ],
         [
-            ['get', 'login', 'Auth\AuthController@showLoginForm'],
-            ['post', 'login', 'Auth\AuthController@login'],
-            ['get', 'logout', 'Auth\AuthController@logout'],
-            ['get', '/', 'BaseController@welcome'],
-            ['get', 'system/site', 'System\SiteController@getIndex'],
-            ['post', 'system/site', 'System\SiteController@postIndex'],
-            ['get', 'system/auth', 'System\AuthController@getIndex'],
-            ['get', 'system/auth/add/admin', 'System\AuthController@getAddAdmin'],
-            ['post', 'system/auth/add/admin', 'System\AuthController@postAddAdmin'],
-            ['get', 'system/auth/edit/admin/{id}', 'System\AuthController@getEditAdmin'],
-            ['get', 'system/auth/del/admin/{id}', 'System\AuthController@delAdmin'],
-            ['post', 'system/auth/check', 'System\AuthController@postCheck'],
+            ['get', 'admin/login', 'Auth\AuthController@showLoginForm'],
+            ['post', 'admin/login', 'Auth\AuthController@login'],
+            ['get', 'admin/logout', 'Auth\AuthController@logout'],
+            ['get', 'admin/index', 'BaseController@welcome'],
+            ['get', 'admin/system/site', 'System\SiteController@getIndex'],
+            ['post', 'admin/system/site', 'System\SiteController@postIndex'],
+            ['get', 'admin/system/auth', 'System\AuthController@getIndex'],
+            ['get', 'admin/system/auth/add/admin', 'System\AuthController@getAddAdmin'],
+            ['post', 'admin/system/auth/add/admin', 'System\AuthController@postAddAdmin'],
+            ['get', 'admin/system/auth/edit/admin/{id}', 'System\AuthController@getEditAdmin'],
+            ['get', 'admin/system/auth/del/admin/{id}', 'System\AuthController@delAdmin'],
+            ['post', 'admin/system/auth/check', 'System\AuthController@postCheck'],
         ],
     ],
     [
         [
-            'domain' => 'www.scocmf.t',
-            'middleware' => ['web'],
-            'namespace'  => 'Home'
+            //'domain' => 'www.scocmf.t',
+            //'middleware' => ['web'],
+            //'namespace'  => 'Home'
         ],
         [
             //[

@@ -1,4 +1,6 @@
-@extends('admin::layouts.layout')
+@extends('admin::layouts.layouts')
+
+@section('title', '欢迎页面')
 
 @section('content')
 welcome scocmf

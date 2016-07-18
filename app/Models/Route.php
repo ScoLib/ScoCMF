@@ -2,9 +2,9 @@
 
 namespace Sco\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Zizaco\Entrust\EntrustPermission;
 
-class Route extends Model
+class Route extends EntrustPermission
 {
     //
 }

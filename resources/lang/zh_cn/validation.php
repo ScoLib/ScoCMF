@@ -107,10 +107,11 @@ return [
     */
 
     'attributes' => [
-        'username' => '用户名',
-        'password' => '密码',
+        'username'   => '用户名',
+        'email'      => '邮箱',
+        'password'   => '密码',
         'repassword' => '密码',
-        'group_id' => '权限组',
+        'group_id'   => '权限组',
     ],
 
 ];

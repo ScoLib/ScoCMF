@@ -38,7 +38,7 @@ return [
     'guards' => [
         'admin' => [
             'driver' => 'session',
-            'provider' => 'admins',
+            'provider' => 'users',
         ],
 
         'user' => [
@@ -72,7 +72,7 @@ return [
     'providers' => [
         'admins' => [
             'driver' => 'eloquent',
-            'model' => Sco\Models\Admin::class,
+            'model' => Sco\Models\User::class,
         ],
         'users' => [
             'driver' => 'eloquent',
