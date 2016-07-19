@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
  *
  * @package Sco\Http\Controllers\Admin\System
  */
-class AuthController extends BaseController
+class PermissionController extends BaseController
 {
 
 

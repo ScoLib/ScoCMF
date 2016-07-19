@@ -12,15 +12,17 @@ $routes = [
             ['get', 'admin/login', 'Auth\AuthController@showLoginForm'],
             ['post', 'admin/login', 'Auth\AuthController@login'],
             ['get', 'admin/logout', 'Auth\AuthController@logout'],
-            ['get', 'admin/index', 'BaseController@welcome'],
+            ['get', 'admin/', 'BaseController@dashboard'],
             ['get', 'admin/system/site', 'System\SiteController@getIndex'],
             ['post', 'admin/system/site', 'System\SiteController@postIndex'],
-            ['get', 'admin/system/auth', 'System\AuthController@getIndex'],
-            ['get', 'admin/system/auth/add/admin', 'System\AuthController@getAddAdmin'],
-            ['post', 'admin/system/auth/add/admin', 'System\AuthController@postAddAdmin'],
-            ['get', 'admin/system/auth/edit/admin/{id}', 'System\AuthController@getEditAdmin'],
-            ['get', 'admin/system/auth/del/admin/{id}', 'System\AuthController@delAdmin'],
-            ['post', 'admin/system/auth/check', 'System\AuthController@postCheck'],
+            ['get', 'admin/system/permission', 'System\PermissionController@getIndex'],
+            ['get', 'admin/system/permission/add/role', 'System\PermissionController@getAddAdmin'],
+            ['post', 'admin/system/permission/add/role', 'System\PermissionController@postAddAdmin'],
+            ['get', 'admin/system/permission/edit/admin/{id}', 'System\PermissionController@getEditAdmin'],
+            ['get', 'admin/system/permission/del/admin/{id}', 'System\PermissionController@delAdmin'],
+            ['post', 'admin/system/permission/check', 'System\AuthController@postCheck'],
+
+            ['get', 'admin/system/route', 'System\RouteController@getIndex'],
         ],
     ],
     [
@@ -49,6 +51,9 @@ foreach ($routes as $route) {
                 $name = 'index';
             } else {
                 $name = str_replace('/', '.', $uri);
+            }
+            if ($name == 'admin.') {
+                $name = 'admin.index';
             }
 
             Route::$method($uri, $controller)->name($name);

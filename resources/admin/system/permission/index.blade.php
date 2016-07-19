@@ -1,4 +1,6 @@
-@extends('admin::layouts.layout')
+@extends('admin::layouts.layouts')
+
+@section('title', '权限设置')
 
 @section('content')
 

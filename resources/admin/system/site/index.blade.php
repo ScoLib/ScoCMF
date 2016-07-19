@@ -1,4 +1,6 @@
-@extends('admin::layouts.layout')
+@extends('admin::layouts.layouts')
+
+@section('title', '站点设置')
 
 @section('content')
     <div class="widget-box transparent">

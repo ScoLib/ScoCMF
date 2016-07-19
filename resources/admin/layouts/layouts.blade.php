@@ -4,7 +4,11 @@
     @include('admin::layouts.partials.htmlheader')
 
     <link rel="stylesheet" href="{{ asset('css/skins/skin-green.min.css') }}">
-
+    <style>
+        /*.tooltip-inner {
+            min-width: 50px;
+        }*/
+    </style>
 </head>
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
 <!-- the fixed layout is not compatible with sidebar-mini -->
@@ -48,13 +52,9 @@
         <section class="content-header">
             <h1>
                 @yield('title')
-                <small>Blank example to the fixed layout</small>
+                <small>@yield('small_title')</small>
             </h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Layout</a></li>
-                <li class="active">Fixed</li>
-            </ol>
+            {!! Breadcrumbs::renderIfExists($breadcrumbs) !!}
         </section>
 
         <!-- Main content -->

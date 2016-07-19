@@ -3,7 +3,7 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
-        <div class="user-panel">
+        {{--<div class="user-panel">
             <div class="pull-left image">
                 <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
@@ -11,7 +11,7 @@
                 <p>Alexander Pierce</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
-        </div>
+        </div>--}}
         <!-- search form -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
@@ -26,19 +26,26 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
+            <li>
+                <a href="{{ route('admin.index') }}">
+                    <i class="fa fa-dashboard"></i> <span>控制台</span>
+                </a>
+            </li>
+
+            <li class="treeview active">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                    <i class="fa fa-dashboard"></i> <span>系统管理</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                    <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                    <li><a href="{{ route('admin.system.site') }}"><i class="fa fa-circle-o"></i> 站点设置</a></li>
+                    <li><a href="{{ route('admin.system.permission') }}"><i class="fa fa-circle-o"></i> 权限设置</a></li>
+                    <li class="active"><a href="{{ route('admin.system.route') }}"><i class="fa fa-circle-o"></i> 路由管理</a></li>
                 </ul>
             </li>
-            <li class="treeview active">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
                     <span>Layout Options</span>
@@ -49,18 +56,11 @@
                 <ul class="treeview-menu">
                     <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
                     <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                    <li class="active"><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                    <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
                     <li><a href="collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="../widgets.html">
-                    <i class="fa fa-th"></i> <span>Widgets</span>
-                    <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-                </a>
-            </li>
+
 
 
             <li class="treeview">

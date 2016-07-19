@@ -3,7 +3,7 @@
 
 namespace Sco\Http\Controllers\Admin;
 
-use Auth;
+use Auth, Route;
 use Sco\Http\Controllers\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -29,6 +29,9 @@ class BaseController extends Controller
 
         $this->middleware('auth:admin');
         $this->user = Auth::guard('admin')->user();
+
+        $this->breadcrumbs = Route::currentRouteName();
+
     }
 
     /**
@@ -36,9 +39,9 @@ class BaseController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function welcome()
+    public function dashboard()
     {
-        return $this->render('welcome');
+        return $this->render('dashboard');
     }
 
     /**
