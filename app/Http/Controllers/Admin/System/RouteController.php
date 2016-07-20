@@ -10,12 +10,15 @@ namespace Sco\Http\Controllers\Admin\System;
 
 
 use Sco\Http\Controllers\Admin\BaseController;
+use Repository;
 
 class RouteController extends BaseController
 {
 
     public function getIndex()
     {
+        $this->routes = Repository::route()->getChildrenList(0);
+
         return $this->render('system.route.index');
     }
 }

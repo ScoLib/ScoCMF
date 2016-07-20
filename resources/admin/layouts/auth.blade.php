@@ -2,7 +2,6 @@
 <html lang="{{ config('app.locale') }}">
 <head>
     @include('admin::layouts.partials.htmlheader')
-    <!-- iCheck -->
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">

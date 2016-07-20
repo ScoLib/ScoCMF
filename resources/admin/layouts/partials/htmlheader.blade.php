@@ -12,7 +12,7 @@
 <!-- Ionicons -->
 <link rel="stylesheet" href="{{ asset('ionicons/css/ionicons.min.css') }}">
 <!-- Theme style -->
-<link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/AdminLTE.css') }}">
 @yield('css')
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -19,5 +19,24 @@ class RouteRepository extends BaseRepository implements CacheableInterface
     {
         return Route::class;
     }
-    
+
+    public function getRouteTreeList()
+    {
+        $routes = $this->getChildrenList(0);
+        dd($routes);
+    }
+
+    public function getChildrenList($pid)
+    {
+        static $routes;
+        $list = $this->orderBy('sort')->all();
+        $pid == 0 && $routes = collect();
+        foreach ($list as $item) {
+            if ($item->pid == $pid) {
+                $routes->push($item);
+                $this->getChildrenList($item->id);
+            }
+        }
+        return $routes;
+    }
 }

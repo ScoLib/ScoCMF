@@ -23,7 +23,9 @@ class AuthController extends Controller
 
     protected $loginView = 'admin::auth.login';
 
-    protected $redirectTo = 'admin.index';
+    protected $redirectPath = 'admin';
+
+    protected $redirectAfterLogout = 'admin/login';
 
     public function __construct()
     {
