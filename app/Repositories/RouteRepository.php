@@ -25,10 +25,9 @@ class RouteRepository extends BaseRepository implements CacheableInterface
 
     public function getRouteTreeList()
     {
-        $routes = $this->getAllChildren(0);
-        //$routes = $this->getChildrenList(0);
-        dd($routes);
-
+        $routes = $this->getSiblingsOfDescendants(0);
+        //dd($routes);
+        return $routes;
     }
 
     protected function getTreeData()

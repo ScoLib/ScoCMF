@@ -55,7 +55,8 @@ class RbacSetupTables extends Migration
             $table->string('action', 255)->comment('控制方法');
             $table->enum('method', ['get', 'post', 'put', 'delete', 'patch', 'options', 'any'])
                   ->comment('请求方式')->default('get');
-            $table->tinyInteger('type')->comment('类型：0仅路由、1仅菜单、2菜单加权限')->default('0');
+            $table->tinyInteger('is_menu')->comment('是否作为菜单')->default('1');
+            $table->tinyInteger('is_perm')->comment('是否作为权限')->default('1');
             $table->tinyInteger('sort')->comment('排序');
             $table->string('description')->nullable()->comment('描述');
             $table->timestamps();
