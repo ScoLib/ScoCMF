@@ -17,7 +17,7 @@ class RouteController extends BaseController
 
     public function getIndex()
     {
-        $this->routes = Repository::route()->getChildrenList(0);
+        $this->routes = Repository::route()->getRouteTreeList();
 
         return $this->render('system.route.index');
     }

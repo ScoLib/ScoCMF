@@ -8,12 +8,15 @@ use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Traits\CacheableRepository;
 use Sco\Models\Route;
+use ScoLib\Tree\Traits\TreeTrait;
 
 class RouteRepository extends BaseRepository implements CacheableInterface
 {
     protected $cacheOnly = ['all'];
 
-    use CacheableRepository;
+    protected $treeDataParentIdName = 'pid';
+
+    use CacheableRepository, TreeTrait;
 
     public function model()
     {
@@ -22,21 +25,15 @@ class RouteRepository extends BaseRepository implements CacheableInterface
 
     public function getRouteTreeList()
     {
-        $routes = $this->getChildrenList(0);
+        $routes = $this->getAllChildren(0);
+        //$routes = $this->getChildrenList(0);
         dd($routes);
+
     }
 
-    public function getChildrenList($pid)
+    protected function getTreeData()
     {
-        static $routes;
-        $list = $this->orderBy('sort')->all();
-        $pid == 0 && $routes = collect();
-        foreach ($list as $item) {
-            if ($item->pid == $pid) {
-                $routes->push($item);
-                $this->getChildrenList($item->id);
-            }
-        }
-        return $routes;
+        return $this->orderBy('sort')->all();
     }
+
 }
