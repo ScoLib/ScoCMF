@@ -35,13 +35,13 @@ class BaseController extends Controller
     }
 
     /**
-     * 后台入口页（欢迎页面）
+     * 后台入口页（控制台）
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function dashboard()
+    public function index()
     {
-        return $this->render('dashboard');
+        return $this->render('index');
     }
 
     /**

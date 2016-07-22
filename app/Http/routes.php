@@ -12,7 +12,7 @@ $routes = [
             ['get', 'admin/login', 'Auth\AuthController@showLoginForm'],
             ['post', 'admin/login', 'Auth\AuthController@login'],
             ['get', 'admin/logout', 'Auth\AuthController@logout'],
-            ['get', 'admin/', 'BaseController@dashboard'],
+            ['get', 'admin/', 'BaseController@index'],
 
             ['get', 'admin/system/site', 'System\SiteController@getIndex'],
             ['post', 'admin/system/site', 'System\SiteController@postIndex'],
