@@ -13,6 +13,7 @@ $routes = [
             ['post', 'admin/login', 'Auth\AuthController@login'],
             ['get', 'admin/logout', 'Auth\AuthController@logout'],
             ['get', 'admin/', 'BaseController@dashboard'],
+
             ['get', 'admin/system/site', 'System\SiteController@getIndex'],
             ['post', 'admin/system/site', 'System\SiteController@postIndex'],
             ['get', 'admin/system/permission', 'System\PermissionController@getIndex'],
@@ -20,9 +21,10 @@ $routes = [
             ['post', 'admin/system/permission/add/role', 'System\PermissionController@postAddAdmin'],
             ['get', 'admin/system/permission/edit/admin/{id}', 'System\PermissionController@getEditAdmin'],
             ['get', 'admin/system/permission/del/admin/{id}', 'System\PermissionController@delAdmin'],
-            ['post', 'admin/system/permission/check', 'System\AuthController@postCheck'],
+            ['post', 'admin/system/permission/check', 'System\PermissionController@postCheck'],
 
             ['get', 'admin/system/route', 'System\RouteController@getIndex'],
+            ['get', 'admin/system/route/add', 'System\RouteController@getAdd'],
         ],
     ],
     [

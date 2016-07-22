@@ -8,23 +8,22 @@
             <h3 class="box-title">搜索</h3>
 
             <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"
-                        data-toggle="tooltip" title="收缩">
-                    <i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-angle-down"></i></button>
+                {{--<button type="button" class="btn btn-box-tool" data-widget="remove"
                         data-toggle="tooltip" title="关闭">
-                    <i class="fa fa-times"></i></button>
+                    <i class="fa fa-times"></i></button>--}}
             </div>
         </div>
         <div class="box-body">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="exampleInputName2">Name</label>
-                    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+                    <label for="search-title">标题</label>
+                    <input type="text" name="title" class="form-control" id="search-title" placeholder="路由标题">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail2">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+                    <label for="search-name">名称</label>
+                    <input type="text" name="name" class="form-control" id="search-name" placeholder="路由名称">
                 </div>
                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
             </form>
@@ -34,11 +33,11 @@
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">路由列表</h3>
-
-            <div class="box-tools">
-                <a class="btn btn-box-tool tooltips" data-toggle="tooltip"
-                   data-original-title="新增"><i class="fa fa-plus"></i></a>
+            <div class="box-tools pull-right">
+                <button id="add-route" class="btn btn-default btn-xs"><i class="fa fa-plus"></i></button>
+                <button class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></button>
             </div>
+
         </div>
         <!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
@@ -54,7 +53,7 @@
                 @foreach ($routes as $route)
                     <tr>
                         <td>{{ $route->id }}</td>
-                        <td>{{ $route->title }}</td>
+                        <td>{{ $route->spacer }}{{ $route->title }}</td>
                         <td>{{ $route->name }}</td>
                         <td>{{ $route->pid }}</td>
                         <td><span class="label label-success">Approved</span></td>
@@ -78,4 +77,27 @@
         </div>
 
     </div>
+@endsection
+
+@section('script')
+<script>
+$(function () {
+    $('#add-route').click(function () {
+        layer.load(2);
+        $.get("{{ route('admin.system.route.add') }}", function (html) {
+            layer.closeAll('loading');
+            layer.open({
+                type: 1,
+                title: '添加路由',
+                skin: 'layui-layer-rim', //加上边框
+                shadeClose: true,
+                shade: 0.2,
+                area: '450px',
+                content: html
+            });
+        });
+
+    });
+});
+</script>
 @endsection

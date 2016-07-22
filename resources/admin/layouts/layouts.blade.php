@@ -5,9 +5,14 @@
 
     <link rel="stylesheet" href="{{ asset('css/skins/skin-green.min.css') }}">
     <style>
-        /*.tooltip-inner {
+        .tooltip {
+            font-size: 13px;
+        }
+        .tooltip-inner {
             min-width: 50px;
-        }*/
+            max-width: 300px;
+            text-align:left;
+        }
     </style>
 </head>
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
@@ -86,5 +91,8 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('js/demo.js') }}"></script>
+
+<script src="{{ asset('layer/layer.js') }}"></script>
+@yield('script')
 </body>
 </html>

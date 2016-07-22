@@ -21,4 +21,10 @@ class RouteController extends BaseController
 
         return $this->render('system.route.index');
     }
+
+    public function getAdd()
+    {
+        $this->routes = Repository::route()->getRouteTreeList();
+        return $this->render('system.route.add');
+    }
 }

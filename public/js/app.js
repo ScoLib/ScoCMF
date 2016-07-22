@@ -80,9 +80,9 @@ $.AdminLTE.options = {
   boxWidgetOptions: {
     boxWidgetIcons: {
       //Collapse icon
-      collapse: 'fa-minus',
+      collapse: 'fa-angle-down',
       //Open icon
-      open: 'fa-plus',
+      open: 'fa-angle-right',
       //Remove icon
       remove: 'fa-times'
     },
