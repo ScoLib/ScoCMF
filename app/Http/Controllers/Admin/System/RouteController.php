@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2016/7/19
- * Time: 16:37
- */
 
 namespace Sco\Http\Controllers\Admin\System;
 
 
 use Sco\Http\Controllers\Admin\BaseController;
 use Repository;
+use Sco\Http\Requests\Request;
 
 class RouteController extends BaseController
 {
@@ -26,5 +21,10 @@ class RouteController extends BaseController
     {
         $this->routes = Repository::route()->getRouteTreeList();
         return $this->render('system.route.add');
+    }
+
+    public function getEdit(Request $request)
+    {
+
     }
 }

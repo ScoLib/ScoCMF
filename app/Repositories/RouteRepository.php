@@ -23,6 +23,9 @@ class RouteRepository extends BaseRepository implements CacheableInterface
         return Route::class;
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function getRouteTreeList()
     {
         $routes = $this->getDescendants(0);
@@ -33,6 +36,30 @@ class RouteRepository extends BaseRepository implements CacheableInterface
     protected function getTreeAllNodes()
     {
         return $this->orderBy('sort')->all();
+    }
+
+    public function getValidRouteList()
+    {
+        $all = $this->orderBy('sort')->all();
+        $routes = collect([]);
+        foreach ($all as $route) {
+            if (!empty($route->uri) && $route->uri != '#') {
+                $routes->push($route);
+            }
+        }
+        return $routes;
+    }
+
+    public function getAdminMenu()
+    {
+        $routes = $this->getDescendants(1);
+        $menus = collect([]);
+        foreach ($routes as $route) {
+            if ($route->is_menu == 1) {
+                $menus->push($route);
+            }
+        }
+        return $menus;
     }
 
 }

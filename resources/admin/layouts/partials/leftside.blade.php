@@ -40,8 +40,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.system.site') }}"><i class="fa fa-circle-o"></i> 站点设置</a></li>
-                    <li><a href="{{ route('admin.system.permission') }}"><i class="fa fa-circle-o"></i> 权限设置</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> 站点设置</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> 权限设置</a></li>
                     <li class="active"><a href="{{ route('admin.system.route') }}"><i class="fa fa-circle-o"></i> 路由管理</a></li>
                 </ul>
             </li>

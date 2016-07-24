@@ -3,7 +3,7 @@
 
 namespace Sco\Http\Controllers\Admin;
 
-use Auth, Route;
+use Auth, Route, Repository;
 use Sco\Http\Controllers\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -31,7 +31,7 @@ class BaseController extends Controller
         $this->user = Auth::guard('admin')->user();
 
         $this->breadcrumbs = Route::currentRouteName();
-
+        $this->getLeftMenu();
     }
 
     /**
@@ -42,6 +42,13 @@ class BaseController extends Controller
     public function index()
     {
         return $this->render('index');
+    }
+
+    private function getLeftMenu()
+    {
+        $menus = Repository::route()->getAdminMenu();
+
+        dd($menus->toArray());
     }
 
     /**
