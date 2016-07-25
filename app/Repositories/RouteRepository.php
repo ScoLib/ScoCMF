@@ -50,16 +50,4 @@ class RouteRepository extends BaseRepository implements CacheableInterface
         return $routes;
     }
 
-    public function getAdminMenu()
-    {
-        $routes = $this->getDescendants(1);
-        $menus = collect([]);
-        foreach ($routes as $route) {
-            if ($route->is_menu == 1) {
-                $menus->push($route);
-            }
-        }
-        return $menus;
-    }
-
 }

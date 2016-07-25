@@ -42,6 +42,13 @@ abstract class Controller extends BaseController
 
     }
 
+    protected function setParam($name, $value)
+    {
+        if (!is_numeric($name)) {
+            $this->params[$name] = $value;
+        }
+    }
+
     /**
      * 视图输出
      *

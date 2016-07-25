@@ -21,7 +21,7 @@ class BaseController extends Controller
 
     use AuthorizesRequests, ValidatesRequests;
 
-    //protected $user;
+    protected $user;
 
     public function __construct()
     {
@@ -29,9 +29,11 @@ class BaseController extends Controller
 
         $this->middleware('auth:admin');
         $this->user = Auth::guard('admin')->user();
-
-        $this->breadcrumbs = Route::currentRouteName();
-        $this->getLeftMenu();
+        if ($this->user) {
+            $this->breadcrumbs = Route::currentRouteName();
+            $this->setParam('user', $this->user);
+            $this->getLeftMenu();
+        }
     }
 
     /**
@@ -46,9 +48,26 @@ class BaseController extends Controller
 
     private function getLeftMenu()
     {
-        $menus = Repository::route()->getAdminMenu();
+        $adminId = 1; // 后台路由ID，默认应该是1，如有变更则以实际ID为准
+        $menus = Repository::route()->getLayerOfDescendants($adminId);
+        if ($menus) {
+            $this->leftMenu = $this->checkMenu($menus);
+            //dd($this->leftMenu);
+        }
+    }
 
-        dd($menus->toArray());
+    private function checkMenu($menus)
+    {
+        $return = collect([]);
+        foreach ($menus as $menu) {
+            if ($menu->is_menu && $this->user->can($menu->name)) {
+                if (!empty($menu->child)) {
+                    $menu->child = $this->checkMenu($menu->child);
+                }
+                $return->push($menu);
+            }
+        }
+        return $return;
     }
 
     /**

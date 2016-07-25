@@ -13,6 +13,12 @@
             max-width: 300px;
             text-align:left;
         }
+        .margin-r-0 {
+            margin-right: 0px !important;
+        }
+        .margin-l-0 {
+            margin-left: 0px !important;
+        }
     </style>
 </head>
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
