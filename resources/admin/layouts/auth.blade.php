@@ -18,7 +18,7 @@
             @endif
         </p>
 
-        <form action="{{ route('admin.login') }}" method="post">
+        <form action="{{ route('admin.postLogin') }}" method="post">
             {!! csrf_field() !!}
             <div class="form-group has-feedback">
                 <input type="email" name="email" class="form-control" placeholder="邮箱">

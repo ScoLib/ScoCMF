@@ -34,7 +34,7 @@
         <div class="box-header">
             <h3 class="box-title">路由列表</h3>
             <div class="box-tools pull-right">
-                <button id="add-route" class="btn btn-default btn-xs"><i class="fa fa-plus"></i></button>
+                <a href="{{ route('admin.system.route.add') }}" class="btn btn-default btn-xs"><i class="fa fa-plus"></i></a>
                 <button class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></button>
             </div>
 
@@ -92,7 +92,7 @@ $(function () {
                 skin: 'layui-layer-rim', //加上边框
                 shadeClose: true,
                 shade: 0.2,
-                area: '450px',
+                area: '480px',
                 content: html
             });
         });

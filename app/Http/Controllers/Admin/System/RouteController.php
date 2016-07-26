@@ -5,7 +5,7 @@ namespace Sco\Http\Controllers\Admin\System;
 
 use Sco\Http\Controllers\Admin\BaseController;
 use Repository;
-use Sco\Http\Requests\Request;
+use Illuminate\Http\Request;
 
 class RouteController extends BaseController
 {
@@ -23,7 +23,18 @@ class RouteController extends BaseController
         return $this->render('system.route.add');
     }
 
+    public function postAdd(Request $request)
+    {
+
+    }
+
     public function getEdit(Request $request)
+    {
+
+        return $this->render('system.route.edit');
+    }
+
+    public function postEdit(Request $request)
     {
 
     }

@@ -26,78 +26,25 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-
-            <li>
-                <a href="{{ route('admin.index') }}">
-                    <i class="fa fa-dashboard"></i> <span>控制台</span>
-                </a>
-            </li>
-
-            <li class="treeview active">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>系统管理</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href=""><i class="fa fa-circle-o"></i> 站点设置</a></li>
-                    <li><a href=""><i class="fa fa-circle-o"></i> 权限设置</a></li>
-                    <li class="active"><a href="{{ route('admin.system.route') }}"><i class="fa fa-circle-o"></i> 路由管理</a></li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span>Layout Options</span>
-                    <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                    <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                    <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                    <li><a href="collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-                </ul>
-            </li>
-
-
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-share"></i> <span>Multilevel</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                    <li>
-                        <a href="#"><i class="fa fa-circle-o"></i> Level One
+            @foreach ($leftMenu as $menu)
+                @if ($menu->child->isEmpty()))
+                <li class="{{ $currentMenuNames->contains($menu->name) ? 'active' : '' }}">
+                    <a href="{{ $menu->uri == '#' ? '#' : route($menu->name) }}">
+                        <i class="fa fa-dashboard"></i> <span>{{ $menu->title }}</span>
+                    </a>
+                </li>
+                @else
+                    <li class="treeview {{ $currentMenuNames->contains($menu->name) ? 'active' : '' }}">
+                        <a href="{{ $menu->uri == '#' ? '#' : route($menu->name) }}">
+                            <i class="fa fa-dashboard"></i> <span>{{ $menu->title }}</span>
                             <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                            <li>
-                                <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        @include('admin::layouts.partials.leftmenuchild', ['childs' => $menu->child])
                     </li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                </ul>
-            </li>
-
+                @endif
+            @endforeach
         </ul>
     </section>
     <!-- /.sidebar -->

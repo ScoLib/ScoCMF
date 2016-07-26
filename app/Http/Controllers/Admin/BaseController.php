@@ -52,8 +52,13 @@ class BaseController extends Controller
         $menus = Repository::route()->getLayerOfDescendants($adminId);
         if ($menus) {
             $this->leftMenu = $this->checkMenu($menus);
+            //dd(Route::currentRouteName());
             //dd($this->leftMenu);
         }
+        // 获取当前路由的相关路由name
+        $parentTree = Repository::route()->getParentTree(Route::currentRouteName());
+        $this->currentMenuNames = $parentTree->pluck('name');
+        $this->currentMenuNames->push(Route::currentRouteName());
     }
 
     private function checkMenu($menus)

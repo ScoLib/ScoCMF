@@ -14,7 +14,7 @@ class RouteRepository extends BaseRepository implements CacheableInterface
 {
     protected $cacheOnly = ['all'];
 
-    protected $treeDataParentIdName = 'pid';
+    protected $treeNodeParentIdName = 'pid';
 
     use CacheableRepository, TreeTrait;
 
@@ -24,6 +24,7 @@ class RouteRepository extends BaseRepository implements CacheableInterface
     }
 
     /**
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getRouteTreeList()
@@ -33,14 +34,24 @@ class RouteRepository extends BaseRepository implements CacheableInterface
         return $routes;
     }
 
-    protected function getTreeAllNodes()
+    private function getAll()
     {
         return $this->orderBy('sort')->all();
     }
 
+    protected function getTreeAllNodes()
+    {
+        return $this->getAll();
+    }
+
+    /**
+     * 获取有效的路由列表
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function getValidRouteList()
     {
-        $all = $this->orderBy('sort')->all();
+        $all = $this->getAll();
         $routes = collect([]);
         foreach ($all as $route) {
             if (!empty($route->uri) && $route->uri != '#') {
@@ -48,6 +59,20 @@ class RouteRepository extends BaseRepository implements CacheableInterface
             }
         }
         return $routes;
+    }
+
+    public function getRouteInfoByName($name)
+    {
+        $all = $this->getAll();
+        $key = $all->search(function ($item) use ($name) {
+            return $item->name == $name;
+        });
+        return $all->get($key);
+    }
+
+    public function getParentTree($name)
+    {
+        return $this->getAncestors($this->getRouteInfoByName($name)->id);
     }
 
 }
