@@ -48,6 +48,7 @@ class BaseController extends Controller
 
     private function getLeftMenu()
     {
+        //Repository::route()->saveRouteFile();
         $adminId = 1; // 后台路由ID，默认应该是1，如有变更则以实际ID为准
         $menus = Repository::route()->getLayerOfDescendants($adminId);
         if ($menus) {
