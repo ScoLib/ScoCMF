@@ -69,34 +69,17 @@ class RouteRepository extends BaseRepository implements CacheableInterface
         return $all->get($key);
     }
 
-    public function getParentTree($name)
+    public function getParentTree($id)
     {
-        return $this->getAncestors($this->getRouteInfoByName($name)->id);
+        return $this->getAncestors($id);
     }
 
-    public function saveRouteFile()
+    public function getParentTreeAndSelfByName($name)
     {
-        $list = $this->getValidRouteList();
-        $routes = [];
-        foreach ($list as $route) {
-            $routes[] = [
-                'name'       => $route->name,
-                'uri'        => $route->uri,
-                'action'     => $route->action,
-                'method'     => $route->method,
-                'middleware' => $route->middleware,
-            ];
-        }
-        $content = "<?php \n"
-                 . "\$routes = " . var_export($routes, true) . ";" . PHP_EOL
-                 . "foreach (\$routes as \$route) {" . PHP_EOL
-                 . "    if (empty(\$route['middleware'])) {" . PHP_EOL
-                 . "        Route::\$route['method'](\$route['uri'], \$route['action'])->name(\$route['name']);" . PHP_EOL
-                 . "    } else {" . PHP_EOL
-                 . "        Route::\$route['method'](\$route['uri'], \$route['action'])->name(\$route['name'])->middleware(\$route['middleware']);" . PHP_EOL
-                 . "    }" . PHP_EOL
-                 . "}";
-        file_put_contents(app_path('Http/routes.php'), $content);
+        $self = $this->getRouteInfoByName($name);
+        $parent = $this->getParentTree($self->id);
+        $parent->push($self);
+        return $parent;
     }
 
 }

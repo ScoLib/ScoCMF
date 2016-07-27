@@ -3,7 +3,7 @@
 
 namespace Sco\Http\Controllers\Admin;
 
-use Auth, Route, Repository;
+use Auth, Route, Repository, Breadcrumbs;
 use Sco\Http\Controllers\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -27,13 +27,10 @@ class BaseController extends Controller
     {
         parent::__construct();
 
-        $this->middleware('auth:admin');
         $this->user = Auth::guard('admin')->user();
-        if ($this->user) {
-            $this->breadcrumbs = Route::currentRouteName();
-            $this->setParam('user', $this->user);
-            $this->getLeftMenu();
-        }
+
+        $this->setParam('user', $this->user);
+        $this->initLeftMenuAndBreadcrumbs();
     }
 
     /**
@@ -46,21 +43,43 @@ class BaseController extends Controller
         return $this->render('index');
     }
 
-    private function getLeftMenu()
+    private function initLeftMenuAndBreadcrumbs()
     {
         //Repository::route()->saveRouteFile();
         $adminId = 1; // 后台路由ID，默认应该是1，如有变更则以实际ID为准
-        $menus = Repository::route()->getLayerOfDescendants($adminId);
+        $menus   = Repository::route()->getLayerOfDescendants($adminId);
         if ($menus) {
             $this->leftMenu = $this->checkMenu($menus);
-            //dd(Route::currentRouteName());
-            //dd($this->leftMenu);
         }
+
         // 获取当前路由的相关路由name
-        $parentTree = Repository::route()->getParentTree(Route::currentRouteName());
+        $parentTree = Repository::route()->getParentTreeAndSelfByName(Route::currentRouteName());
         $this->currentMenuNames = $parentTree->pluck('name');
-        $this->currentMenuNames->push(Route::currentRouteName());
+
+        foreach ($parentTree as $key => $route) {
+            Breadcrumbs::register($route->name, function ($breadcrumbs) use ($parentTree, $key, $route) {
+                if ($route->pid) {
+                    $parent = $parentTree->get(($key - 1));
+                    $breadcrumbs->parent($parent->name);
+                }
+
+                if ($route->pid == 0) {
+                    $name = $route->name . '.index';
+                } else {
+                    $name = $route->uri == '#' ? '' : $route->name;
+                }
+
+                if (empty($name)) {
+                    $breadcrumbs->push($route->title);
+                } else {
+                    $breadcrumbs->push($route->title, route($name));
+                }
+            });
+        }
+        $this->breadcrumbs = Route::currentRouteName();
+
     }
+
 
     private function checkMenu($menus)
     {

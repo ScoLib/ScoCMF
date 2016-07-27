@@ -55,7 +55,10 @@ class RouteServiceProvider extends ServiceProvider
         $router->group([
             'namespace' => $this->namespace, 'middleware' => 'web',
         ], function ($router) {
-            require app_path('Http/routes.php');
+            $file = app_path('Http/routes.php');
+            if (file_exists($file)) {
+                require $file;
+            }
         });
     }
 }
