@@ -78,26 +78,3 @@
 
     </div>
 @endsection
-
-@section('script')
-<script>
-$(function () {
-    $('#add-route').click(function () {
-        layer.load(2);
-        $.get("{{ route('admin.system.route.add') }}", function (html) {
-            layer.closeAll('loading');
-            layer.open({
-                type: 1,
-                title: '添加路由',
-                skin: 'layui-layer-rim', //加上边框
-                shadeClose: true,
-                shade: 0.2,
-                area: '480px',
-                content: html
-            });
-        });
-
-    });
-});
-</script>
-@endsection
