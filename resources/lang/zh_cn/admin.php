@@ -15,6 +15,13 @@ return [
         'repassword_required'       => '请输入密码',
         'repassowrd_equal_password' => '两次密码输入不一致',
         'group_id_required'         => '请选择权限组',
+
+        'route' => [
+            'name_required' => '请输入名称',
+            'title_required' => '请输入标题',
+            'uri_required' => '请输入URI地址',
+            'action_required' => '请输入ACTION',
+        ],
     ],
 
 

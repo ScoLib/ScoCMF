@@ -25,7 +25,11 @@ class RouteController extends BaseController
 
     public function postAdd(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|unique:routes'
+        ]);
 
+        return response()->json(success());
     }
 
     public function getEdit(Request $request)

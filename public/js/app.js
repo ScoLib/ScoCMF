@@ -221,6 +221,43 @@ $(function () {
     });
 
 
+
+    // ajax get 方法
+    $(document).on('click', '.ajax-get', function() {
+        var _this = this;
+        if ($(this).hasClass('confirm')) {
+            var text = $(this).attr('data-confirm') || '确认要执行该操作吗?';
+            layer.confirm(text, {icon: 3, title : '提示'}, function(index) {
+                layer.close(index);
+                $(_this).ajaxGet();
+            });
+        } else {
+            $(this).ajaxGet();
+
+        }
+        return false;
+    });
+
+    $(".check-all").click(function () {
+        var chk = this.checked;
+        $(this).closest('table').find('tbody > tr').each(function() {
+            if (chk) {
+                $(this).addClass('active').find(':checkbox').prop('checked', true);
+            } else {
+                $(this).removeClass('active').find(':checkbox').prop('checked', false);
+
+            }
+        });
+    });
+    $(".ids").click(function () {
+        var row = $(this).closest('tr');
+        if (this.checked) {
+            $(row).addClass('active');
+        } else {
+            $(row).removeClass('active');
+        }
+    });
+
     /**
      * jquery validate
      */
@@ -228,7 +265,6 @@ $(function () {
         $.validator.setDefaults({
             errorClass: 'col-sm-3 help-block',
             errorPlacement: function(error, element) {
-                console.log(element.parent().next());
                 element.parent().after(error);
             },
             //focusInvalid: false,
@@ -243,7 +279,7 @@ $(function () {
                 $(e).remove();
             },
             submitHandler: function (form) {
-                // $(form).find(':submit').ajaxPost();
+                $(form).find(':submit').ajaxPost();
             },
             invalidHandler: function (form) {
             }
@@ -706,6 +742,92 @@ function _init() {
         }
 
     };
+
+    /**
+     * submit button
+     * target-form && (url | href | action)
+     *
+     */
+    $.fn.ajaxPost = function() {
+        var _this, target, params, form;
+        _this = this;
+        if ($(this).attr('type') == 'submit'
+            || (target = $(this).attr('href'))
+            || (target = $(this).attr('url'))
+        ) {
+            if ($(this).attr('target-form') !== undefined) {
+                form = $('.' + $(this).attr('target-form'));
+            } else {
+                form = $(this).parents('form');
+            }
+            if (form.get(0).nodeName == 'FORM') {
+                if ($(this).attr('url') !== undefined) {
+                    target = $(this).attr('url');
+                } else {
+                    target = $(form).attr('action');
+                }
+                params = form.serialize();
+            } else if (form.get(0).nodeName == 'INPUT') {
+
+                params = form.serialize();
+            }
+            $(_this).addClass('disabled').prop('disabled', true);
+            layer.load(2);
+            $.post(target, params).success(function(result) {
+                layer.closeAll();
+                if (result.state) {
+                    var message = result.message || '操作成功';
+                    layer.msg(message, {'icon': 1, time : 1500, offset : 0}, function() {
+                        if (result.data.url) {
+                            location.href = result.data.url;
+                        } else if($(_this).hasClass('no-refresh')) {
+                            // 什么也不做
+                        } else {
+                            location.reload();
+                        }
+                    });
+                } else {
+                    var message = result.message || '操作失败';
+                    layer.msg(message, {'icon': 2, time : 2000, offset : 0}, function() {
+                        if (result.data && typeof result.data.url !== 'undefined') {
+                            location.href = result.data.url;
+                        }
+                        $(_this).removeClass('disabled').prop('disabled', false);
+                    });
+                }
+            });
+        }
+    };
+
+    $.fn.ajaxGet = function() {
+        var target, _this = this;
+        if ((target = $(this).attr('href')) || (target = $(this).attr('url'))) {
+            layer.load(2);
+            $.get(target).success(function(result) {
+                layer.closeAll();
+                if (result.state) {
+                    var message = result.message || '操作成功';
+                    layer.msg(message, {'icon': 1, time : 1500, offset : 0}, function() {
+                        if (result.data.url) {
+                            location.href = result.data.url;
+                        } else if($(_this).hasClass('no-refresh')) {
+                            // 什么也不做
+                        } else {
+                            location.reload();
+                        }
+                    });
+                } else {
+                    var message = result.message || '操作失败';
+                    layer.msg(message, {'icon': 2, time : 2000, offset : 0}, function() {
+                        if (result.data && typeof result.data.url !== 'undefined') {
+                            location.href = result.data.url;
+                        }
+                    });
+                }
+            });
+        }
+        return false;
+    }
 
 })(jQuery);
 
