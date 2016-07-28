@@ -82,7 +82,7 @@ $.AdminLTE.options = {
       //Collapse icon
       collapse: 'fa-angle-down',
       //Open icon
-      open: 'fa-angle-right',
+      open: 'fa-angle-left',
       //Remove icon
       remove: 'fa-times'
     },
