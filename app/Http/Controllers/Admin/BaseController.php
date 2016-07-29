@@ -9,6 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Sco\Repositories\RouteRepository;
 
 /**
  * 后台基础控制器
@@ -28,9 +29,10 @@ class BaseController extends Controller
         parent::__construct();
 
         $this->user = Auth::guard('admin')->user();
-
-        $this->setParam('user', $this->user);
-        $this->initLeftMenuAndBreadcrumbs();
+        if ($this->user && !request()->ajax()) {
+            $this->setParam('user', $this->user);
+            $this->initLeftMenuAndBreadcrumbs();
+        }
     }
 
     /**
@@ -47,34 +49,37 @@ class BaseController extends Controller
     {
         //Repository::route()->saveRouteFile();
         $adminId = 1; // 后台路由ID，默认应该是1，如有变更则以实际ID为准
-        $menus   = Repository::route()->getLayerOfDescendants($adminId);
+        $menus   = app(RouteRepository::class)->getLayerOfDescendants($adminId);
+        $this->leftMenu = collect();
         if ($menus) {
             $this->leftMenu = $this->checkMenu($menus);
         }
 
         // 获取当前路由的相关路由name
-        $parentTree = Repository::route()->getParentTreeAndSelfByName(Route::currentRouteName());
+        $parentTree = app(RouteRepository::class)->getParentTreeAndSelfByName(Route::currentRouteName());
+
         $this->currentMenuNames = $parentTree->pluck('name');
 
         foreach ($parentTree as $key => $route) {
-            Breadcrumbs::register($route->name, function ($breadcrumbs) use ($parentTree, $key, $route) {
-                if ($route->pid) {
-                    $parent = $parentTree->get(($key - 1));
-                    $breadcrumbs->parent($parent->name);
-                }
+            Breadcrumbs::register($route->name,
+                function ($breadcrumbs) use ($parentTree, $key, $route) {
+                    if ($route->pid) {
+                        $parent = $parentTree->get(($key - 1));
+                        $breadcrumbs->parent($parent->name);
+                    }
 
-                if ($route->pid == 0) {
-                    $name = $route->name . '.index';
-                } else {
-                    $name = $route->uri == '#' ? '' : $route->name;
-                }
+                    if ($route->pid == 0) {
+                        $name = $route->name . '.index';
+                    } else {
+                        $name = $route->uri == '#' ? '' : $route->name;
+                    }
 
-                if (empty($name)) {
-                    $breadcrumbs->push($route->title);
-                } else {
-                    $breadcrumbs->push($route->title, route($name));
-                }
-            });
+                    if (empty($name)) {
+                        $breadcrumbs->push($route->title);
+                    } else {
+                        $breadcrumbs->push($route->title, route($name));
+                    }
+                });
         }
         $this->breadcrumbs = Route::currentRouteName();
 
@@ -83,7 +88,7 @@ class BaseController extends Controller
 
     private function checkMenu($menus)
     {
-        $return = collect([]);
+        $return = collect();
         foreach ($menus as $menu) {
             if ($menu->is_menu && $this->user->can($menu->name)) {
                 if (!empty($menu->child)) {

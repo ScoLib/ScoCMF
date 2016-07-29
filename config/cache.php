@@ -78,6 +78,7 @@ return [
     |
     */
 
-    'prefix' => 'laravel',
+    'prefix' => 'scocmf',
 
+    //'ttl' => 10,
 ];
