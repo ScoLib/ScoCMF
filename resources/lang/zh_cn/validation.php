@@ -13,19 +13,19 @@ return [
     |
     */
 
-    'accepted'             => 'The :attribute must be accepted.',
-    'active_url'           => 'The :attribute is not a valid URL.',
-    'after'                => 'The :attribute must be a date after :date.',
-    'alpha'                => 'The :attribute may only contain letters.',
-    'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
-    'alpha_num'            => 'The :attribute may only contain letters and numbers.',
-    'array'                => 'The :attribute must be an array.',
-    'before'               => 'The :attribute must be a date before :date.',
+    'accepted'             => ':attribute 必须同意',
+    'active_url'           => ':attribute 不是一个真实有效的URL',
+    'after'                => ':attribute 必须是 :date 之后的时间',
+    'alpha'                => ':attribute 必须是字母',
+    'alpha_dash'           => ':attribute 必须是字母和数字，以及破折号和下划线',
+    'alpha_num'            => ':attribute 必须是字母或数字',
+    'array'                => ':attribute 必须是数组',
+    'before'               => ':attribute 必须是 :date 之前的时间',
     'between'              => [
-        'numeric' => 'The :attribute must be between :min and :max.',
-        'file'    => 'The :attribute must be between :min and :max kilobytes.',
-        'string'  => ':attribute长度必须在:min和:max之间',
-        'array'   => 'The :attribute must have between :min and :max items.',
+        'numeric' => ':attribute 大小必须在 :min ~ :max 之间',
+        'file'    => ':attribute 文件大小必须在 :min ~ :max KB之间',
+        'string'  => ':attribute 长度必须在 :min ~ :max 之间',
+        'array'   => ':attribute must have between :min and :max items.',
     ],
     'boolean'              => 'The :attribute field must be true or false.',
     'confirmed'            => 'The :attribute confirmation does not match.',
@@ -34,13 +34,13 @@ return [
     'different'            => 'The :attribute and :other must be different.',
     'digits'               => 'The :attribute must be :digits digits.',
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
-    'email'                => 'The :attribute must be a valid email address.',
+    'email'                => ':attribute 格式不正确',
     'exists'               => 'The selected :attribute is invalid.',
     'filled'               => 'The :attribute field is required.',
-    'image'                => 'The :attribute must be an image.',
+    'image'                => ':attribute 必须是图片',
     'in'                   => 'The selected :attribute is invalid.',
     'integer'              => 'The :attribute must be an integer.',
-    'ip'                   => 'The :attribute must be a valid IP address.',
+    'ip'                   => ':attribute 格式不正确',
     'json'                 => 'The :attribute must be a valid JSON string.',
     'max'                  => [
         'numeric' => 'The :attribute may not be greater than :max.',
@@ -56,9 +56,9 @@ return [
         'array'   => 'The :attribute must have at least :min items.',
     ],
     'not_in'               => 'The selected :attribute is invalid.',
-    'numeric'              => ':attribute必须是数字',
+    'numeric'              => ':attribute 必须是数字',
     'regex'                => 'The :attribute format is invalid.',
-    'required'             => ':attribute不能为空',
+    'required'             => ':attribute 不能为空',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'The :attribute field is required when :values is present.',
@@ -66,7 +66,7 @@ return [
     'required_without'     => 'The :attribute field is required when :values is not present.',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
     //'same'                 => 'The :attribute and :other must match.',
-    'same'                 => '两次:attribute输入不一致',
+    'same'                 => '两次 :attribute 输入不一致',
     'size'                 => [
         'numeric' => 'The :attribute must be :size.',
         'file'    => 'The :attribute must be :size kilobytes.',
@@ -76,7 +76,7 @@ return [
     'string'               => ':attribute 必须是字符串',
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => ':attribute 已存在',
-    'url'                  => 'The :attribute format is invalid.',
+    'url'                  => ':attribute 格式不正确',
 
     /*
     |--------------------------------------------------------------------------
@@ -112,6 +112,7 @@ return [
         'password'   => '密码',
         'repassword' => '密码',
         'group_id'   => '权限组',
+        'name'       => '名称',
     ],
 
 ];
