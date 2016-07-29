@@ -220,7 +220,11 @@ $(function () {
 
     });
 
-
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
     // ajax get 方法
     $(document).on('click', '.ajax-get', function() {
@@ -773,7 +777,7 @@ function _init() {
             }
             $(_this).addClass('disabled').prop('disabled', true);
             layer.load(2);
-            $.post(target, params).success(function(result) {
+            $.post(target, params, function(result) {
                 layer.closeAll();
                 if (result.state) {
                     var message = result.message || '操作成功';
@@ -795,7 +799,7 @@ function _init() {
                         $(_this).removeClass('disabled').prop('disabled', false);
                     });
                 }
-            });
+            }, 'json');
         }
     };
 
@@ -803,7 +807,7 @@ function _init() {
         var target, _this = this;
         if ((target = $(this).attr('href')) || (target = $(this).attr('url'))) {
             layer.load(2);
-            $.get(target).success(function(result) {
+            $.get(target, function(result) {
                 layer.closeAll();
                 if (result.state) {
                     var message = result.message || '操作成功';
@@ -824,7 +828,7 @@ function _init() {
                         }
                     });
                 }
-            });
+            }, 'json');
         }
         return false;
     }

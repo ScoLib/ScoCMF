@@ -10,7 +10,6 @@
     </div>
     <!-- form start -->
     <form method="post" id="form-add-route" action="{{ route('admin.system.route.postAdd') }}" class="form-horizontal">
-        {!! csrf_field() !!}
         <div class="box-body">
             <div class="form-group margin-l-0 margin-r-0">
                 <label class="col-sm-3 control-label">所属组</label>
