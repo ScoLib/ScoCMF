@@ -3,7 +3,7 @@
 
 namespace Sco\Http\Controllers\Admin;
 
-use Auth, Route, Repository, Breadcrumbs;
+use Auth, Route, Breadcrumbs;
 use Sco\Http\Controllers\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;

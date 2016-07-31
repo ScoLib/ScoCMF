@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerRepository();
+        //$this->registerRepository();
     }
 
     protected function registerRepository()

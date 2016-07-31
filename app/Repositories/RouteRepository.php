@@ -4,19 +4,18 @@
 namespace Sco\Repositories;
 
 
-use Prettus\Repository\Contracts\CacheableInterface;
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Traits\CacheableRepository;
+use Bosnadev\Repositories\Eloquent\Repository;
 use Sco\Models\Route;
 use ScoLib\Tree\Traits\TreeTrait;
+use Cache;
 
-class RouteRepository extends BaseRepository implements CacheableInterface
+class RouteRepository extends Repository
 {
-    protected $cacheOnly = ['all'];
-
     protected $treeNodeParentIdName = 'pid';
+    // 路由数据缓存键值
+    private static $cacheKey = 'route_all_data';
 
-    use CacheableRepository, TreeTrait;
+    use TreeTrait;
 
     public function model()
     {
@@ -35,7 +34,10 @@ class RouteRepository extends BaseRepository implements CacheableInterface
 
     private function getAll()
     {
-        return $this->orderBy('sort')->all();
+        return Cache::rememberForever(self::$cacheKey, function () {
+            return $this->model->orderBy('sort')->get();
+        });
+
     }
 
     protected function getTreeAllNodes()
@@ -80,6 +82,16 @@ class RouteRepository extends BaseRepository implements CacheableInterface
         $parent = $this->getParentTree($self->id);
         $parent->push($self);
         return $parent;
+    }
+
+    public function create(array $data)
+    {
+        $result = parent::create($data);
+        if ($result) {
+            Cache::forget(self::$cacheKey);
+        }
+        return $result;
+
     }
 
 }
