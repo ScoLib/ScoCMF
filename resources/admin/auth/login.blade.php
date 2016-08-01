@@ -18,6 +18,7 @@
             </p>
 
             <form action="{{ route('admin.postLogin') }}" method="post">
+                {!! csrf_field() !!}
                 <div class="form-group has-feedback">
                     <input type="email" name="email" class="form-control" placeholder="邮箱" value="{{ old('email') }}">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
