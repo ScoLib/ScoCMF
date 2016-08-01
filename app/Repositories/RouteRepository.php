@@ -15,8 +15,6 @@ class RouteRepository extends BaseRepository
     use TreeTrait, CacheableRepository;
 
     protected $treeNodeParentIdName = 'pid';
-    // 路由数据缓存键值
-    private static $cacheKey = 'route_all_data';
 
     public function model()
     {
@@ -83,16 +81,6 @@ class RouteRepository extends BaseRepository
         $parent = $this->getParentTree($self->id);
         $parent->push($self);
         return $parent;
-    }
-
-    public function create(array $data)
-    {
-        $result = parent::create($data);
-        if ($result) {
-            Cache::forget(self::$cacheKey);
-        }
-        return $result;
-
     }
 
 }
