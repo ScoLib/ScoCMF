@@ -50,6 +50,6 @@ class Handler extends ExceptionHandler
             return new JsonResponse(error($e->getMessage()));
         }
 
-        //return parent::render($request, $e);
+        return parent::render($request, $e);
     }
 }
