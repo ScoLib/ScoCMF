@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
+use Route;
 
 class Handler extends ExceptionHandler
 {
@@ -49,7 +50,16 @@ class Handler extends ExceptionHandler
         if ($request->ajax()) {
             return new JsonResponse(error($e->getMessage()));
         }
+        if (config('app.debug', false)) {
+            return parent::render($request, $e);
+        }
 
-        return parent::render($request, $e);
+        // 判断是否为 \Sco\Http\Controllers\Admin
+        $action = Route::current()->getAction();
+        if (strpos($action['controller'], $action['namespace'] . '\\Admin') === 0) {
+            return response()->view('admin::errors.500', ['expection' => $e], 500);
+        }
+
+        return response()->view('errors.default', ['expection' => $e], 500);
     }
 }
