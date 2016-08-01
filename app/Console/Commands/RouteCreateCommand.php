@@ -5,14 +5,14 @@ namespace Sco\Console\Commands;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
-class Route extends Command
+class RouteCreateCommand extends Command
 {
     /**
      * The name of the console command.
      *
      * @var string
      */
-    protected $name = 'make:route';
+    protected $name = 'route:create';
 
     /**
      * The console command description.
