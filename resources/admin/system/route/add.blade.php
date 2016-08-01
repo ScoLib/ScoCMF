@@ -78,7 +78,7 @@
             </div>
             <div class="form-group margin-l-0 margin-r-0">
                 <label for="icon" class="col-sm-3 control-label">图标</label>
-                <div class="col-sm-6">
+                <div class="col-sm-2">
                     <input type="text" name="icon" class="form-control" id="icon"
                            placeholder="fa-">
                 </div>
@@ -88,15 +88,44 @@
                 <label for="icon" class="col-sm-3 control-label">菜单</label>
                 <div class="col-sm-6">
                     <div class="switch">
-                        <input type="radio" class="switch-input" name="site_close" value="1" id="site_close_on" checked>
-                        <label for="site_close_on" class="switch-label switch-label-on">开始</label>
-                        <input type="radio" class="switch-input" name="site_close" value="0" id="site_close_off">
-                        <label for="site_close_off" class="switch-label switch-label-off">关闭</label>
+                        <input type="radio" class="switch-input" name="is_menu" value="1" id="is_menu_on" checked>
+                        <label for="is_menu_on" class="switch-label switch-label-on">是</label>
+                        <input type="radio" class="switch-input" name="is_menu" value="0" id="is_menu_off">
+                        <label for="is_menu_off" class="switch-label switch-label-off">否</label>
                         <span class="switch-selection"></span>
 
                     </div>
                 </div>
             </div>
+
+            <div class="form-group margin-l-0 margin-r-0">
+                <label for="icon" class="col-sm-3 control-label">权限</label>
+                <div class="col-sm-6">
+                    <div class="switch">
+                        <input type="radio" class="switch-input" name="is_perm" value="1" id="is_perm_on" checked>
+                        <label for="is_perm_on" class="switch-label switch-label-on">是</label>
+                        <input type="radio" class="switch-input" name="is_perm" value="0" id="is_perm_off">
+                        <label for="is_perm_off" class="switch-label switch-label-off">否</label>
+                        <span class="switch-selection"></span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group margin-l-0 margin-r-0">
+                <label for="sort" class="col-sm-3 control-label">排序</label>
+                <div class="col-sm-2">
+                    <input type="text" name="sort" class="form-control" id="sort" value="0">
+                </div>
+            </div>
+
+            <div class="form-group margin-l-0 margin-r-0">
+                <label for="description" class="col-sm-3 control-label">描述</label>
+                <div class="col-sm-6">
+                    <textarea id="description" class="form-control" rows="3" name="description"></textarea>
+                </div>
+            </div>
+
+
         </div>
         <!-- /.box-body -->
 
