@@ -160,7 +160,6 @@ return [
         //Sco\Providers\HomeServiceProvider::class,
         Sco\Providers\AdminServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
-        //Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Bosnadev\Repositories\Providers\RepositoryProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
@@ -218,7 +217,6 @@ return [
 
         // 自定义门面
         'Captcha'     => Mews\Captcha\Facades\Captcha::class,
-        'Repository'  => Sco\Facades\Repository::class,
         'Entrust'     => Zizaco\Entrust\EntrustFacade::class,
 
     ],

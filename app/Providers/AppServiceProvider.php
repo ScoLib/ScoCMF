@@ -24,14 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //$this->registerRepository();
-    }
-
-    protected function registerRepository()
-    {
-        $this->app->singleton('repository', function($app) {
-            return new RepositoryManager($app);
-        });
 
     }
+
 }
