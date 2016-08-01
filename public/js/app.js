@@ -792,7 +792,7 @@ function _init() {
                     });
                 } else {
                     var message = result.message || '操作失败';
-                    layer.msg(message, {'icon': 2, time : 2000, offset : 0}, function() {
+                    layer.msg(message, {'icon': 2, time : 2500, offset : 0}, function() {
                         if (result.data && typeof result.data.url !== 'undefined') {
                             location.href = result.data.url;
                         }
@@ -822,7 +822,7 @@ function _init() {
                     });
                 } else {
                     var message = result.message || '操作失败';
-                    layer.msg(message, {'icon': 2, time : 2000, offset : 0}, function() {
+                    layer.msg(message, {'icon': 2, time : 2500, offset : 0}, function() {
                         if (result.data && typeof result.data.url !== 'undefined') {
                             location.href = result.data.url;
                         }
