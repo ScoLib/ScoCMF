@@ -4,13 +4,12 @@
 namespace Sco\Repositories;
 
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Traits\CacheableRepository;
+use Bosnadev\Repositories\Eloquent\Repository;
+use Bosnadev\Repositories\Traits\CacheableRepository;
 use Sco\Models\Route;
 use ScoLib\Tree\Traits\TreeTrait;
-use Cache;
 
-class RouteRepository extends BaseRepository
+class RouteRepository extends Repository
 {
     use TreeTrait, CacheableRepository;
 
@@ -33,10 +32,9 @@ class RouteRepository extends BaseRepository
 
     private function getAll()
     {
-
-        return $this->scopeQuery(function($query){
-            return $query->orderBy('sort');
-        })->all();
+        return $this->remember('all', function () {
+            return $this->model->orderBy('sort')->get();
+        });
     }
 
     protected function getTreeAllNodes()
