@@ -7,6 +7,7 @@ use Sco\Http\Controllers\Admin\BaseController;
 use Repository;
 use Illuminate\Http\Request;
 use Sco\Repositories\RouteRepository;
+use Route;
 
 class RouteController extends BaseController
 {
@@ -27,12 +28,20 @@ class RouteController extends BaseController
     public function postAdd(Request $request)
     {
         $this->validate($request, [
-            'name' => 'bail|required|alpha|unique:routes'
+            //'pid' => 'integer',
+            'title' => 'required',
+            'name' => ['bail', 'required', 'regex:/^[a-z\.]+$/', 'unique:routes'],
+            'uri' => 'required',
+            'action' => 'required',
+            //'' => '',
         ]);
 
-        $res = app(RouteRepository::class)->create($request->input());
+        $result = app(RouteRepository::class)->createRoute($request);
+        if ($result['state']) {
+            $result['data'] = ['url' => route('admin.system.route')];
+        }
 
-        return response()->json(success());
+        return response()->json($result);
     }
 
     public function getEdit(Request $request)

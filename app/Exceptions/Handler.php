@@ -47,11 +47,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($request->ajax()) {
-            return new JsonResponse(error($e->getMessage()));
-        }
         if (config('app.debug', false)) {
             return parent::render($request, $e);
+        }
+
+        if ($request->ajax()) {
+            return new JsonResponse(error($e->getMessage()));
         }
 
         // 判断是否为 \Sco\Http\Controllers\Admin

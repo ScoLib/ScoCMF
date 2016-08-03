@@ -6,6 +6,7 @@ namespace Sco\Repositories;
 
 use Bosnadev\Repositories\Eloquent\Repository;
 use Bosnadev\Repositories\Traits\CacheableRepository;
+use Illuminate\Http\Request;
 use Sco\Models\Route;
 use ScoLib\Tree\Traits\TreeTrait;
 
@@ -79,6 +80,56 @@ class RouteRepository extends Repository
         $parent = $this->getParentTree($self->id);
         $parent->push($self);
         return $parent;
+    }
+
+    public function createRoute(Request $request)
+    {
+        $input = $request->input();
+        $result = $this->checkRoute($input);
+        if ($result['state'] == false) {
+            return $result;
+        }
+        $res = $this->create($input);
+        if ($res) {
+            return success();
+        }
+        return error('新增路由失败');
+    }
+
+    /**
+     * 检验路由数据是否正确
+     *
+     * @param array $route
+     *
+     * @return Exception
+     */
+    private function checkRoute($route)
+    {
+        if ($route['action'] != '#') {
+            list($class, $method) = array_pad(explode('@', $route['action']), 2, null);
+            if (is_null($class) || is_null($method)) {
+                return error('操作（Action） 格式有误');
+            }
+            if (strpos($class, '\\') !== 0) {
+                $class = app()->getNamespace() . 'Http\\Controllers\\' . $class;
+            }
+
+            if (!method_exists($class, $method)) {
+                return error(sprintf('方法 [%s] 不存在', $route['action']));
+            }
+        }
+
+        if (!empty($route['middleware'])) {
+            $middlewares = explode('|', $route['middleware']);
+            foreach ($middlewares as $middleware) {
+                list($name, $parameters) = array_pad(explode(':', $middleware, 2), 2, null);
+                $className = \Route::resolveMiddlewareClassName($middleware);
+                if ($name == $className) {
+                    return error(sprintf('中间件 [%s] 不存在', $middleware));
+                }
+            }
+        }
+        return success();
     }
 
 }

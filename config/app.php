@@ -160,7 +160,7 @@ return [
         //Sco\Providers\HomeServiceProvider::class,
         Sco\Providers\AdminServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
-        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Bosnadev\Repositories\Providers\RepositoryProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 

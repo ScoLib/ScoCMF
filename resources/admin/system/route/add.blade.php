@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="form-group margin-l-0 margin-r-0">
-                <label for="action" class="col-sm-3 control-label">ACTION</label>
+                <label for="action" class="col-sm-3 control-label">操作（Action）</label>
                 <div class="col-sm-6">
                     <input type="text" data-toggle="tooltip"
                            data-html="true" data-original-title="不可点击路由输入'#'" name="action"
