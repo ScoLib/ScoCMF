@@ -7,8 +7,12 @@ use Sco\Http\Controllers\Admin\BaseController;
 use Repository;
 use Illuminate\Http\Request;
 use Sco\Repositories\RouteRepository;
-use Route;
 
+/**
+ * Class RouteController
+ *
+ * @package Sco\Http\Controllers\Admin\System
+ */
 class RouteController extends BaseController
 {
 
@@ -29,9 +33,9 @@ class RouteController extends BaseController
     {
         $this->validate($request, [
             //'pid' => 'integer',
-            'title' => 'required',
-            'name' => ['bail', 'required', 'regex:/^[a-z\.]+$/', 'unique:routes'],
-            'uri' => 'required',
+            'title'  => 'required',
+            'name'   => ['bail', 'required', 'regex:/^[a-z\.]+$/', 'unique:routes'],
+            'uri'    => 'required',
             'action' => 'required',
             //'' => '',
         ]);
@@ -44,9 +48,12 @@ class RouteController extends BaseController
         return response()->json($result);
     }
 
-    public function getEdit(Request $request)
+    public function getEdit($id)
     {
-
+        if ($id) {
+            $this->route = app(RouteRepository::class)->find($id);
+            $this->routes = app(RouteRepository::class)->getRouteTreeList();
+        }
         return $this->render('system.route.edit');
     }
 

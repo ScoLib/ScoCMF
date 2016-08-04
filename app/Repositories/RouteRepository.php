@@ -16,6 +16,8 @@ class RouteRepository extends Repository
 
     protected $treeNodeParentIdName = 'pid';
 
+    private $allRoutes = null;
+
     public function model()
     {
         return Route::class;
@@ -33,9 +35,14 @@ class RouteRepository extends Repository
 
     private function getAll()
     {
-        return $this->remember('all', function () {
+        if ($this->allRoutes) {
+            return $this->allRoutes;
+        }
+
+        $this->allRoutes = $this->remember('all', function () {
             return $this->model->orderBy('sort')->get();
         });
+        return $this->allRoutes;
     }
 
     protected function getTreeAllNodes()
@@ -76,7 +83,7 @@ class RouteRepository extends Repository
 
     public function getParentTreeAndSelfByName($name)
     {
-        $self = $this->getRouteInfoByName($name);
+        $self   = $this->getRouteInfoByName($name);
         $parent = $this->getParentTree($self->id);
         $parent->push($self);
         return $parent;
@@ -84,7 +91,7 @@ class RouteRepository extends Repository
 
     public function createRoute(Request $request)
     {
-        $input = $request->input();
+        $input  = $request->input();
         $result = $this->checkRoute($input);
         if ($result['state'] == false) {
             return $result;

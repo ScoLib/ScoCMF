@@ -48,7 +48,7 @@
                     <th>名称</th>
                     <th>父ID</th>
                     <th>Status</th>
-                    <th>Reason</th>
+                    <th>操作</th>
                 </tr>
                 @foreach ($routes as $route)
                     <tr>
@@ -58,6 +58,9 @@
                         <td>{{ $route->pid }}</td>
                         <td><span class="label label-success">Approved</span></td>
                         <td>
+                            <a href="{{ route('admin.system.route.edit', ['id' => $route->id]) }}" class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> 编辑</a>
+                            <a class="btn btn-danger btn-xs ajax-get" href="" data-confirm="确定要删除？">
+                                <i class="fa fa-trash-o"></i> 删除</a>
                         </td>
                     </tr>
                 @endforeach
