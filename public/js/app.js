@@ -229,8 +229,8 @@ $(function () {
     // ajax get 方法
     $(document).on('click', '.ajax-get', function() {
         var _this = this;
-        if ($(this).hasClass('confirm')) {
-            var text = $(this).attr('data-confirm') || '确认要执行该操作吗?';
+        if ($(this).data('confirm') !== undefined) {
+            var text = $(this).data('confirm') || '确认要执行该操作吗?';
             layer.confirm(text, {icon: 3, title : '提示'}, function(index) {
                 layer.close(index);
                 $(_this).ajaxGet();
@@ -805,7 +805,7 @@ function _init() {
 
     $.fn.ajaxGet = function() {
         var target, _this = this;
-        if ((target = $(this).attr('href')) || (target = $(this).attr('url'))) {
+        if ((target = $(this).attr('href')) || (target = $(this).data('url'))) {
             layer.load(2);
             $.get(target, function(result) {
                 layer.closeAll();
