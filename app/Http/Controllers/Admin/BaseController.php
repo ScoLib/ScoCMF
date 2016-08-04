@@ -74,7 +74,7 @@ class BaseController extends Controller
                         $name = $route->uri == '#' ? '' : $route->name;
                     }
 
-                    if (empty($name)) {
+                    if (empty($name) || preg_match('/\{.*?\}/', $route->uri)) {
                         $breadcrumbs->push($route->title);
                     } else {
                         $breadcrumbs->push($route->title, route($name));
