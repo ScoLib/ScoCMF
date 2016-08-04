@@ -4,7 +4,7 @@ namespace Sco\Http\Controllers\Admin\System;
 
 use Illuminate\Http\Request;
 use Sco\Http\Controllers\Admin\BaseController;
-use Repository;
+use Sco\Repositories\ConfigRepository;
 
 /**
  * 站点设置
@@ -16,14 +16,14 @@ class SiteController extends BaseController
 
     public function getIndex()
     {
-        $configs = Repository::config()->getConfigs();
-        return $this->render('system.site.index', compact('configs'));
+        $this->configs = app(ConfigRepository::class)->getConfigs();
+        return $this->render('system.site.index');
     }
 
     public function postIndex(Request $request)
     {
         $configs = $request->input('configs');
-        Repository::config()->saveConfigs($configs);
+        app(ConfigRepository::class)->saveConfigs($configs);
         return response()->json(success());
     }
 

@@ -2,11 +2,14 @@
 
 namespace Sco\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
+use Bosnadev\Repositories\Eloquent\Repository;
+use Bosnadev\Repositories\Traits\CacheableRepository;
 use Sco\Models\Config;
 
-class ConfigRepository extends BaseRepository
+class ConfigRepository extends Repository
 {
+    use CacheableRepository;
+
     private $configs = null;
 
     public function model()
@@ -25,11 +28,15 @@ class ConfigRepository extends BaseRepository
             return $this->configs;
         }
 
-        $collection = collect();
-        $this->all()->each(function ($item) use ($collection) {
-            $collection->put($item->name, $item->value);
+        $this->configs = $this->remember('configs', function () {
+            $collection = collect();
+            $this->all()->each(function ($item) use ($collection) {
+                $collection->put($item->name, $item->value);
+            });
+            return $collection->all();
         });
-        return $this->configs = $collection->all();
+
+        return $this->configs;
 
     }
 
@@ -55,7 +62,7 @@ class ConfigRepository extends BaseRepository
     private function flushConfigFile()
     {
         $configs = $this->getConfigs();
-        $file = config_path('sco.php');
+        $file    = config_path('sco.php');
         file_put_contents($file, sprintf('<?php return %s;', var_export($configs, true)));
     }
 
