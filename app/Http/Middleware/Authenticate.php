@@ -21,7 +21,7 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next, $guard = null)
     {
-        $url = $guard == 'admin' ? route('admin.login')  :  '/login';
+        $url = $guard == 'admin' ? route('admin.login') : '/login';
         if (Auth::guard($guard)->guest()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
@@ -30,16 +30,16 @@ class Authenticate
             }
         }
 
-        /*if ($guard == 'admin') {
+        if ($guard == 'admin') {
             if (!Auth::guard('admin')->user()->can(Route::currentRouteName())) {
                 if ($request->ajax() || $request->wantsJson()) {
-                    return response('Forbidden.', 403);
+                    return response()->json(error('您没有权限执行此操作'));
                 } else {
                     $previousUrl = URL::previous();
                     return view('admin::errors.403', compact('previousUrl'));
                 }
             }
-        }*/
+        }
 
         return $next($request);
     }
