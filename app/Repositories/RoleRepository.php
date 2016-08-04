@@ -3,10 +3,10 @@
 namespace Sco\Repositories;
 
 
-use Prettus\Repository\Eloquent\BaseRepository;
+use Bosnadev\Repositories\Eloquent\Repository;
 use Sco\Models\Role;
 
-class RoleRepository extends BaseRepository
+class RoleRepository extends Repository
 {
 
     public function model()
