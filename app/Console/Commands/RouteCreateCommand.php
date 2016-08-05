@@ -3,6 +3,7 @@
 namespace Sco\Console\Commands;
 
 use Illuminate\Console\Command;
+use Sco\Repositories\RouteRepository;
 use Symfony\Component\Console\Input\InputOption;
 
 class RouteCreateCommand extends Command
@@ -35,9 +36,23 @@ class RouteCreateCommand extends Command
             return false;
         }
 
+        $routes = app(RouteRepository::class)->getValidRouteList();
+        
+        $content = "<?php" . PHP_EOL;
+        foreach ($routes as $route) {
+            $content .= "// {$route->title}" . PHP_EOL;
+            $content .= "\$router->{$route->method}('{$route->uri}', '{$route->action}')" . PHP_EOL
+                     . "->name('{$route->name}')";
+
+            if (!empty($route->middleware)) {
+                $middleware = str_replace('|', "','", $route->middleware);
+                $content .= PHP_EOL . "->middleware(['{$middleware}'])";
+            }
+            $content .= ";" . PHP_EOL . PHP_EOL;
+        }
         file_put_contents(
             app_path('Http/routes.php'),
-            file_get_contents(__DIR__ . '/../stubs/route.stub')
+            $content
         );
 
         $this->info('route file created successfully.');
