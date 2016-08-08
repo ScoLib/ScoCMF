@@ -41,7 +41,7 @@ class RouteCreateCommand extends Command
         $content = "<?php" . PHP_EOL;
         foreach ($routes as $route) {
             $content .= "// {$route->title}" . PHP_EOL;
-            $content .= "\$router->{$route->method}('{$route->uri}', '{$route->action}')" . PHP_EOL
+            $content .= "Route::{$route->method}('{$route->uri}', '{$route->action}')" . PHP_EOL
                      . "->name('{$route->name}')";
 
             if (!empty($route->middleware)) {
