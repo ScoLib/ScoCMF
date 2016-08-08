@@ -32,9 +32,9 @@ class RouteController extends BaseController
     public function postAdd(Request $request)
     {
         $this->validate($request, [
-            //'pid' => 'integer',
+            'pid' => 'integer',
             'title'  => 'required',
-            'name'   => ['bail', 'required', 'regex:/^[a-z\.]+$/', 'unique:routes'],
+            'name'   => ['bail', 'required', 'regex:/^[a-z\.]+$/', 'unique:routes,name'],
             'uri'    => 'required',
             'action' => 'required',
             //'' => '',
@@ -57,8 +57,23 @@ class RouteController extends BaseController
         return $this->render('system.route.edit');
     }
 
-    public function postEdit(Request $request)
+    public function postEdit(Request $request, $id)
     {
+        $this->validate($request, [
+            'pid' => 'integer',
+            'title'  => 'required',
+            'name'   => ['bail', 'required', 'regex:/^[a-z\.]+$/', 'unique:routes,name,' . $id],
+            'uri'    => 'required',
+            'action' => 'required',
+            //'' => '',
+        ]);
+
+        $result = app(RouteRepository::class)->updateRoute($request, $id);
+        if ($result['state']) {
+            $result['data'] = ['url' => route('admin.system.route')];
+        }
+
+        return response()->json($result);
 
     }
 }

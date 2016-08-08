@@ -103,6 +103,20 @@ class RouteRepository extends Repository
         return error('新增路由失败');
     }
 
+    public function updateRoute(Request $request, $id)
+    {
+        $input  = $request->input();
+        $result = $this->checkRoute($input);
+        if ($result['state'] == false) {
+            return $result;
+        }
+        $res = $this->update($input, $id);
+        if ($res) {
+            return success();
+        }
+        return error('编辑路由失败');
+    }
+
     /**
      * 检验路由数据是否正确
      *

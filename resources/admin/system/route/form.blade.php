@@ -92,7 +92,7 @@
             <label for="icon" class="col-sm-3 control-label">权限</label>
             <div class="col-sm-6">
                 <div class="switch">
-                    <input type="radio" class="switch-input" name="is_perm" value="1" id="is_perm_on" checked>
+                    <input type="radio" class="switch-input" name="is_perm" value="1" id="is_perm_on" >
                     <label for="is_perm_on" class="switch-label switch-label-on">是</label>
                     <input type="radio" class="switch-input" name="is_perm" value="0" id="is_perm_off">
                     <label for="is_perm_off" class="switch-label switch-label-off">否</label>

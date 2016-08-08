@@ -39,7 +39,7 @@ return [
     'filled'               => 'The :attribute field is required.',
     'image'                => ':attribute 必须是图片',
     'in'                   => 'The selected :attribute is invalid.',
-    'integer'              => 'The :attribute must be an integer.',
+    'integer'              => ':attribute 必须是整数',
     'ip'                   => ':attribute 格式不正确',
     'json'                 => 'The :attribute must be a valid JSON string.',
     'max'                  => [
@@ -113,6 +113,7 @@ return [
         'repassword' => '密码',
         'group_id'   => '权限组',
         'name'       => '名称',
+        'pid'        => '所属父级',
     ],
 
 ];

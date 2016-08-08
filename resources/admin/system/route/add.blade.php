@@ -17,6 +17,9 @@
     <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
     <script>
         $(function () {
+            $(':input[name="is_menu"][value="1"]').prop('checked', true);
+            $(':input[name="is_perm"][value="1"]').prop('checked', true);
+
             $('#form-add-route').validate({
                 rules: {
                     'name' : {
