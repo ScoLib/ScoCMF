@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Sco\Repositories;
-
 
 use Bosnadev\Repositories\Eloquent\Repository;
 use Bosnadev\Repositories\Traits\CacheableRepository;
@@ -10,6 +8,11 @@ use Illuminate\Http\Request;
 use Sco\Models\Route;
 use ScoLib\Tree\Traits\TreeTrait;
 
+/**
+ * Class RouteRepository
+ *
+ * @package Sco\Repositories
+ */
 class RouteRepository extends Repository
 {
     use TreeTrait, CacheableRepository;
