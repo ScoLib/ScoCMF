@@ -30,13 +30,13 @@
                 @if ($menu->child->isEmpty()))
                 <li class="{{ $currentMenuNames->contains($menu->name) ? 'active' : '' }}">
                     <a href="{{ $menu->uri == '#' ? '#' : route($menu->name) }}">
-                        <i class="fa fa-dashboard"></i> <span>{{ $menu->title }}</span>
+                        <i class="fa {{ $menu->icon ?: 'fa-folder' }}"></i> <span>{{ $menu->title }}</span>
                     </a>
                 </li>
                 @else
                     <li class="treeview {{ $currentMenuNames->contains($menu->name) ? 'active' : '' }}">
                         <a href="{{ $menu->uri == '#' ? '#' : route($menu->name) }}">
-                            <i class="fa fa-dashboard"></i> <span>{{ $menu->title }}</span>
+                            <i class="fa {{ $menu->icon ?: 'fa-folder' }}"></i> <span>{{ $menu->title }}</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
