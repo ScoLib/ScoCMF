@@ -50,7 +50,7 @@ return [
     | The model namespace.
     |
     */
-    'model_namespace' => 'Sco',
+    'model_namespace' => 'Sco\Models',
 
     /**
      * Cache Config
