@@ -7,6 +7,7 @@ use Sco\Http\Controllers\Admin\BaseController;
 use Repository;
 use Illuminate\Http\Request;
 use Sco\Repositories\RouteRepository;
+use Route;
 
 /**
  * Class RouteController
@@ -25,6 +26,7 @@ class RouteController extends BaseController
 
     public function getAdd()
     {
+        $this->middlewares = $this->getAppMiddlewares();
         $this->routes = app(RouteRepository::class)->getRouteTreeList();
         return $this->render('system.route.add');
     }
@@ -51,6 +53,7 @@ class RouteController extends BaseController
     public function getEdit($id)
     {
         if ($id) {
+            $this->middlewares = $this->getAppMiddlewares();
             $this->route = app(RouteRepository::class)->find($id);
             $this->routes = app(RouteRepository::class)->getRouteTreeList();
         }
@@ -74,6 +77,13 @@ class RouteController extends BaseController
         }
 
         return response()->json($result);
+
+    }
+
+    private function getAppMiddlewares()
+    {
+        $group = ['web', 'api'];
+        return array_merge($group, array_keys(Route::getMiddleware()));
 
     }
 }

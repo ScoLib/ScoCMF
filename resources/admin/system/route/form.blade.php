@@ -61,7 +61,7 @@
             <label for="middleware" class="col-sm-3 control-label">中间件</label>
             <div class="col-sm-6">
                 <input type="text" data-toggle="tooltip"
-                       data-html="true" data-original-title="多个中间件以“|”分隔" name="middleware"
+                       data-html="true" data-original-title="可用中间件： {{ implode('&nbsp;&nbsp;', $middlewares) }}<br>多个中间件以“|”分隔" name="middleware"
                        class="form-control tooltips" id="middleware"
                        placeholder="web|throttle:60,1" value="{{ $route->middleware or '' }}">
             </div>
