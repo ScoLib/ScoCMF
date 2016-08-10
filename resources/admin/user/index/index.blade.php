@@ -32,6 +32,15 @@
                     <input type="text" name="email" class="form-control" id="search-email"
                            placeholder="邮箱" value="{{ request('email') }}">
                 </div>
+                <div class="form-group">
+                    <label for="search-role">角色</label>
+                    <select class="form-control" name="role">
+                        <option value="0">选择角色</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}"{{ $role->id == request('role') ? 'selected' : '' }}>{{ $role->display_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
             </form>
         </div>
@@ -56,6 +65,7 @@
                     <th>用户名</th>
                     <th>邮箱</th>
                     <th>创建时间</th>
+                    <th>角色</th>
                     <th class="col-sm-2">操作</th>
                 </tr>
                 @foreach ($users as $user)
@@ -65,6 +75,11 @@
                         <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->created_at }}</td>
+                        <td>
+                            @foreach ($user->roles as $role)
+                                {{ $role->display_name }}
+                            @endforeach
+                        </td>
                         <td>
                             <a href="{{ route('admin.system.route.edit', ['id' => $user->id]) }}"
                                class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> 编辑</a>
