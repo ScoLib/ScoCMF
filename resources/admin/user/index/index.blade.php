@@ -18,14 +18,19 @@
         <div class="box-body">
             <form class="form-inline">
                 <div class="form-group">
+                    <label for="search-uid">用户UID</label>
+                    <input type="text" name="uid" class="form-control" id="search-uid"
+                           placeholder="用户UID" value="{{ request('uid') }}">
+                </div>
+                <div class="form-group">
                     <label for="search-username">用户名</label>
                     <input type="text" name="username" class="form-control" id="search-username"
                            placeholder="用户名" value="{{ request('username') }}">
                 </div>
                 <div class="form-group">
-                    <label for="search-name">名称</label>
-                    <input type="text" name="name" class="form-control" id="search-name"
-                           placeholder="路由名称" value="{{ request('name') }}">
+                    <label for="search-email">邮箱</label>
+                    <input type="text" name="email" class="form-control" id="search-email"
+                           placeholder="邮箱" value="{{ request('email') }}">
                 </div>
                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
             </form>
@@ -34,7 +39,7 @@
     </div>
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">路由列表</h3>
+            <h3 class="box-title">用户列表</h3>
             <div class="box-tools pull-right">
                 <a href="{{ route('admin.system.route.add') }}" class="btn btn-default btn-xs"><i
                             class="fa fa-plus"></i></a>
@@ -46,7 +51,7 @@
         <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
                 <tr>
-                    <th><input type="checkbox"></th>
+                    <th><input class="check-all" title="全选" type="checkbox"></th>
                     <th>UID</th>
                     <th>用户名</th>
                     <th>邮箱</th>
@@ -55,8 +60,8 @@
                 </tr>
                 @foreach ($users as $user)
                     <tr>
-                        <td><input type="checkbox" value="{{ $user->id }}"></td>
-                        <td>{{ $user->id }}</td>
+                        <td><input type="checkbox" value="{{ $user->uid }}"></td>
+                        <td>{{ $user->uid }}</td>
                         <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->created_at }}</td>
