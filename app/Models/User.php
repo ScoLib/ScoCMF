@@ -8,6 +8,8 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 class User extends Authenticatable
 {
     use EntrustUserTrait;
+
+    protected $primaryKey = 'uid';
     
     /**
      * The attributes that are mass assignable.

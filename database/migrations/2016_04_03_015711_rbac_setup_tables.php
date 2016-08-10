@@ -16,17 +16,17 @@ class RbacSetupTables extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->engine = "InnoDB COMMENT='角色表'";
             $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('display_name')->nullable();
-            $table->string('description')->nullable();
+            $table->string('name')->unique()->comment('名称');
+            $table->string('display_name')->nullable()->comment('显示名');
+            $table->string('description')->nullable()->comment('备注');
             $table->timestamps();
         });
 
         // Create table for associating roles to users (Many-to-Many)
         Schema::create('role_user', function (Blueprint $table) {
             $table->engine = "InnoDB COMMENT='角色与用户对应表'";
-            $table->integer('uid')->unsigned();
-            $table->integer('role_id')->unsigned();
+            $table->integer('uid')->unsigned()->comment('UID');
+            $table->integer('role_id')->unsigned()->comment('角色ID');
 
             /*$table->foreign('uid')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
@@ -70,8 +70,8 @@ class RbacSetupTables extends Migration
         // Create table for associating permissions to roles (Many-to-Many)
         Schema::create('route_role', function (Blueprint $table) {
             $table->engine = "InnoDB COMMENT='路由（权限）与角色对应表'";
-            $table->integer('route_id')->unsigned();
-            $table->integer('role_id')->unsigned();
+            $table->integer('route_id')->unsigned()->comment('路由ID');
+            $table->integer('role_id')->unsigned()->comment('角色ID');
 
             /*$table->foreign('route_id')->references('id')->on('routes')
                 ->onUpdate('cascade')->onDelete('cascade');
