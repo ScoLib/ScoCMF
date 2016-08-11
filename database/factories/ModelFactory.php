@@ -13,8 +13,8 @@
 
 $factory->define(Sco\Models\User::class, function (Faker\Generator $faker) {
     return [
-        'username' => $faker->name,
-        'email' => $faker->safeEmail,
+        'username' => str_random(6),
+        'email' => str_random(10) . '@test.com',
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
