@@ -1,4 +1,24 @@
 <?php
+// 添加用户
+Route::get('admin/users/user/add', 'Admin\Users\UserController@getAdd')
+->name('admin.users.user.add')
+->middleware(['web','auth:admin']);
+
+// 编辑用户
+Route::get('admin/users/user/{uid}/edit', 'Admin\Users\UserController@getEdit')
+->name('admin.users.user.edit')
+->middleware(['web','auth:admin']);
+
+// 提交添加用户
+Route::post('admin/users/user/postAdd', 'Admin\Users\UserController@postAdd')
+->name('admin.users.user.postAdd')
+->middleware(['web','auth:admin']);
+
+// 提交编辑用户
+Route::post('admin/users/user/{uid}/edit', 'Admin\Users\UserController@postEdit')
+->name('admin.users.user.postEdit')
+->middleware(['web','auth:admin']);
+
 // 登录页
 Route::get('admin/login', 'Admin\Auth\AuthController@getLogin')
 ->name('admin.login')
@@ -39,7 +59,7 @@ Route::get('admin/system/route/{id}/edit', 'Admin\System\RouteController@getEdit
 ->name('admin.system.route.edit')
 ->middleware(['web','auth:admin']);
 
-// 编辑路由提交
+// 提交编辑路由
 Route::post('admin/system/route/{id}/edit', 'Admin\System\RouteController@postEdit')
 ->name('admin.system.route.postEdit')
 ->middleware(['web','auth:admin']);
@@ -55,7 +75,12 @@ Route::post('admin/system/site/save', 'Admin\System\SiteController@postIndex')
 ->middleware(['web','auth:admin']);
 
 // 用户列表
-Route::get('admin/user/index', 'Admin\User\IndexController@getIndex')
-->name('admin.user.index')
+Route::get('admin/users/user', 'Admin\Users\UserController@getIndex')
+->name('admin.users.user')
+->middleware(['web','auth:admin']);
+
+// 角色管理
+Route::get('admin/users/role', 'Admin\Users\RoleController@getIndex')
+->name('admin.users.role')
 ->middleware(['web','auth:admin']);
 

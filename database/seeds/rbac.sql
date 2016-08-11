@@ -45,6 +45,14 @@ INSERT INTO `sco_route_role` VALUES ('13', '1');
 INSERT INTO `sco_route_role` VALUES ('14', '1');
 INSERT INTO `sco_route_role` VALUES ('15', '1');
 INSERT INTO `sco_route_role` VALUES ('16', '1');
+INSERT INTO `sco_route_role` VALUES ('17', '1');
+INSERT INTO `sco_route_role` VALUES ('18', '1');
+INSERT INTO `sco_route_role` VALUES ('19', '1');
+INSERT INTO `sco_route_role` VALUES ('20', '1');
+INSERT INTO `sco_route_role` VALUES ('21', '1');
+INSERT INTO `sco_route_role` VALUES ('22', '1');
+INSERT INTO `sco_route_role` VALUES ('23', '1');
+INSERT INTO `sco_route_role` VALUES ('24', '1');
 
 -- ----------------------------
 -- Records of sco_routes
@@ -60,8 +68,13 @@ INSERT INTO `sco_routes` VALUES ('8', '7', 'fa-link', '路由管理', 'admin.sys
 INSERT INTO `sco_routes` VALUES ('9', '8', '', '新增路由', 'admin.system.route.add', 'admin/system/route/add', 'Admin\\System\\RouteController@getAdd', 'get', 'web|auth:admin', '0', '1', '1', '新增路由', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
 INSERT INTO `sco_routes` VALUES ('10', '8', '', '提交新增路由', 'admin.system.route.postAdd', 'admin/system/route/postAdd', 'Admin\\System\\RouteController@postAdd', 'post', 'web|auth:admin', '0', '1', '1', '提交新增路由', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
 INSERT INTO `sco_routes` VALUES ('11', '8', '', '编辑路由', 'admin.system.route.edit', 'admin/system/route/{id}/edit', 'Admin\\System\\RouteController@getEdit', 'get', 'web|auth:admin', '0', '1', '1', '编辑路由', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
-INSERT INTO `sco_routes` VALUES ('12', '8', '', '编辑路由提交', 'admin.system.route.postEdit', 'admin/system/route/{id}/edit', 'Admin\\System\\RouteController@postEdit', 'post', 'web|auth:admin', '0', '1', '1', '编辑路由提交', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
+INSERT INTO `sco_routes` VALUES ('12', '8', '', '提交编辑路由', 'admin.system.route.postEdit', 'admin/system/route/{id}/edit', 'Admin\\System\\RouteController@postEdit', 'post', 'web|auth:admin', '0', '1', '1', '编辑路由提交', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
 INSERT INTO `sco_routes` VALUES ('13', '7', 'fa-gear', '站点设置', 'admin.system.site', 'admin/system/site', 'Admin\\System\\SiteController@getIndex', 'get', 'web|auth:admin', '1', '1', '1', '站点设置', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
 INSERT INTO `sco_routes` VALUES ('14', '13', '', '保存设置', 'admin.system.site.save', 'admin/system/site/save', 'Admin\\System\\SiteController@postIndex', 'post', 'web|auth:admin', '0', '1', '1', '保存站点设置', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
-INSERT INTO `sco_routes` VALUES ('15', '1', 'fa-users', '用户管理', 'admin.user', '#', '#', 'get', '', '1', '1', '1', '用户管理', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
-INSERT INTO `sco_routes` VALUES ('16', '15', 'fa-user', '用户列表', 'admin.user.index', 'admin/user/index', 'Admin\\User\\IndexController@getIndex', 'get', 'web|auth:admin', '1', '1', '1', '用户列表', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
+INSERT INTO `sco_routes` VALUES ('15', '1', '', '用户管理', 'admin.users', '#', '#', 'get', '', '1', '1', '1', '用户管理', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
+INSERT INTO `sco_routes` VALUES ('16', '15', 'fa-user', '用户列表', 'admin.users.user', 'admin/users/user', 'Admin\\Users\\UserController@getIndex', 'get', 'web|auth:admin', '1', '1', '1', '用户列表', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
+INSERT INTO `sco_routes` VALUES ('17', '15', 'fa-users', '角色管理', 'admin.users.role', 'admin/users/role', 'Admin\\Users\\RoleController@getIndex', 'get', 'web|auth:admin', '1', '1', '1', '用户列表', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
+INSERT INTO `sco_routes` VALUES ('18', '16', '', '添加用户', 'admin.users.user.add', 'admin/users/user/add', 'Admin\\Users\\UserController@getAdd', 'get', 'web|auth:admin', '0', '1', '0', '', '2016-08-11 15:19:32', '2016-08-11 15:19:32');
+INSERT INTO `sco_routes` VALUES ('19', '16', '', '编辑用户', 'admin.users.user.edit', 'admin/users/user/{uid}/edit', 'Admin\\Users\\UserController@getEdit', 'get', 'web|auth:admin', '0', '1', '0', '', '2016-08-11 16:05:06', '2016-08-11 16:05:06');
+INSERT INTO `sco_routes` VALUES ('20', '16', '', '提交添加用户', 'admin.users.user.postAdd', 'admin/users/user/postAdd', 'Admin\\Users\\UserController@postAdd', 'post', 'web|auth:admin', '0', '1', '0', '', '2016-08-11 16:39:43', '2016-08-11 16:39:43');
+INSERT INTO `sco_routes` VALUES ('21', '16', '', '提交编辑用户', 'admin.users.user.postEdit', 'admin/users/user/{uid}/edit', 'Admin\\Users\\UserController@postEdit', 'post', 'web|auth:admin', '0', '1', '0', '', '2016-08-11 16:39:43', '2016-08-11 16:39:43');
