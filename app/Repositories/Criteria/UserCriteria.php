@@ -28,7 +28,6 @@ class UserCriteria implements CriteriaInterface
     public function apply($model, RepositoryInterface $repository)
     {
         if (($uid = intval($this->request->input('uid')))) {
-            dd($uid);
             $model = $model->where('uid', $uid);
         }
 
