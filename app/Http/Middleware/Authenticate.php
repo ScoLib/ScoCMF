@@ -36,7 +36,7 @@ class Authenticate
                     return response()->json(error('您没有权限执行此操作'));
                 } else {
                     $previousUrl = URL::previous();
-                    return view('admin::errors.403', compact('previousUrl'));
+                    return response()->view('admin::errors.403', compact('previousUrl'));
                 }
             }
         }
