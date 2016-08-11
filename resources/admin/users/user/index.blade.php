@@ -50,7 +50,7 @@
         <div class="box-header">
             <h3 class="box-title">用户列表</h3>
             <div class="box-tools pull-right">
-                <a href="{{ route('admin.system.route.add') }}" class="btn btn-default btn-xs"><i
+                <a href="{{ route('admin.users.user.add') }}" class="btn btn-default btn-xs"><i
                             class="fa fa-plus"></i></a>
                 <button class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></button>
             </div>
@@ -81,7 +81,7 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="{{ route('admin.system.route.edit', ['id' => $user->id]) }}"
+                            <a href="{{ route('admin.users.user.edit', ['uid' => $user->uid]) }}"
                                class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> 编辑</a>
                             <a class="btn btn-danger btn-xs ajax-get" href="" data-confirm="确定要删除？">
                                 <i class="fa fa-trash-o"></i> 删除</a>
