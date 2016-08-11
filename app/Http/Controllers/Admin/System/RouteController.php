@@ -36,7 +36,7 @@ class RouteController extends BaseController
         $this->validate($request, [
             'pid' => 'integer',
             'title'  => 'required',
-            'name'   => ['bail', 'required', 'regex:/^[a-z\.]+$/', 'unique:routes,name'],
+            'name'   => ['bail', 'required', 'regex:/^[\w\.]+$/', 'unique:routes,name'],
             'uri'    => 'required',
             'action' => 'required',
             //'' => '',
@@ -65,7 +65,7 @@ class RouteController extends BaseController
         $this->validate($request, [
             'pid' => 'integer',
             'title'  => 'required',
-            'name'   => ['bail', 'required', 'regex:/^[a-z\.]+$/', 'unique:routes,name,' . $id],
+            'name'   => ['bail', 'required', 'regex:/^[\w\.]+$/', 'unique:routes,name,' . $id],
             'uri'    => 'required',
             'action' => 'required',
             //'' => '',
