@@ -1,5 +1,5 @@
 <!-- form start -->
-<form method="post" id="form-add-route" action="{{ $url }}" class="form-horizontal">
+<form method="post" id="form-route" action="{{ $url }}" class="form-horizontal">
     <div class="box-body">
         <div class="form-group margin-l-0 margin-r-0">
             <label class="col-sm-3 control-label">所属组</label>
@@ -125,3 +125,46 @@
             保存</button>
     </div>
 </form>
+
+@section('script')
+    <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+    <script>
+        $(function () {
+            $(':input[name="pid"]').val('{{ $route->pid or '0' }}');
+            $(':input[name="method"]').val('{{ $route->method or 'get' }}');
+            $(':input[name="is_menu"][value="{{ $route->is_menu or '1' }}"]').prop('checked', true);
+            $(':input[name="is_perm"][value="{{ $route->is_perm or '1' }}"]').prop('checked', true);
+
+            $('#form-route').validate({
+                rules: {
+                    'name' : {
+                        required : true
+                    },
+                    'title' : {
+                        required : true
+                    },
+                    'uri' : {
+                        required : true
+                    },
+                    'action' : {
+                        required : true
+                    }
+                },
+                messages : {
+                    'name': {
+                        required : '{{ trans('admin.system.route.name_required') }}'
+                    },
+                    'title' : {
+                        required : '{{ trans('admin.system.route.title_required') }}'
+                    },
+                    'uri' : {
+                        required : '{{ trans('admin.system.route.uri_required') }}'
+                    },
+                    'action' : {
+                        required : '{{ trans('admin.system.route.action_required') }}'
+                    }
+                }
+            });
+        })
+    </script>
+@endsection
