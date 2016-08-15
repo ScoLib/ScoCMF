@@ -269,7 +269,11 @@ $(function () {
         $.validator.setDefaults({
             errorClass: 'col-sm-3 help-block',
             errorPlacement: function(error, element) {
-                element.parent().after(error);
+                if ($(element).attr('type') == 'checkbox') {
+                    $(element).parents('.col-sm-6').after(error);
+                } else {
+                    element.parent().after(error);
+                }
             },
             //focusInvalid: false,
             onkeyup: false,
