@@ -35,7 +35,7 @@ return [
     'digits'               => 'The :attribute must be :digits digits.',
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
     'email'                => ':attribute 格式不正确',
-    'exists'               => 'The selected :attribute is invalid.',
+    'exists'               => '选择的 :attribute 不存在',
     'filled'               => 'The :attribute field is required.',
     'image'                => ':attribute 必须是图片',
     'in'                   => 'The selected :attribute is invalid.',
@@ -114,6 +114,7 @@ return [
         'group_id'   => '权限组',
         'name'       => '名称',
         'pid'        => '所属父级',
+        'role'       => '角色',
     ],
 
 ];

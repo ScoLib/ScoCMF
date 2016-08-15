@@ -17,12 +17,21 @@ class UserController extends BaseController
 
     public function getAdd()
     {
+        $this->roles = app(RoleRepository::class)->getAllRoles();
         return $this->render('users.user.add');
     }
 
     public function postAdd(Request $request)
     {
+        $this->validate($request, [
+            'username' => ['bail', 'required', 'between:3,15', 'regex:/^[\w]+$/', 'unique:users'],
+            'email' => 'bail|required|email|unique:users',
+            'password' => 'bail|required|between:6,20',
+            'role' => 'bail|required|exists:roles,id'
+        ]);
 
+        app(UserRepository::class)->createUser($request);
+        return response()->json(success('新增用户完成', ['url' => route('admin.users.user')]));
     }
 
     public function getEdit($uid)
