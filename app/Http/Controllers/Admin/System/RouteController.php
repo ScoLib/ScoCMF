@@ -42,12 +42,8 @@ class RouteController extends BaseController
             //'' => '',
         ]);
 
-        $result = app(RouteRepository::class)->createRoute($request);
-        if ($result['state']) {
-            $result['data'] = ['url' => route('admin.system.route')];
-        }
-
-        return response()->json($result);
+        app(RouteRepository::class)->createRoute($request);
+        return response()->json(success('新增路由完成', ['url' => route('admin.system.route')]));
     }
 
     public function getEdit($id)
@@ -71,13 +67,8 @@ class RouteController extends BaseController
             //'' => '',
         ]);
 
-        $result = app(RouteRepository::class)->updateRoute($request, $id);
-        if ($result['state']) {
-            $result['data'] = ['url' => route('admin.system.route')];
-        }
-
-        return response()->json($result);
-
+        app(RouteRepository::class)->updateRoute($request, $id);
+        return response()->json(success('编辑路由完成', ['url' => route('admin.system.route')]));
     }
 
     private function getAppMiddlewares()

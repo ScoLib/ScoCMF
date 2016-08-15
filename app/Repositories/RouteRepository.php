@@ -7,6 +7,7 @@ use Bosnadev\Repositories\Traits\CacheableRepository;
 use Illuminate\Http\Request;
 use Sco\Models\Route;
 use ScoLib\Tree\Traits\TreeTrait;
+use InvalidArgumentException;
 
 /**
  * Class RouteRepository
@@ -95,29 +96,17 @@ class RouteRepository extends Repository
     public function createRoute(Request $request)
     {
         $input  = $request->input();
-        $result = $this->checkRoute($input);
-        if ($result['state'] == false) {
-            return $result;
-        }
-        $res = $this->create($input);
-        if ($res) {
-            return success();
-        }
-        return error('新增路由失败');
+        $this->checkRoute($input);
+        $this->create($input);
+        return true;
     }
 
     public function updateRoute(Request $request, $id)
     {
         $input  = $request->input();
-        $result = $this->checkRoute($input);
-        if ($result['state'] == false) {
-            return $result;
-        }
-        $res = $this->update($input, $id);
-        if ($res) {
-            return success();
-        }
-        return error('编辑路由失败');
+        $this->checkRoute($input);
+        $this->update($input, $id);
+        return true;
     }
 
     /**
@@ -132,14 +121,14 @@ class RouteRepository extends Repository
         if ($route['action'] != '#') {
             list($class, $method) = array_pad(explode('@', $route['action']), 2, null);
             if (is_null($class) || is_null($method)) {
-                return error('操作（Action） 格式有误');
+                throw new InvalidArgumentException('操作（Action） 格式有误');
             }
             if (strpos($class, '\\') !== 0) {
                 $class = app()->getNamespace() . 'Http\\Controllers\\' . $class;
             }
 
             if (!method_exists($class, $method)) {
-                return error(sprintf('方法 [%s] 不存在', $route['action']));
+                throw new InvalidArgumentException(sprintf('方法 [%s] 不存在', $route['action']));
             }
         }
 
@@ -149,11 +138,11 @@ class RouteRepository extends Repository
                 list($name, $parameters) = array_pad(explode(':', $middleware, 2), 2, null);
                 $className = \Route::resolveMiddlewareClassName($middleware);
                 if ($name == $className) {
-                    return error(sprintf('中间件 [%s] 不存在', $middleware));
+                    throw new InvalidArgumentException(sprintf('中间件 [%s] 不存在', $middleware));
                 }
             }
         }
-        return success();
+        return true;
     }
 
 }
