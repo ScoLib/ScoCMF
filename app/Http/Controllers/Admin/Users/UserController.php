@@ -37,12 +37,19 @@ class UserController extends BaseController
     public function getEdit($uid)
     {
         $this->userInfo = app(UserRepository::class)->find($uid);
-
+        $this->roles = app(RoleRepository::class)->getAllRoles();
         return $this->render('users.user.edit');
     }
 
     public function postEdit(Request $request, $uid)
     {
-
+        $this->validate($request, [
+            'username' => ['bail', 'required', 'between:3,15', 'regex:/^[\w]+$/', 'unique:users,username,' . $uid . ',uid'],
+            'email' => 'bail|required|email|unique:users,email,' . $uid . ',uid',
+            'password' => 'between:6,20',
+            'role' => 'bail|required|exists:roles,id'
+        ]);
+        app(UserRepository::class)->updateUser($request, $uid);
+        return response()->json(success('编辑用户完成', ['url' => route('admin.users.user')]));
     }
 }

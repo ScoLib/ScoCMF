@@ -9,7 +9,7 @@
         <h3 class="box-title">编辑用户</h3>
     </div>
     @include('admin::users.user.form', [
-        'url' => route('admin.system.route.postEdit', ['uid' => $userInfo->uid]),
+        'url' => route('admin.users.user.postEdit', ['uid' => $userInfo->uid]),
         'userInfo' => $userInfo
     ])
 </div>

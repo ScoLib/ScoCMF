@@ -32,7 +32,23 @@ class UserRepository extends Repository
     {
         DB::transaction(function () use($request) {
             $user = $this->create($request->except('role'));
-            $user->roles()->attach($request->input('role'));
+            $user->roles()->sync($request->input('role'));
+        });
+        return true;
+    }
+
+    public function updateUser(Request $request, $uid)
+    {
+        DB::transaction(function () use($request, $uid) {
+            $except = ['role'];
+            if ($request->has('password')) {
+                $request->offsetSet('password', bcrypt($request->input('password')));
+            } else {
+                $except[] = 'password';
+            }
+
+            $user = $this->update($request->except($except), $uid);
+            $user->roles()->sync($request->input('role'));
         });
         return true;
     }

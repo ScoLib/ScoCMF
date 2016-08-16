@@ -31,7 +31,7 @@
                 @foreach ($roles as $role)
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="role[]" value="{{ $role->id }}">
+                            <input type="checkbox" name="role[]" value="{{ $role->id }}"{{ $userInfo->roles()->getRelatedIds()->contains($role->id) ? ' checked' : '' }}>
                             {{ $role->display_name }}({{ $role->name }})
                         </label>
                     </div>
@@ -66,7 +66,7 @@
                         email: true
                     },
                     'password': {
-                        required: true,
+                        {{ isset($userInfo) ? '' : 'required: true,' }}
                         rangelength: [6, 20]
                     },
                     'role[]': {
@@ -83,7 +83,7 @@
                         email: '{{ trans('admin.users.email_format') }}'
                     },
                     'password': {
-                        required: '{{ trans('admin.users.password_required') }}',
+                        {{ isset($userInfo) ? '' : 'required: "' . trans('admin.users.password_required') . '",' }}
                         rangelength: '{{ trans('admin.users.password_rangelength') }}'
                     },
                     'role[]': {
