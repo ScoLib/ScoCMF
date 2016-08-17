@@ -20,7 +20,7 @@ class UserCriteria implements CriteriaInterface
     }
 
     /**
-     * @param                                                      $model
+     * @param \Illuminate\Database\Eloquent\Model                  $model
      * @param \Bosnadev\Repositories\Contracts\RepositoryInterface $repository
      *
      * @return mixed
@@ -44,6 +44,7 @@ class UserCriteria implements CriteriaInterface
                 $query->where('id', $role);
             });
         }
+        $model = $model->orderBy('uid', 'desc');
 
         return $model;
     }
