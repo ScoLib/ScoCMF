@@ -71,6 +71,11 @@ class RouteController extends BaseController
         return response()->json(success('编辑路由完成', ['url' => route('admin.system.route')]));
     }
 
+    public function getDelete($id)
+    {
+
+    }
+
     private function getAppMiddlewares()
     {
         $group = ['web', 'api'];

@@ -34,7 +34,7 @@
                         <td>
                             <a href="{{ route('admin.system.route.edit', ['id' => $route->id]) }}"
                                class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> 编辑</a>
-                            <a class="btn btn-danger btn-xs ajax-get" href="" data-confirm="确定要删除？">
+                            <a class="btn btn-danger btn-xs ajax-get" href="{{ route('admin.system.route.delete', ['id' => $route->id]) }}" data-confirm="确定要删除？">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                         </td>
                     </tr>
