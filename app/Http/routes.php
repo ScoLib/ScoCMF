@@ -19,6 +19,16 @@ Route::post('admin/users/user/{uid}/edit', 'Admin\Users\UserController@postEdit'
 ->name('admin.users.user.postEdit')
 ->middleware(['web','auth:admin']);
 
+// 删除用户
+Route::get('admin/users/user/{uid}/delete', 'Admin\Users\UserController@getDelete')
+->name('admin.users.user.delete')
+->middleware(['web','auth:admin']);
+
+// 删除路由
+Route::get('admin/system/route/{id}/delete', 'Admin\System\RouteController@getDelete')
+->name('admin.system.route.delete')
+->middleware(['web','auth:admin']);
+
 // 登录页
 Route::get('admin/login', 'Admin\Auth\AuthController@getLogin')
 ->name('admin.login')
