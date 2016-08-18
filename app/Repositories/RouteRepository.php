@@ -3,7 +3,7 @@
 namespace Sco\Repositories;
 
 use Bosnadev\Repositories\Eloquent\Repository;
-use Bosnadev\Repositories\Traits\CacheableRepository;
+use Bosnadev\Repositories\Traits\CacheableTrait;
 use Illuminate\Http\Request;
 use Sco\Models\Route;
 use ScoLib\Tree\Traits\TreeTrait;
@@ -16,7 +16,7 @@ use InvalidArgumentException;
  */
 class RouteRepository extends Repository
 {
-    use TreeTrait, CacheableRepository;
+    use TreeTrait, CacheableTrait;
 
     protected $treeNodeParentIdName = 'pid';
 

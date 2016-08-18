@@ -3,12 +3,12 @@
 namespace Sco\Repositories;
 
 use Bosnadev\Repositories\Eloquent\Repository;
-use Bosnadev\Repositories\Traits\CacheableRepository;
+use Bosnadev\Repositories\Traits\CacheableTrait;
 use Sco\Models\Config;
 
 class ConfigRepository extends Repository
 {
-    use CacheableRepository;
+    use CacheableTrait;
 
     private $configs = null;
 
