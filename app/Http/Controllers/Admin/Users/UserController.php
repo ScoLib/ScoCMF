@@ -52,4 +52,10 @@ class UserController extends BaseController
         app(UserRepository::class)->updateUser($request, $uid);
         return response()->json(success('编辑用户完成', ['url' => route('admin.users.user')]));
     }
+
+    public function getDelete($uid)
+    {
+        app(UserRepository::class)->delete($uid);
+        return response()->json(success('删除用户完成'));
+    }
 }
