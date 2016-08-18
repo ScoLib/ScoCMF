@@ -62,14 +62,6 @@ return [
          */
         'minutes' => 30,
 
-        /**
-         * Cache Repository
-         *
-         * Instance of Illuminate\Contracts\Cache\Repository
-         *
-         */
-        'repository' => 'cache',
-
         /*
           |--------------------------------------------------------------------------
           | Cache Clean Listener
