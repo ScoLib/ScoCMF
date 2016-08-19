@@ -29,6 +29,36 @@ Route::get('admin/system/route/{id}/delete', 'Admin\System\RouteController@getDe
 ->name('admin.system.route.delete')
 ->middleware(['web','auth:admin']);
 
+// 新增角色
+Route::get('admin/users/role/add', 'Admin\Users\RoleController@getAdd')
+->name('admin.users.role.add')
+->middleware(['web','auth:admin']);
+
+// 提交新增角色
+Route::post('admin/users/role/postAdd', 'Admin\Users\RoleController@postAdd')
+->name('admin.users.role.postAdd')
+->middleware(['web','auth:admin']);
+
+// 编辑角色
+Route::get('admin/users/role/{id}/edit', 'Admin\Users\RoleController@getEdit')
+->name('admin.users.role.edit')
+->middleware(['web','auth:admin']);
+
+// 提交编辑角色
+Route::post('admin/users/role/{id}/edit', 'Admin\Users\RoleController@postEdit')
+->name('admin.users.role.postEdit')
+->middleware(['web','auth:admin']);
+
+// 角色授权
+Route::get('admin/users/role/{id}/authorize', 'Admin\Users\RoleController@getAuthorize')
+->name('admin.users.role.authorize')
+->middleware(['web','auth:admin']);
+
+// 删除角色
+Route::get('admin/users/role/{id}/delete', 'Admin\Users\RoleController@getDelete')
+->name('admin.users.role.delete')
+->middleware(['web','auth:admin']);
+
 // 登录页
 Route::get('admin/login', 'Admin\Auth\AuthController@getLogin')
 ->name('admin.login')

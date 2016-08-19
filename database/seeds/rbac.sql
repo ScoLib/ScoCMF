@@ -53,6 +53,16 @@ INSERT INTO `sco_route_role` VALUES ('21', '1');
 INSERT INTO `sco_route_role` VALUES ('22', '1');
 INSERT INTO `sco_route_role` VALUES ('23', '1');
 INSERT INTO `sco_route_role` VALUES ('24', '1');
+INSERT INTO `sco_route_role` VALUES ('25', '1');
+INSERT INTO `sco_route_role` VALUES ('26', '1');
+INSERT INTO `sco_route_role` VALUES ('27', '1');
+INSERT INTO `sco_route_role` VALUES ('28', '1');
+INSERT INTO `sco_route_role` VALUES ('29', '1');
+INSERT INTO `sco_route_role` VALUES ('30', '1');
+INSERT INTO `sco_route_role` VALUES ('31', '1');
+INSERT INTO `sco_route_role` VALUES ('32', '1');
+INSERT INTO `sco_route_role` VALUES ('33', '1');
+INSERT INTO `sco_route_role` VALUES ('34', '1');
 
 -- ----------------------------
 -- Records of sco_routes
@@ -80,3 +90,9 @@ INSERT INTO `sco_routes` VALUES ('20', '16', '', '提交添加用户', 'admin.us
 INSERT INTO `sco_routes` VALUES ('21', '16', '', '提交编辑用户', 'admin.users.user.postEdit', 'admin/users/user/{uid}/edit', 'Admin\\Users\\UserController@postEdit', 'post', 'web|auth:admin', '0', '1', '0', '', '2016-08-11 16:39:43', '2016-08-11 16:39:43');
 INSERT INTO `sco_routes` VALUES ('22', '16', '', '删除用户', 'admin.users.user.delete', 'admin/users/user/{uid}/delete', 'Admin\\Users\\UserController@getDelete', 'get', 'web|auth:admin', '0', '1', '0', '', '2016-08-18 14:43:03', '2016-08-18 14:43:03');
 INSERT INTO `sco_routes` VALUES ('23', '8', '', '删除路由', 'admin.system.route.delete', 'admin/system/route/{id}/delete', 'Admin\\System\\RouteController@getDelete', 'get', 'web|auth:admin', '0', '1', '0', '', '2016-08-18 15:22:22', '2016-08-18 15:22:22');
+INSERT INTO `sco_routes` VALUES ('24', '17', '', '新增角色', 'admin.users.role.add', 'admin/users/role/add', 'Admin\\Users\\RoleController@getAdd', 'get', 'web|auth:admin', '0', '1', '0', '', '2016-08-19 17:20:39', '2016-08-19 17:20:39');
+INSERT INTO `sco_routes` VALUES ('25', '17', '', '提交新增角色', 'admin.users.role.postAdd', 'admin/users/role/postAdd', 'Admin\\Users\\RoleController@postAdd', 'post', 'web|auth:admin', '0', '1', '0', '', '2016-08-19 17:20:39', '2016-08-19 17:20:39');
+INSERT INTO `sco_routes` VALUES ('26', '17', '', '编辑角色', 'admin.users.role.edit', 'admin/users/role/{id}/edit', 'Admin\\Users\\RoleController@getEdit', 'get', 'web|auth:admin', '0', '1', '0', '', '2016-08-19 17:20:39', '2016-08-19 17:20:39');
+INSERT INTO `sco_routes` VALUES ('27', '17', '', '提交编辑角色', 'admin.users.role.postEdit', 'admin/users/role/{id}/edit', 'Admin\\Users\\RoleController@postEdit', 'post', 'web|auth:admin', '0', '1', '0', '', '2016-08-19 17:20:39', '2016-08-19 17:20:39');
+INSERT INTO `sco_routes` VALUES ('28', '17', '', '角色授权', 'admin.users.role.authorize', 'admin/users/role/{id}/authorize', 'Admin\\Users\\RoleController@getAuthorize', 'get', 'web|auth:admin', '0', '1', '0', '', '2016-08-19 17:20:39', '2016-08-19 17:20:39');
+INSERT INTO `sco_routes` VALUES ('29', '17', '', '删除角色', 'admin.users.role.delete', 'admin/users/role/{id}/delete', 'Admin\\Users\\RoleController@getDelete', 'get', 'web|auth:admin', '0', '1', '0', '', '2016-08-19 17:20:39', '2016-08-19 17:20:39');
