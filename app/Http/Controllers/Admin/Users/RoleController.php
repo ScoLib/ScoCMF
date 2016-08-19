@@ -3,6 +3,7 @@
 namespace Sco\Http\Controllers\Admin\Users;
 
 
+use Illuminate\Http\Request;
 use Sco\Http\Controllers\Admin\BaseController;
 use Sco\Repositories\RoleRepository;
 
@@ -23,5 +24,35 @@ class RoleController extends BaseController
     {
         $this->roles = app(RoleRepository::class)->getAllRoles();
         return $this->render('users.role.index');
+    }
+
+    public function getAdd()
+    {
+
+    }
+
+    public function postAdd(Request $request)
+    {
+
+    }
+
+    public function getEdit($id)
+    {
+
+    }
+
+    public function postEdit(Request $request, $id)
+    {
+
+    }
+
+    public function getAuthorize($id)
+    {
+
+    }
+
+    public function getDelete($id)
+    {
+
     }
 }

@@ -7,9 +7,8 @@
         <div class="box-header">
             <h3 class="box-title">角色列表</h3>
             <div class="box-tools pull-right">
-                <a href="{{ route('admin.system.route.add') }}" class="btn btn-default btn-xs"><i
+                <a href="{{ route('admin.users.role.add') }}" class="btn btn-default btn-xs"><i
                             class="fa fa-plus"></i></a>
-                <button class="btn btn-default btn-xs"><i class="fa fa-trash-o"></i></button>
             </div>
 
         </div>
@@ -21,7 +20,7 @@
                     <th>名称</th>
                     <th>显示名</th>
                     <th>创建时间</th>
-                    <th class="col-sm-2">操作</th>
+                    <th class="col-sm-3">操作</th>
                 </tr>
                 @foreach ($roles as $role)
                     <tr>
@@ -30,8 +29,10 @@
                         <td>{{ $role->display_name }}</td>
                         <td>{{ $role->created_at }}</td>
                         <td>
-                            <a href="{{ route('admin.system.route.edit', ['id' => $role->id]) }}"
+                            <a href="{{ route('admin.users.role.edit', ['id' => $role->id]) }}"
                                class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> 编辑</a>
+                            <a href="{{ route('admin.users.role.authorize', ['id' => $role->id]) }}"
+                               class="btn btn-default btn-xs"><i class="fa fa-key"></i> 授权</a>
                             <a class="btn btn-danger btn-xs ajax-get" href="" data-confirm="确定要删除？">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                         </td>
