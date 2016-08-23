@@ -19,6 +19,9 @@
         .margin-l-0 {
             margin-left: 0px !important;
         }
+        .margin-offset-5 {
+            margin-left: 5%;
+        }
         .switch {
             position: relative;
             margin: 0;

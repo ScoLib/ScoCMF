@@ -49,6 +49,11 @@ class RouteRepository extends Repository
         return $this->allRoutes;
     }
 
+    /**
+     * Tree Trait 获取所有节点
+     *
+     * @return mixed|null
+     */
     protected function getTreeAllNodes()
     {
         return $this->getAll();
@@ -68,6 +73,20 @@ class RouteRepository extends Repository
                 $routes->push($route);
             }
         }
+        return $routes;
+    }
+
+    public function getPermRouteList($parentId)
+    {
+        $all    = $this->getAll();
+        $routes = collect([]);
+        foreach ($all as $route) {
+            if ($route->is_perm) {
+                $routes->push($route);
+            }
+        }
+        $this->setAllNodes($routes);
+        $routes = $this->getLayerOfDescendants($parentId);
         return $routes;
     }
 

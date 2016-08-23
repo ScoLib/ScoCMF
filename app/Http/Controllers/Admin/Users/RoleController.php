@@ -6,6 +6,7 @@ namespace Sco\Http\Controllers\Admin\Users;
 use Illuminate\Http\Request;
 use Sco\Http\Controllers\Admin\BaseController;
 use Sco\Repositories\RoleRepository;
+use Sco\Repositories\RouteRepository;
 
 /**
  * 角色管理
@@ -48,7 +49,16 @@ class RoleController extends BaseController
 
     public function getAuthorize($id)
     {
+        $this->role        = app(RoleRepository::class)->find($id);
+        $this->permList    = app(RouteRepository::class)->getPermRouteList(1);
+        $this->rolePermIds = $this->role->perms()->getRelatedIds();
+        return $this->render('users.role.authorize');
+    }
 
+    public function postAuthorize(Request $request, $id)
+    {
+        app(RoleRepository::class)->find($id)->savePermissions($request->input('perms'));
+        return response()->json(success('授权完成', ['url' => route('admin.users.role')]));
     }
 
     public function getDelete($id)
