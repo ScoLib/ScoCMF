@@ -9,12 +9,12 @@ Route::get('admin/users/user/{uid}/edit', 'Admin\Users\UserController@getEdit')
 ->name('admin.users.user.edit')
 ->middleware(['web','auth:admin']);
 
-// 提交添加用户
+// 保存添加用户
 Route::post('admin/users/user/postAdd', 'Admin\Users\UserController@postAdd')
 ->name('admin.users.user.postAdd')
 ->middleware(['web','auth:admin']);
 
-// 提交编辑用户
+// 保存编辑用户
 Route::post('admin/users/user/{uid}/edit', 'Admin\Users\UserController@postEdit')
 ->name('admin.users.user.postEdit')
 ->middleware(['web','auth:admin']);
@@ -34,7 +34,7 @@ Route::get('admin/users/role/add', 'Admin\Users\RoleController@getAdd')
 ->name('admin.users.role.add')
 ->middleware(['web','auth:admin']);
 
-// 提交新增角色
+// 保存新增角色
 Route::post('admin/users/role/postAdd', 'Admin\Users\RoleController@postAdd')
 ->name('admin.users.role.postAdd')
 ->middleware(['web','auth:admin']);
@@ -44,7 +44,7 @@ Route::get('admin/users/role/{id}/edit', 'Admin\Users\RoleController@getEdit')
 ->name('admin.users.role.edit')
 ->middleware(['web','auth:admin']);
 
-// 提交编辑角色
+// 保存编辑角色
 Route::post('admin/users/role/{id}/edit', 'Admin\Users\RoleController@postEdit')
 ->name('admin.users.role.postEdit')
 ->middleware(['web','auth:admin']);
@@ -59,7 +59,7 @@ Route::get('admin/users/role/{id}/delete', 'Admin\Users\RoleController@getDelete
 ->name('admin.users.role.delete')
 ->middleware(['web','auth:admin']);
 
-// 提交角色授权
+// 保存角色授权
 Route::post('admin/users/role/{id}/authorize', 'Admin\Users\RoleController@postAuthorize')
 ->name('admin.users.role.postAuthorize')
 ->middleware(['web','auth:admin']);
@@ -94,7 +94,7 @@ Route::get('admin/system/route/add', 'Admin\System\RouteController@getAdd')
 ->name('admin.system.route.add')
 ->middleware(['web','auth:admin']);
 
-// 提交新增路由
+// 保存新增路由
 Route::post('admin/system/route/postAdd', 'Admin\System\RouteController@postAdd')
 ->name('admin.system.route.postAdd')
 ->middleware(['web','auth:admin']);
@@ -104,7 +104,7 @@ Route::get('admin/system/route/{id}/edit', 'Admin\System\RouteController@getEdit
 ->name('admin.system.route.edit')
 ->middleware(['web','auth:admin']);
 
-// 提交编辑路由
+// 保存编辑路由
 Route::post('admin/system/route/{id}/edit', 'Admin\System\RouteController@postEdit')
 ->name('admin.system.route.postEdit')
 ->middleware(['web','auth:admin']);
