@@ -67,6 +67,7 @@ class UserController extends BaseController
     public function getEdit($uid)
     {
         $this->userInfo = app(UserRepository::class)->find($uid);
+        $this->userRoleIds = $this->userInfo->roles()->getRelatedIds();
         $this->roles    = app(RoleRepository::class)->getAllRoles();
         return $this->render('users.user.edit');
     }

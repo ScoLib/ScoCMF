@@ -31,7 +31,7 @@
                 @foreach ($roles as $role)
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="role[]" value="{{ $role->id }}"{{ $userInfo->roles()->getRelatedIds()->contains($role->id) ? ' checked' : '' }}>
+                            <input type="checkbox" name="role[]" value="{{ $role->id }}"{{ $userRoleIds->contains($role->id) ? ' checked' : '' }}>
                             {{ $role->display_name }}({{ $role->name }})
                         </label>
                     </div>
