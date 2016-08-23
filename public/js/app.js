@@ -760,6 +760,7 @@ function _init() {
         var _this, target, params, form;
         _this = this;
         if ($(this).attr('type') == 'submit'
+            || $(this).attr('type') == 'button'
             || (target = $(this).attr('href'))
             || (target = $(this).attr('url'))
         ) {
