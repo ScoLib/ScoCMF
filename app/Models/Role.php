@@ -11,6 +11,7 @@ use Config;
 class Role extends EntrustRole
 {
 
+    protected $fillable = ['name', 'display_name', 'description'];
 
     /**
      * 保存权限（覆盖父级方法）

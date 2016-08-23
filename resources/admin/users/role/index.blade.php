@@ -33,7 +33,9 @@
                                class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> 编辑</a>
                             <a href="{{ route('admin.users.role.authorize', ['id' => $role->id]) }}"
                                class="btn btn-default btn-xs"><i class="fa fa-key"></i> 授权</a>
-                            <a class="btn btn-danger btn-xs ajax-get" href="" data-confirm="确定要删除？">
+                            <a class="btn btn-danger btn-xs ajax-get"
+                               href="{{ route('admin.users.role.delete', ['id' => $role->id]) }}"
+                               data-confirm="确定要删除？">
                                 <i class="fa fa-trash-o"></i> 删除</a>
                         </td>
                     </tr>
