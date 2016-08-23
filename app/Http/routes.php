@@ -59,6 +59,11 @@ Route::get('admin/users/role/{id}/delete', 'Admin\Users\RoleController@getDelete
 ->name('admin.users.role.delete')
 ->middleware(['web','auth:admin']);
 
+// 提交角色授权
+Route::post('admin/users/role/{id}/authorize', 'Admin\Users\RoleController@postAuthorize')
+->name('admin.users.role.postAuthorize')
+->middleware(['web','auth:admin']);
+
 // 登录页
 Route::get('admin/login', 'Admin\Auth\AuthController@getLogin')
 ->name('admin.login')
