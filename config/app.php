@@ -4,6 +4,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of your application. This value is used when the
+    | framework needs to place the application's name in a notification or
+    | any other location as required by the application or its packages.
+    */
+
+    'name' => 'My Application',
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
@@ -140,6 +152,7 @@ return [
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
         Illuminate\Mail\MailServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Pipeline\PipelineServiceProvider::class,
         Illuminate\Queue\QueueServiceProvider::class,
@@ -159,7 +172,7 @@ return [
         Sco\Providers\RouteServiceProvider::class,
         //Sco\Providers\HomeServiceProvider::class,
         Sco\Providers\AdminServiceProvider::class,
-        Mews\Captcha\CaptchaServiceProvider::class,
+        //Mews\Captcha\CaptchaServiceProvider::class,
         Bosnadev\Repositories\Providers\RepositoryProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
@@ -200,6 +213,7 @@ return [
         'Lang'        => Illuminate\Support\Facades\Lang::class,
         'Log'         => Illuminate\Support\Facades\Log::class,
         'Mail'        => Illuminate\Support\Facades\Mail::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password'    => Illuminate\Support\Facades\Password::class,
         'Queue'       => Illuminate\Support\Facades\Queue::class,
         'Redirect'    => Illuminate\Support\Facades\Redirect::class,
@@ -216,7 +230,7 @@ return [
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
         // 自定义门面
-        'Captcha'     => Mews\Captcha\Facades\Captcha::class,
+        //'Captcha'     => Mews\Captcha\Facades\Captcha::class,
         'Entrust'     => Zizaco\Entrust\EntrustFacade::class,
 
     ],

@@ -3,28 +3,36 @@
 
 namespace Sco\Http\Controllers\Admin\Auth;
 
-use Auth;
-use Carbon\Carbon;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Request;
 use Sco\Http\Controllers\Controller;
+use Auth;
 
 class AuthController extends Controller
 {
-    use ThrottlesLogins, AuthenticatesUsers, ValidatesRequests;
+    use AuthenticatesUsers, ValidatesRequests;
 
     //private $maxLoginAttempts = 2;
 
     //private $lockoutTime = 10;
 
-    protected $guard = 'admin';
-
-    protected $loginView = 'admin::auth.login';
-
-    protected $redirectPath = 'admin';
+    protected $redirectTo = '/admin';
 
     protected $redirectAfterLogout = 'admin/login';
 
+
+    public function showLoginForm()
+    {
+        return view('admin::auth.login');
+    }
+
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
 }

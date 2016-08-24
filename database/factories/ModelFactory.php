@@ -12,10 +12,12 @@
 */
 
 $factory->define(Sco\Models\User::class, function (Faker\Generator $faker) {
+    static $password;
+
     return [
         'username' => str_random(6),
         'email' => str_random(10) . '@test.com',
-        'password' => bcrypt(str_random(10)),
+        'password' => $password ?: $password = bcrypt('123456'),
         'remember_token' => str_random(10),
     ];
 });

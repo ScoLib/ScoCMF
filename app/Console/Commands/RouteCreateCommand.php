@@ -30,7 +30,7 @@ class RouteCreateCommand extends Command
     public function fire()
     {
 
-        if (!$this->option('force') && file_exists(app_path('Http/routes.php'))) {
+        if (!$this->option('force') && file_exists(base_path('routes/web.php'))) {
             $this->error('route file already exists!');
 
             return false;
@@ -51,7 +51,7 @@ class RouteCreateCommand extends Command
             $content .= ";" . PHP_EOL . PHP_EOL;
         }
         file_put_contents(
-            app_path('Http/routes.php'),
+            base_path('routes/web.php'),
             $content
         );
 

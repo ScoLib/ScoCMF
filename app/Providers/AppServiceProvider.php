@@ -3,7 +3,6 @@
 namespace Sco\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Sco\Repositories\RepositoryManager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+
     }
 
     /**
