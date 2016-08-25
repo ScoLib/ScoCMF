@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'My Application',
+    'name' => 'ScoCMF',
 
     /*
     |--------------------------------------------------------------------------
@@ -172,7 +172,7 @@ return [
         Sco\Providers\RouteServiceProvider::class,
         //Sco\Providers\HomeServiceProvider::class,
         Sco\Providers\AdminServiceProvider::class,
-        //Mews\Captcha\CaptchaServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
         Bosnadev\Repositories\Providers\RepositoryProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
@@ -230,7 +230,7 @@ return [
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
         // 自定义门面
-        //'Captcha'     => Mews\Captcha\Facades\Captcha::class,
+        'Captcha'     => Mews\Captcha\Facades\Captcha::class,
         'Entrust'     => Zizaco\Entrust\EntrustFacade::class,
 
     ],
