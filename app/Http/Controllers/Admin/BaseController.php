@@ -50,7 +50,6 @@ class BaseController extends Controller
 
     private function initLeftMenuAndBreadcrumbs()
     {
-        //Repository::route()->saveRouteFile();
         $adminId = 1; // 后台路由ID，默认应该是1，如有变更则以实际ID为准
         $menus   = app(RouteRepository::class)->getLayerOfDescendants($adminId);
         $this->leftMenu = collect();
