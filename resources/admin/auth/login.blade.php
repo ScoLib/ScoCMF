@@ -20,15 +20,25 @@
             <form action="{{ route('admin.postLogin') }}" method="post">
                 {!! csrf_field() !!}
                 <div class="form-group has-feedback">
-                    <input type="email" name="email" class="form-control" placeholder="邮箱" value="{{ old('email') }}">
+                    <input type="email" name="email" class="form-control" placeholder="邮箱"
+                           value="{{ old('email') }}">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
                     <input type="password" name="password" class="form-control" placeholder="密码">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
+                <div class="form-group row">
+                    <div class="col-sm-7">
+                        <input type="text" name="captcha" class="form-control" placeholder="验证码">
+                    </div>
+                    <div class="col-sm-5">
+                        <img src="{{ captcha_src('admin') }}" title="换一个？" alt="换一个？"
+                             onclick="this.src='{{ captcha_src('admin') }}' + Math.random();">
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-xs-8">
+                    <div class="col-sm-8">
                         <div class="checkbox">
                             <label>
                                 <input name="remember" type="checkbox" value="1"> 记住我
@@ -36,7 +46,7 @@
                         </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
                     </div>
                     <!-- /.col -->
