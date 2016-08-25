@@ -3,7 +3,8 @@
 
 namespace Sco\Http\Controllers\Admin;
 
-use Auth, Route, Breadcrumbs;
+use Auth, Route, Breadcrumbs, Event;
+use Illuminate\Auth\Events\Authenticated;
 use Sco\Http\Controllers\Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -28,11 +29,13 @@ class BaseController extends Controller
     {
         parent::__construct();
 
-        $this->user = Auth::guard('admin')->user();
-        if ($this->user && !request()->ajax()) {
-            $this->setParam('user', $this->user);
-            $this->initLeftMenuAndBreadcrumbs();
-        }
+        Event::listen(Authenticated::class, function ($event) {
+            $this->user = $event->user;
+            if ($this->user && !request()->ajax()) {
+                $this->setParam('user', $this->user);
+                $this->initLeftMenuAndBreadcrumbs();
+            }
+        });
     }
 
     /**
