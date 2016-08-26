@@ -22,6 +22,13 @@ class RouteRepository extends Repository
 
     private $allRoutes = null;
 
+    private $validList = null;
+
+    private $permList = null;
+
+    private $menuList = null;
+
+
     public function model()
     {
         return Route::class;
@@ -66,19 +73,36 @@ class RouteRepository extends Repository
      */
     public function getValidRouteList()
     {
-        $all    = $this->getAll();
-        $routes = collect([]);
+        if ($this->validList) {
+            return $this->validList;
+        }
+
+        $all = $this->getAll();
+
+        $this->validList = collect([]);
         foreach ($all as $route) {
             if (!empty($route->uri) && $route->uri != '#') {
-                $routes->push($route);
+                $this->validList->push($route);
             }
         }
-        return $routes;
+        return $this->validList;
     }
 
+    /**
+     * 获取权限列表
+     *
+     * @param int $parentId
+     *
+     * @return \Illuminate\Support\Collection|null
+     */
     public function getPermRouteList($parentId)
     {
-        $all    = $this->getAll();
+        if ($this->permList) {
+            return $this->permList;
+        }
+
+        $all = $this->getAll();
+
         $routes = collect([]);
         foreach ($all as $route) {
             if ($route->is_perm) {
@@ -86,8 +110,25 @@ class RouteRepository extends Repository
             }
         }
         $this->setAllNodes($routes);
-        $routes = $this->getLayerOfDescendants($parentId);
-        return $routes;
+        return $this->permList = $this->getLayerOfDescendants($parentId);
+    }
+
+    public function getMenuRouteList($parentId)
+    {
+        if ($this->menuList) {
+            return $this->menuList;
+        }
+        $all = $this->getAll();
+
+        $routes = collect([]);
+        foreach ($all as $route) {
+            if ($route->is_menu) {
+                $routes->push($route);
+            }
+        }
+
+        $this->setAllNodes($routes);
+        return $this->menuList = $this->getLayerOfDescendants($parentId);
     }
 
     public function getRouteInfoByName($name)
@@ -114,7 +155,7 @@ class RouteRepository extends Repository
 
     public function createRoute(Request $request)
     {
-        $input  = $request->input();
+        $input = $request->input();
         $this->checkRoute($input);
         $this->create($input);
         return true;
@@ -122,7 +163,7 @@ class RouteRepository extends Repository
 
     public function updateRoute(Request $request, $id)
     {
-        $input  = $request->input();
+        $input = $request->input();
         $this->checkRoute($input);
         $this->update($input, $id);
         return true;

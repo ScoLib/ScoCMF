@@ -34,7 +34,8 @@ class BaseController extends Controller
             $this->user = $event->user;
             if ($this->user && !request()->ajax()) {
                 $this->setParam('user', $this->user);
-                $this->initLeftMenuAndBreadcrumbs();
+                $this->getLeftMenu();
+                $this->breadcrumbs();
             }
         });
     }
@@ -49,15 +50,21 @@ class BaseController extends Controller
         return $this->render('index');
     }
 
-    private function initLeftMenuAndBreadcrumbs()
+    /**
+     * 左侧菜单
+     */
+    private function getLeftMenu()
     {
         $adminId = 1; // 后台路由ID，默认应该是1，如有变更则以实际ID为准
-        $menus   = app(RouteRepository::class)->getLayerOfDescendants($adminId);
-        $this->leftMenu = collect();
-        if ($menus) {
-            $this->leftMenu = $this->checkMenu($menus);
-        }
 
+        $this->leftMenu = app(RouteRepository::class)->getMenuRouteList($adminId);
+    }
+
+    /**
+     * 面包屑导航
+     */
+    private function breadcrumbs()
+    {
         // 获取当前路由的相关路由name
         $parentTree = app(RouteRepository::class)->getParentTreeAndSelfByName(Route::currentRouteName());
 
@@ -85,22 +92,6 @@ class BaseController extends Controller
                 });
         }
         $this->breadcrumbs = Route::currentRouteName();
-
-    }
-
-
-    private function checkMenu($menus)
-    {
-        $return = collect();
-        foreach ($menus as $menu) {
-            if ($menu->is_menu && $this->user->can($menu->name)) {
-                if (!empty($menu->child)) {
-                    $menu->child = $this->checkMenu($menu->child);
-                }
-                $return->push($menu);
-            }
-        }
-        return $return;
     }
 
     /**

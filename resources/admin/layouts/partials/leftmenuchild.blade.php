@@ -1,5 +1,6 @@
 <ul class="treeview-menu">
     @foreach ($childs as $child)
+        @permission($child->name)
         @if ($child->child->isEmpty())
             <li class="{{ $currentMenuNames->contains($child->name) ? 'active' : '' }}">
                 <a href="{{ $child->uri == '#' ? '#' : route($child->name) }}">
@@ -19,5 +20,6 @@
                 @include('admin::layouts.partials.leftmenuchild', ['childs' => $child->child])
             </li>
         @endif
+        @endpermission
     @endforeach
 </ul>
