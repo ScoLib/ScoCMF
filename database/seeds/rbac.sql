@@ -69,9 +69,9 @@ INSERT INTO `sco_route_role` VALUES ('34', '1');
 -- ----------------------------
 INSERT INTO `sco_routes` VALUES ('1', '0', '', '后台', 'admin', '#', '#', 'get', '', '1', '1', '1', '后台组', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
 INSERT INTO `sco_routes` VALUES ('2', '0', '', '前台', 'home', '#', '#', 'get', '', '1', '1', '1', '前台组', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
-INSERT INTO `sco_routes` VALUES ('3', '1', '', '登录页', 'admin.login', 'admin/login', 'Admin\\Auth\\AuthController@showLoginForm', 'get', 'web|guest:admin', '0', '1', '1', '后台登录', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
-INSERT INTO `sco_routes` VALUES ('4', '1', '', '登录提交', 'admin.postLogin', 'admin/postLogin', 'Admin\\Auth\\AuthController@login', 'post', 'web|guest:admin', '0', '1', '1', '登录提交', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
-INSERT INTO `sco_routes` VALUES ('5', '1', '', '退出', 'admin.logout', 'admin/logout', 'Admin\\Auth\\AuthController@logout', 'get', 'web', '0', '1', '1', '退出', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
+INSERT INTO `sco_routes` VALUES ('3', '1', '', '登录页', 'admin.login', 'admin/login', 'Admin\\Auth\\AuthController@showLoginForm', 'get', 'web|guest:admin', '0', '0', '1', '后台登录', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
+INSERT INTO `sco_routes` VALUES ('4', '1', '', '登录提交', 'admin.postLogin', 'admin/postLogin', 'Admin\\Auth\\AuthController@login', 'post', 'web|guest:admin', '0', '0', '1', '登录提交', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
+INSERT INTO `sco_routes` VALUES ('5', '1', '', '退出', 'admin.logout', 'admin/logout', 'Admin\\Auth\\AuthController@logout', 'get', 'web', '0', '0', '1', '退出', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
 INSERT INTO `sco_routes` VALUES ('6', '1', 'fa-dashboard', '控制台', 'admin.index', 'admin/', 'Admin\\BaseController@index', 'get', 'web|auth:admin', '1', '1', '1', '控制台', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
 INSERT INTO `sco_routes` VALUES ('7', '1', 'fa-edit', '系统管理', 'admin.system', '#', '#', 'get', '', '1', '1', '1', '后台组', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
 INSERT INTO `sco_routes` VALUES ('8', '7', 'fa-link', '路由管理', 'admin.system.route', 'admin/system/route', 'Admin\\System\\RouteController@getIndex', 'get', 'web|auth:admin', '1', '1', '1', '路由管理', '2016-08-05 16:50:19', '2016-08-05 16:50:19');
