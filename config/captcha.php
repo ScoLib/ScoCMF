@@ -10,7 +10,7 @@ return [
     ],
 
     'admin'   => [
-        'length'    => 5,
+        'length'    => 4,
         'width'     => 115,
         'height'    => 34,
         'quality'   => 90,

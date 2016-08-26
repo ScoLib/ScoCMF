@@ -35,11 +35,14 @@ class AuthController extends Controller
      */
     protected function validateLogin(Request $request)
     {
-        $this->validate($request, [
+        $rules = [
             $this->username() => 'required',
             'password' => 'required',
-            'captcha' => 'required|captcha'
-        ]);
+        ];
+        if (config('sco.admin_captcha')) {
+            $rules['captcha'] = 'required|captcha';
+        }
+        $this->validate($request, $rules);
     }
 
     /**

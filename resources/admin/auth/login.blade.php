@@ -28,15 +28,17 @@
                     <input type="password" name="password" class="form-control" placeholder="密码">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-7">
-                        <input type="text" name="captcha" class="form-control" placeholder="验证码">
+                @if (config('sco.admin_captcha'))
+                    <div class="form-group row">
+                        <div class="col-sm-7">
+                            <input type="text" name="captcha" class="form-control" placeholder="验证码">
+                        </div>
+                        <div class="col-sm-5">
+                            <img src="{{ captcha_src('admin') }}" title="换一个？" alt="换一个？"
+                                 onclick="this.src='{{ captcha_src('admin') }}' + Math.random();">
+                        </div>
                     </div>
-                    <div class="col-sm-5">
-                        <img src="{{ captcha_src('admin') }}" title="换一个？" alt="换一个？"
-                             onclick="this.src='{{ captcha_src('admin') }}' + Math.random();">
-                    </div>
-                </div>
+                @endif
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="checkbox">
