@@ -1,5 +1,5 @@
 {
-    "name": "ScoCMF",
+    "name": "scolib/scocmf",
     "description": "天蝎内容管理框架（Sco Content Management Framework）",
     "keywords": ["ScoCMF", "cmf"],
     "license": "Apache-2.0",
