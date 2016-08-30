@@ -28,7 +28,7 @@
                     <input type="password" name="password" class="form-control" placeholder="密码">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                @if (config('sco.admin_captcha'))
+                @if (config('captcha.switch.admin'))
                     <div class="form-group row">
                         <div class="col-sm-7">
                             <input type="text" name="captcha" class="form-control" placeholder="验证码">

@@ -41,19 +41,6 @@
                     </div>
                 </div>
 
-                <div class="form-group margin-l-0 margin-r-0">
-                    <label for="admin_captcha" class="col-sm-3 control-label">后台登录验证码</label>
-                    <div class="col-sm-6">
-                        <div class="switch">
-                            <input type="radio" class="switch-input" name="configs[admin_captcha]" value="1" id="admin_captcha_on" checked>
-                            <label for="admin_captcha_on" class="switch-label switch-label-on">开启</label>
-                            <input type="radio" class="switch-input" name="configs[admin_captcha]" value="0" id="admin_captcha_off">
-                            <label for="admin_captcha_off" class="switch-label switch-label-off">关闭</label>
-                            <span class="switch-selection"></span>
-
-                        </div>
-                    </div>
-                </div>
 
             </div>
             <!-- /.box-body -->
@@ -72,10 +59,8 @@
 @section('script')
     <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
 
-
     <script>
         $(function () {
-            $(':input[name="configs\[admin_captcha\]"][value="{{ $configs['admin_captcha'] }}"]').prop('checked', true);
             $('#form-config').validate({
 
                 rules: {

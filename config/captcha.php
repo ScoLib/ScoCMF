@@ -50,6 +50,11 @@ return [
         'blur'      => 2,
         'invert'    => true,
         'contrast'  => -5,
+    ],
+
+    // 开关
+    'switch' => [
+        'admin' => false,
     ]
 
 ];

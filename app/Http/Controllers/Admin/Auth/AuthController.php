@@ -39,7 +39,7 @@ class AuthController extends Controller
             $this->username() => 'required',
             'password' => 'required',
         ];
-        if (config('sco.admin_captcha')) {
+        if (config('captcha.switch.admin')) {
             $rules['captcha'] = 'required|captcha';
         }
         $this->validate($request, $rules);

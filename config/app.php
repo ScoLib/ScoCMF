@@ -170,7 +170,7 @@ return [
         Sco\Providers\AuthServiceProvider::class,
         Sco\Providers\EventServiceProvider::class,
         Sco\Providers\RouteServiceProvider::class,
-        //Sco\Providers\HomeServiceProvider::class,
+        Sco\Providers\HomeServiceProvider::class,
         Sco\Providers\AdminServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Bosnadev\Repositories\Providers\RepositoryProvider::class,

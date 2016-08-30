@@ -15,7 +15,6 @@ class ConfigsTableSeeder extends Seeder
             ['name' => 'site_name', 'value' => 'ScoCMF内容管理框架'],
             ['name' => 'icp_number', 'value' => ''],
             ['name' => 'statistics_code', 'value' => ''],
-            ['name' => 'admin_captcha', 'value' => '1'],
         ]);
     }
 }
