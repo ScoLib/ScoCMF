@@ -93,7 +93,7 @@
         <!-- /.box-body -->
 
         <div class="box-footer clearfix">
-            @include('admin::layouts.partials.paginate', ['paginator' => $users])
+            {{ $users->links('admin::layouts.partials.pagination') }}
         </div>
 
     </div>

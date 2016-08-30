@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ConfigsTableSeeder::class);
         $this->call(RbacTableSeeder::class);
 
-        factory(Sco\Models\User::class, 50)->create()->each(function ($u) {
+        factory(Sco\Models\User::class, 20000)->create()->each(function ($u) {
             $u->roles()->attach(2);
         });
 

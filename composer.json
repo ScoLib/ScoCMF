@@ -17,23 +17,23 @@
         "source": "https://git.oschina.net/klgd/ScoCMF.git"
     },
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
+        "php": ">=5.6.4",
+        "laravel/framework": "5.3.*",
         "mews/captcha": "^2.1",
-        "zizaco/entrust": "dev-master",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "scolib/laravel-tree": "dev-master",
         "scolib/repositories": "dev-master",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "scolib/entrust": "^5.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~4.0",
-        "symfony/css-selector": "2.8.*|3.0.*",
-        "symfony/dom-crawler": "2.8.*|3.0.*",
-        "barryvdh/laravel-debugbar": "^2.1",
-        "barryvdh/laravel-ide-helper": "^2.1"
+        "phpunit/phpunit": "~5.0",
+        "symfony/css-selector": "3.1.*",
+        "symfony/dom-crawler": "3.1.*",
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "barryvdh/laravel-debugbar": "^2.2"
     },
     "autoload": {
         "classmap": [
@@ -53,7 +53,7 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"

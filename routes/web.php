@@ -65,12 +65,12 @@ Route::post('admin/users/role/{id}/authorize', 'Admin\Users\RoleController@postA
 ->middleware(['web','auth:admin']);
 
 // 登录页
-Route::get('admin/login', 'Admin\Auth\AuthController@getLogin')
+Route::get('admin/login', 'Admin\Auth\AuthController@showLoginForm')
 ->name('admin.login')
 ->middleware(['web','guest:admin']);
 
 // 登录提交
-Route::post('admin/postLogin', 'Admin\Auth\AuthController@postLogin')
+Route::post('admin/postLogin', 'Admin\Auth\AuthController@login')
 ->name('admin.postLogin')
 ->middleware(['web','guest:admin']);
 

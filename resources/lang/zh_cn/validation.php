@@ -77,6 +77,7 @@ return [
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => ':attribute 已存在',
     'url'                  => ':attribute 格式不正确',
+    'captcha'              => '验证码不正确',
 
     /*
     |--------------------------------------------------------------------------
@@ -115,6 +116,7 @@ return [
         'name'       => '名称',
         'pid'        => '所属父级',
         'role'       => '角色',
+        'captcha'    => '验证码',
     ],
 
 ];
