@@ -29,7 +29,7 @@
             <li class="header">MAIN NAVIGATION</li>
             @foreach ($leftMenu as $menu)
                 @permission($menu->name)
-                @if ($menu->child->isEmpty()))
+                @if ($menu->child->isEmpty())
                     <li class="{{ $currentMenuNames->contains($menu->name) ? 'active' : '' }}">
                         <a href="{{ $menu->uri == '#' ? '#' : route($menu->name) }}">
                             <i class="fa {{ $menu->icon ?: 'fa-folder' }}"></i>

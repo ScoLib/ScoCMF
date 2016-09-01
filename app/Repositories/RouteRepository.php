@@ -137,7 +137,7 @@ class RouteRepository extends Repository
         $key = $all->search(function ($item) use ($name) {
             return $item->name == $name;
         });
-        return $all->get($key);
+        return $key ? $all->get($key) : false;
     }
 
     public function getParentTree($id)
@@ -148,9 +148,13 @@ class RouteRepository extends Repository
     public function getParentTreeAndSelfByName($name)
     {
         $self   = $this->getRouteInfoByName($name);
-        $parent = $this->getParentTree($self->id);
-        $parent->push($self);
-        return $parent;
+        if ($self) {
+            $parent = $this->getParentTree($self->id);
+            $parent->push($self);
+            return $parent;
+        }
+        return false;
+
     }
 
     public function createRoute(Request $request)

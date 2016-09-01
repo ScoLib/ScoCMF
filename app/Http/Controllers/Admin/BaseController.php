@@ -67,31 +67,32 @@ class BaseController extends Controller
     {
         // 获取当前路由的相关路由name
         $parentTree = app(RouteRepository::class)->getParentTreeAndSelfByName(Route::currentRouteName());
+        if ($parentTree) {
+            $this->currentMenuNames = $parentTree->pluck('name');
 
-        $this->currentMenuNames = $parentTree->pluck('name');
+            foreach ($parentTree as $key => $route) {
+                Breadcrumbs::register($route->name,
+                    function ($breadcrumbs) use ($parentTree, $key, $route) {
+                        if ($route->pid) {
+                            $parent = $parentTree->get(($key - 1));
+                            $breadcrumbs->parent($parent->name);
+                        }
 
-        foreach ($parentTree as $key => $route) {
-            Breadcrumbs::register($route->name,
-                function ($breadcrumbs) use ($parentTree, $key, $route) {
-                    if ($route->pid) {
-                        $parent = $parentTree->get(($key - 1));
-                        $breadcrumbs->parent($parent->name);
-                    }
+                        if ($route->pid == 0) {
+                            $name = $route->name . '.index';
+                        } else {
+                            $name = $route->uri == '#' ? '' : $route->name;
+                        }
 
-                    if ($route->pid == 0) {
-                        $name = $route->name . '.index';
-                    } else {
-                        $name = $route->uri == '#' ? '' : $route->name;
-                    }
-
-                    if (empty($name) || preg_match('/\{.*?\}/', $route->uri)) {
-                        $breadcrumbs->push($route->title);
-                    } else {
-                        $breadcrumbs->push($route->title, route($name));
-                    }
-                });
+                        if (empty($name) || preg_match('/\{.*?\}/', $route->uri)) {
+                            $breadcrumbs->push($route->title);
+                        } else {
+                            $breadcrumbs->push($route->title, route($name));
+                        }
+                    });
+            }
+            $this->breadcrumbs = Route::currentRouteName();
         }
-        $this->breadcrumbs = Route::currentRouteName();
     }
 
     /**
