@@ -90,7 +90,7 @@ Route::get('admin/system/route', 'Admin\System\RouteController@getIndex')
 ->middleware(['web','auth:admin']);
 
 // 新增路由
-Route::get('admin/system/route/add', 'Admin\System\RouteController@getAdd')
+Route::get('admin/system/route/add/{pid?}', 'Admin\System\RouteController@getAdd')
 ->name('admin.system.route.add')
 ->middleware(['web','auth:admin']);
 
