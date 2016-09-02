@@ -21,7 +21,7 @@
         "laravel/framework": "5.3.*",
         "mews/captcha": "^2.1",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
-        "scolib/laravel-tree": "dev-master",
+        "scolib/tree": "1.*",
         "scolib/repositories": "dev-master",
         "predis/predis": "^1.1",
         "scolib/entrust": "^5.3"
