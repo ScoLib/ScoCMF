@@ -33,10 +33,17 @@ class RouteController extends BaseController
     /**
      * 新增路由
      *
+     * @param int $pid
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getAdd()
+    public function getAdd($pid = 0)
     {
+
+        if ($pid) {
+
+        }
+
         $this->middlewares = $this->getAppMiddlewares();
         $this->routes      = app(RouteRepository::class)->getRouteTreeList();
         return $this->render('system.route.add');

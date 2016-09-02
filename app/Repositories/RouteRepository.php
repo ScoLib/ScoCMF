@@ -131,6 +131,11 @@ class RouteRepository extends Repository
         return $this->menuList = $this->getLayerOfDescendants($parentId);
     }
 
+    public function getRouteInfoById($id)
+    {
+        return $this->getSelf($id);
+    }
+
     public function getRouteInfoByName($name)
     {
         $all = $this->getAll();
@@ -143,6 +148,17 @@ class RouteRepository extends Repository
     public function getParentTree($id)
     {
         return $this->getAncestors($id);
+    }
+
+    public function getParentTreeAndSelfById($id)
+    {
+        $self = $this->getRouteInfoById($id);
+        if ($self) {
+            $parent = $this->getParentTree($self->id);
+            $parent->push($self);
+            return $parent;
+        }
+        return false;
     }
 
     public function getParentTreeAndSelfByName($name)
