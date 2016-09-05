@@ -1,27 +1,90 @@
-## Laravel PHP Framework
+# ScoCMF
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+ScoCMF是基于 Laravel 5.x 开发的一套内容管理框架(Content Management Framework)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+##安装
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+```bash
+$ composer create-project scolib/scocmf demo
+$ cd demo
+$ vim .env //编辑数据库、缓存配置等
+$ php artisan migrate --seed
+```
 
-## Official Documentation
+##将你的服务器根目录指向 public/
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+###Example:
 
-## Contributing
+####Apache
+```bash
+<VirtualHost *:80>
+    DocumentRoot "/var/www/demo/public"
+    ServerName scocmf.lo
+    DirectoryIndex index.php
+    <Directory "/var/www/demo/public">
+        Options FollowSymLinks ExecCGI
+        AllowOverride All
+    </Directory>
+</VirtualHost>
+```
+####Nginx
+```bash
+server {
+    listen 80;
+    server_name scocmf.lo;
+    index index.php;
+    root  /var/www/demo/public;
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+    location ~ [^/]\.php(/|$) {
+        fastcgi_pass  unix:/tmp/php-cgi.sock;
+        astcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        
+        fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+        set $path_info $fastcgi_path_info;
+        fastcgi_param PATH_INFO       $path_info;
+    }
 
-## Security Vulnerabilities
+    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$ {
+        expires      30d;
+    }
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+    location ~ .*\.(js|css)?$ {
+        expires      12h;
+    }
 
-### License
+    location ~ /\. {
+            deny all;
+    }
+    access_log  /home/wwwlogs/www.scocmf.lo.log;
+}
+```
+###登录
+http://scocmf.lo/admin
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+- **用户名:** `admin@admin.com`
+- **密码:** `123456`
+
+**注意**
+* 只有在redis或memcache作为缓存驱动的情况下，某些缓存才有效
+
+
+### 鸣谢
+
+- [Laravel](http://laravel.com)
+- [ENTRUST](https://github.com/Zizaco/entrust)
+- [Laravel Repositories](https://github.com/bosnadev/repository)
+- [Laravel Breadcrumbs](https://github.com/davejamesmiller/laravel-breadcrumbs)
+- [Laravel Captcha](https://github.com/mewebstudio/captcha)
+- [Bootstrap](https://github.com/twbs/bootstrap)
+- [AdminLTE](https://github.com/almasaeed2010/AdminLTE)
+- [Font Awesome](http://fontawesome.io/)
+
+
+## License
+
+ScoCMF is licensed under [Apache-2.0](LICENSE).
