@@ -64,6 +64,11 @@ Route::post('admin/users/role/{id}/authorize', 'Admin\Users\RoleController@postA
 ->name('admin.users.role.postAuthorize')
 ->middleware(['web','auth:admin']);
 
+// 刷新路由文件
+Route::get('admin/system/route/refresh', 'Admin\System\RouteController@getRefresh')
+->name('admin.system.route.refresh')
+->middleware(['web','auth:admin']);
+
 // 登录页
 Route::get('admin/login', 'Admin\Auth\AuthController@showLoginForm')
 ->name('admin.login')
