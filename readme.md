@@ -60,7 +60,7 @@ server {
     location ~ /\. {
             deny all;
     }
-    access_log  /home/wwwlogs/www.scocmf.lo.log;
+    access_log  /var/logs/scocmf.lo.log;
 }
 ```
 ###登录
