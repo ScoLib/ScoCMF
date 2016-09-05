@@ -10,6 +10,9 @@
                 <a href="{{ route('admin.system.route.add') }}" class="btn btn-default btn-xs">
                     <i class="fa fa-plus"></i>
                 </a>
+                <a href="{{ route('admin.system.route.refresh') }}" class="btn btn-default btn-xs ajax-get no-refresh">
+                    <i class="fa fa-refresh"></i>
+                </a>
             </div>
 
         </div>

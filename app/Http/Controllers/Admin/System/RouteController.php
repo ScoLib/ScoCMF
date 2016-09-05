@@ -8,6 +8,7 @@ use Repository;
 use Illuminate\Http\Request;
 use Sco\Repositories\RouteRepository;
 use Route;
+use Artisan;
 
 /**
  * 路由管理
@@ -118,6 +119,22 @@ class RouteController extends BaseController
      */
     public function getDelete($id)
     {
+
+    }
+
+    /**
+     * 刷新路由文件
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getRefresh()
+    {
+        // 强制更新路由文件
+        $res = Artisan::call('route:create', ['--force' => true]);
+        if ($res) {
+            return response()->json(error('刷新路由文件失败'));
+        }
+        return response()->json(success('刷新完成'));
 
     }
 
