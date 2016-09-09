@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
-<!-- Ionicons -->
-<link rel="stylesheet" href="{{ asset('ionicons/css/ionicons.min.css') }}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{ asset('css/AdminLTE.css') }}">
 @yield('css')

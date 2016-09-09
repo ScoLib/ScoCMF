@@ -173,8 +173,6 @@
 
 <!-- SlimScroll -->
 <script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>
-<!-- FastClick -->
-<script src="{{ asset('js/fastclick.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('js/app.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
