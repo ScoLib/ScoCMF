@@ -2,7 +2,6 @@
 
 namespace Sco\Providers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 
 class HomeServiceProvider extends ServiceProvider
@@ -12,17 +11,11 @@ class HomeServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Request $request)
+    public function boot()
     {
         // 前台语言包目录
         //$this->loadTranslationsFrom(base_path('resources/lang/frontend'), 'Frontend');
-        $theme = $request->input('t') ?: config('view.theme');
-        $path = base_path('resources/themes/' . $theme);
-        if (!is_dir($path)) {
-            $path = base_path('resources/themes/' . config('view.theme'));
-        }
-
-        $this->loadViewsFrom($path, 'theme');
+        $this->loadViewsFrom(base_path('resources/themes/' . config('view.theme')), 'theme');
 
     }
 
