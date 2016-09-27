@@ -22,6 +22,12 @@ class AuthController extends Controller
     //protected $redirectAfterLogout = 'admin/login';
 
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->middleware('guest:admin', ['except' => 'logout']);
+    }
+
     public function showLoginForm()
     {
         return view('admin::auth.login');

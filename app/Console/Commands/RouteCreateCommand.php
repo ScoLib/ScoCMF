@@ -3,7 +3,7 @@
 namespace Sco\Console\Commands;
 
 use Illuminate\Console\Command;
-use Sco\Repositories\RouteRepository;
+use Sco\Repositories\PermissionRepository;
 use Symfony\Component\Console\Input\InputOption;
 
 class RouteCreateCommand extends Command
@@ -36,7 +36,7 @@ class RouteCreateCommand extends Command
             return false;
         }
 
-        $routes = app(RouteRepository::class)->getValidRouteList();
+        $routes = app(PermissionRepository::class)->getValidRouteList();
         
         $content = "<?php" . PHP_EOL;
         foreach ($routes as $route) {

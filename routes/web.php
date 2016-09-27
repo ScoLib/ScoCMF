@@ -1,5 +1,42 @@
 <?php
-// 添加用户
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', ], function () {
+    //登录页
+    Route::get('login', 'Auth\AuthController@showLoginForm')->name('admin.login');
+    //登录提交
+    Route::post('postLogin', 'Auth\AuthController@login')->name('admin.postLogin');
+    //退出
+    Route::get('logout', 'Auth\AuthController@logout')->name('admin.logout');
+
+    Route::group(['middleware' => 'auth:admin'], function () {
+        // 控制台
+        Route::get('/', 'BaseController@index')->name('admin.index');
+
+        Route::group(['prefix' => 'system', 'namespace' => 'System'], function () {
+            // 站点设置
+            Route::get('site', 'SiteController@getIndex')->name('admin.system.site');
+
+            // 保存设置
+            Route::post('site/save', 'SiteController@postIndex')->name('admin.system.site.save');
+
+            // 菜单管理
+            Route::get('menu', 'MenuController@getIndex')->name('admin.system.menu');
+
+            // 新增菜单
+            Route::get('menu/add/{pid?}', 'MenuController@getAdd')->name('admin.system.menu.add');
+
+            // 保存菜单
+            Route::post('menu/postAdd', 'MenuController@postAdd')->name('admin.system.menu.postAdd');
+
+        });
+
+
+    });
+
+});
+
+
+/*// 添加用户
 Route::get('admin/users/user/add', 'Admin\Users\UserController@getAdd')
 ->name('admin.users.user.add')
 ->middleware(['web','auth:admin']);
@@ -133,4 +170,29 @@ Route::get('admin/users/user', 'Admin\Users\UserController@getIndex')
 Route::get('admin/users/role', 'Admin\Users\RoleController@getIndex')
 ->name('admin.users.role')
 ->middleware(['web','auth:admin']);
+
+// 分类管理
+Route::get('admin/shop/category', '\ScoLib\Shop\Http\Controllers\Admin\CategoryController@getIndex')
+->name('admin.shop.category')
+->middleware(['web','auth:admin']);
+
+// 新增分类
+Route::get('admin/shop/category/add', '\ScoLib\Shop\Http\Controllers\Admin\CategoryController@getAdd')
+->name('admin.shop.category.add')
+->middleware(['web','auth:admin']);
+
+// 保存新增分类
+Route::post('admin/shop/category/postAdd', '\ScoLib\Shop\Http\Controllers\Admin\CategoryController@postAdd')
+->name('admin.shop.category.postAdd')
+->middleware(['web','auth:admin']);
+
+// 编辑分类
+Route::get('admin/shop/category/{id}/edit', '\ScoLib\Shop\Http\Controllers\Admin\CategoryController@getEdit')
+->name('admin.shop.category.edit')
+->middleware(['web','auth:admin']);
+
+// 保存编辑分类
+Route::post('admin/shop/category/{id}/edit', '\ScoLib\Shop\Http\Controllers\Admin\CategoryController@postEdit')
+->name('admin.shop.category.postEdit')
+->middleware(['web','auth:admin']);*/
 

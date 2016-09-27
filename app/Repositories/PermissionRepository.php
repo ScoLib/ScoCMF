@@ -5,16 +5,16 @@ namespace Sco\Repositories;
 use Bosnadev\Repositories\Eloquent\Repository;
 use Bosnadev\Repositories\Traits\CacheableTrait;
 use Illuminate\Http\Request;
-use Sco\Models\Route;
+use Sco\Models\Permission;
 use ScoLib\Tree\Traits\TreeTrait;
 use InvalidArgumentException;
 
 /**
- * Class RouteRepository
+ * Class PermissionRepository
  *
  * @package Sco\Repositories
  */
-class RouteRepository extends Repository
+class PermissionRepository extends Repository
 {
     use TreeTrait, CacheableTrait;
 
@@ -31,7 +31,7 @@ class RouteRepository extends Repository
 
     public function model()
     {
-        return Route::class;
+        return Permission::class;
     }
 
     /**
@@ -113,7 +113,7 @@ class RouteRepository extends Repository
         return $this->permList = $this->getLayerOfDescendants($parentId);
     }
 
-    public function getMenuRouteList($parentId)
+    public function getMenuList()
     {
         if ($this->menuList) {
             return $this->menuList;
@@ -128,7 +128,7 @@ class RouteRepository extends Repository
         }
 
         $this->setAllNodes($routes);
-        return $this->menuList = $this->getLayerOfDescendants($parentId);
+        return $this->menuList = $this->getLayerOfDescendants(0);
     }
 
     public function getRouteInfoById($id)
@@ -142,7 +142,7 @@ class RouteRepository extends Repository
         $key = $all->search(function ($item) use ($name) {
             return $item->name == $name;
         });
-        return $key ? $all->get($key) : false;
+        return $key === false ? false : $all->get($key);
     }
 
     public function getParentTree($id)
@@ -186,42 +186,6 @@ class RouteRepository extends Repository
         $input = $request->input();
         $this->checkRoute($input);
         $this->update($input, $id);
-        return true;
-    }
-
-    /**
-     * 检验路由数据是否正确
-     *
-     * @param array $route
-     *
-     * @return Exception
-     */
-    private function checkRoute($route)
-    {
-        if ($route['action'] != '#') {
-            list($class, $method) = array_pad(explode('@', $route['action']), 2, null);
-            if (is_null($class) || is_null($method)) {
-                throw new InvalidArgumentException('操作（Action） 格式有误');
-            }
-            if (strpos($class, '\\') !== 0) {
-                $class = app()->getNamespace() . 'Http\\Controllers\\' . $class;
-            }
-
-            if (!method_exists($class, $method)) {
-                throw new InvalidArgumentException(sprintf('方法 [%s] 不存在', $route['action']));
-            }
-        }
-
-        if (!empty($route['middleware'])) {
-            $middlewares = explode('|', $route['middleware']);
-            foreach ($middlewares as $middleware) {
-                list($name, $parameters) = array_pad(explode(':', $middleware, 2), 2, null);
-                $className = \Route::resolveMiddlewareClassName($middleware);
-                if ($name == $className) {
-                    throw new InvalidArgumentException(sprintf('中间件 [%s] 不存在', $middleware));
-                }
-            }
-        }
         return true;
     }
 

@@ -11,7 +11,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Sco\Repositories\RouteRepository;
+use Sco\Repositories\PermissionRepository;
 
 /**
  * 后台基础控制器
@@ -35,7 +35,7 @@ class BaseController extends Controller
             if ($this->user && !request()->ajax()) {
                 $this->setParam('user', $this->user);
                 $this->getLeftMenu();
-                $this->breadcrumbs();
+                //$this->breadcrumbs();
             }
         });
     }
@@ -55,9 +55,11 @@ class BaseController extends Controller
      */
     private function getLeftMenu()
     {
-        $adminId = 1; // 后台路由ID，默认应该是1，如有变更则以实际ID为准
-
-        $this->leftMenu = app(RouteRepository::class)->getMenuRouteList($adminId);
+        $this->leftMenu = app(PermissionRepository::class)->getMenuList();
+        $parentTree = app(PermissionRepository::class)->getParentTreeAndSelfByName(Route::currentRouteName());
+        if ($parentTree) {
+            $this->currentMenuNames = $parentTree->pluck('name');
+        }
     }
 
     /**
@@ -66,7 +68,7 @@ class BaseController extends Controller
     private function breadcrumbs()
     {
         // 获取当前路由的相关路由name
-        $parentTree = app(RouteRepository::class)->getParentTreeAndSelfByName(Route::currentRouteName());
+        $parentTree = app(PermissionRepository::class)->getParentTreeAndSelfByName(Route::currentRouteName());
         if ($parentTree) {
             $this->currentMenuNames = $parentTree->pluck('name');
 
