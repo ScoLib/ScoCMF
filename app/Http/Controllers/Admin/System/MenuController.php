@@ -4,19 +4,18 @@ namespace Sco\Http\Controllers\Admin\System;
 
 
 use Sco\Http\Controllers\Admin\BaseController;
-use Repository;
 use Illuminate\Http\Request;
-use Sco\Repositories\RouteRepository;
+use Sco\Repositories\PermissionRepository;
 use Route;
 use Artisan;
 
 /**
- * 路由管理
- * Class RouteController
+ * 菜单管理
+ * Class MenuController
  *
  * @package Sco\Http\Controllers\Admin\System
  */
-class RouteController extends BaseController
+class MenuController extends BaseController
 {
 
     /**
@@ -26,9 +25,9 @@ class RouteController extends BaseController
      */
     public function getIndex()
     {
-        $this->routes = app(RouteRepository::class)->getRouteTreeList();
+        $this->routes = app(PermissionRepository::class)->getRouteTreeList();
 
-        return $this->render('system.route.index');
+        return $this->render('system.menu.index');
     }
 
     /**
@@ -45,9 +44,8 @@ class RouteController extends BaseController
 
         }
 
-        $this->middlewares = $this->getAppMiddlewares();
-        $this->routes      = app(RouteRepository::class)->getRouteTreeList();
-        return $this->render('system.route.add');
+        $this->routes = app(PermissionRepository::class)->getRouteTreeList();
+        return $this->render('system.menu.add');
     }
 
     /**
@@ -68,7 +66,7 @@ class RouteController extends BaseController
             //'' => '',
         ]);
 
-        app(RouteRepository::class)->createRoute($request);
+        app(PermissionRepository::class)->createRoute($request);
         return response()->json(success('新增路由完成', ['url' => route('admin.system.route')]));
     }
 
@@ -83,8 +81,8 @@ class RouteController extends BaseController
     {
         if ($id) {
             $this->middlewares = $this->getAppMiddlewares();
-            $this->route       = app(RouteRepository::class)->find($id);
-            $this->routes      = app(RouteRepository::class)->getRouteTreeList();
+            $this->route       = app(PermissionRepository::class)->find($id);
+            $this->routes      = app(PermissionRepository::class)->getRouteTreeList();
         }
         return $this->render('system.route.edit');
     }
@@ -108,7 +106,7 @@ class RouteController extends BaseController
             //'' => '',
         ]);
 
-        app(RouteRepository::class)->updateRoute($request, $id);
+        app(PermissionRepository::class)->updateRoute($request, $id);
         return response()->json(success('编辑路由完成', ['url' => route('admin.system.route')]));
     }
 
@@ -122,31 +120,5 @@ class RouteController extends BaseController
 
     }
 
-    /**
-     * 刷新路由文件
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getRefresh()
-    {
-        // 强制更新路由文件
-        $res = Artisan::call('route:create', ['--force' => true]);
-        if ($res) {
-            return response()->json(error('刷新路由文件失败'));
-        }
-        return response()->json(success('刷新完成'));
 
-    }
-
-    /**
-     * 获取所有中间件
-     *
-     * @return array
-     */
-    private function getAppMiddlewares()
-    {
-        $group = ['web', 'api'];
-        return array_merge($group, array_keys(Route::getMiddleware()));
-
-    }
 }

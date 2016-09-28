@@ -3,16 +3,16 @@
         @permission($child->name)
         @if ($child->child->isEmpty())
             <li class="{{ $currentMenuNames->contains($child->name) ? 'active' : '' }}">
-                <a href="{{ $child->uri == '#' ? '#' : route($child->name) }}">
+                <a href="{{ $child->name == '#' ? '#' : route($child->name) }}">
                     <i class="fa  {{ $child->icon ?: 'fa-circle-o' }}"></i>
-                    {{ $child->title }}
+                    {{ $child->display_name }}
                 </a>
             </li>
         @else
             <li class="{{ $currentMenuNames->contains($child->name) ? 'active' : '' }}">
-                <a href="{{ $child->uri == '#' ? '#' : route($child->name) }}">
+                <a href="{{ $child->name == '#' ? '#' : route($child->name) }}">
                     <i class="fa {{ $child->icon ?: 'fa-circle-o' }}"></i>
-                    {{ $child->title }}
+                    {{ $child->display_name }}
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>

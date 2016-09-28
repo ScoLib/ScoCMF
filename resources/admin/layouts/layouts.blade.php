@@ -147,7 +147,7 @@
                 @yield('title')
                 <small>@yield('small_title')</small>
             </h1>
-            {!! Breadcrumbs::renderIfExists($breadcrumbs) !!}
+            {!! Breadcrumbs::renderIfExists(isset($breadcrumbs) ? $breadcrumbs : '') !!}
         </section>
 
         <!-- Main content -->

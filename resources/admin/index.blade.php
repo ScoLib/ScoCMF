@@ -4,5 +4,5 @@
 
 @section('content')
 welcome scocmf
-<a href="{{ route('admin.system.route') }}" class="ajax-get confirm">ajax get</a>
+<a href="{{ route('admin.index') }}" class="ajax-get confirm">ajax get</a>
 @endsection

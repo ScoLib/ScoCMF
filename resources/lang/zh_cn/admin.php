@@ -7,11 +7,9 @@ return [
     'system' => [
         'site_name_required' => '请输入网站名称',
 
-        'route' => [
-            'name_required'   => '请输入名称',
-            'title_required'  => '请输入标题',
-            'uri_required'    => '请输入URI地址',
-            'action_required' => '请输入ACTION',
+        'menu' => [
+            'name_required'         => '请输入名称',
+            'display_name_required' => '请输入显示名称',
         ],
     ],
     'users'  => [

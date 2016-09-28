@@ -6,7 +6,7 @@ namespace Sco\Http\Controllers\Admin\Users;
 use Illuminate\Http\Request;
 use Sco\Http\Controllers\Admin\BaseController;
 use Sco\Repositories\RoleRepository;
-use Sco\Repositories\RouteRepository;
+use Sco\Repositories\PermissionRepository;
 
 /**
  * 角色管理
@@ -97,7 +97,7 @@ class RoleController extends BaseController
     public function getAuthorize($id)
     {
         $this->role        = app(RoleRepository::class)->find($id);
-        $this->permList    = app(RouteRepository::class)->getPermRouteList(1);
+        $this->permList    = app(PermissionRepository::class)->getPermRouteList(1);
         $this->rolePermIds = $this->role->perms()->getRelatedIds();
         return $this->render('users.role.authorize');
     }

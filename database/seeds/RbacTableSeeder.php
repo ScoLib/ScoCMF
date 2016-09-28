@@ -21,6 +21,9 @@ class RbacTableSeeder extends Seeder
         ]);
 
         $database = file_get_contents(base_path('database/seeds') . '/' . 'rbac.sql');
+        $prefix = env('DB_PREFIX', 'sco_');
+        $database = str_replace('sco_', $prefix, $database);
+
         DB::connection()->getPdo()->exec($database);
     }
 }
