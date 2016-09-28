@@ -25,7 +25,7 @@ class MenuController extends BaseController
      */
     public function getIndex()
     {
-        $this->routes = app(PermissionRepository::class)->getRouteTreeList();
+        $this->menus = app(PermissionRepository::class)->getMenuTreeList();
 
         return $this->render('system.menu.index');
     }
@@ -44,7 +44,7 @@ class MenuController extends BaseController
 
         }
 
-        $this->routes = app(PermissionRepository::class)->getRouteTreeList();
+        $this->routes = app(PermissionRepository::class)->getMenuTreeList();
         return $this->render('system.menu.add');
     }
 
@@ -82,7 +82,7 @@ class MenuController extends BaseController
         if ($id) {
             $this->middlewares = $this->getAppMiddlewares();
             $this->route       = app(PermissionRepository::class)->find($id);
-            $this->routes      = app(PermissionRepository::class)->getRouteTreeList();
+            $this->routes      = app(PermissionRepository::class)->getMenuTreeList();
         }
         return $this->render('system.route.edit');
     }

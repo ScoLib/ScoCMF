@@ -37,7 +37,7 @@ class PermissionRepository extends Repository
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function getRouteTreeList()
+    public function getMenuTreeList()
     {
         $routes = $this->getDescendants(0);
         //dd($routes);
