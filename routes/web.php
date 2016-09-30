@@ -26,10 +26,21 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin',], function () {
             // 新增菜单
             Route::get('menu/add/{pid?}', 'MenuController@getAdd')->name('admin.system.menu.add');
 
-            // 保存菜单
-            Route::post('menu/postAdd',
-                'MenuController@postAdd')->name('admin.system.menu.postAdd');
+            // 保存新增菜单
+            Route::post('menu/postAdd', 'MenuController@postAdd')
+                ->name('admin.system.menu.postAdd');
 
+            // 编辑路由
+            Route::get('admin/system/menu/{id}/edit', 'MenuController@getEdit')
+                ->name('admin.system.menu.edit');
+
+            // 保存编辑菜单
+            Route::post('admin/system/menu/{id}/edit', 'MenuController@postEdit')
+                ->name('admin.system.menu.postEdit');
+
+            // 删除菜单
+            Route::get('admin/system/menu/{id}/delete', 'MenuController@getDelete')
+                ->name('admin.system.menu.delete');
         });
 
         //用户管理
@@ -47,10 +58,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin',], function () {
             Route::post('user/postAdd', 'UserController@postAdd')->name('admin.users.user.postAdd');
 
             // 保存编辑用户
-            Route::post('user/{uid}/edit', 'UserController@postEdit')->name('admin.users.user.postEdit');
+            Route::post('user/{uid}/edit', 'UserController@postEdit')
+                ->name('admin.users.user.postEdit');
 
             // 删除用户
-            Route::get('user/{uid}/delete', 'UserController@getDelete')->name('admin.users.user.delete');
+            Route::get('user/{uid}/delete', 'UserController@getDelete')
+                ->name('admin.users.user.delete');
 
             //角色管理
             Route::get('role', 'RoleController@getIndex')->name('admin.users.role');
@@ -65,16 +78,20 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin',], function () {
             Route::get('role/{id}/edit', 'RoleController@getEdit')->name('admin.users.role.edit');
 
             // 保存编辑角色
-            Route::post('role/{id}/edit', 'RoleController@postEdit')->name('admin.users.role.postEdit');
+            Route::post('role/{id}/edit', 'RoleController@postEdit')
+                ->name('admin.users.role.postEdit');
 
             // 角色授权
-            Route::get('role/{id}/authorize', 'RoleController@getAuthorize')->name('admin.users.role.authorize');
+            Route::get('role/{id}/authorize', 'RoleController@getAuthorize')
+                ->name('admin.users.role.authorize');
 
             // 删除角色
-            Route::get('role/{id}/delete', 'RoleController@getDelete')->name('admin.users.role.delete');
+            Route::get('role/{id}/delete', 'RoleController@getDelete')
+                ->name('admin.users.role.delete');
 
             // 保存角色授权
-            Route::post('role/{id}/authorize', 'RoleController@postAuthorize')->name('admin.users.role.postAuthorize');
+            Route::post('role/{id}/authorize', 'RoleController@postAuthorize')
+                ->name('admin.users.role.postAuthorize');
         });
 
     });
