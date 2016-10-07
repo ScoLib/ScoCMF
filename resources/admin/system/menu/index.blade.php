@@ -22,6 +22,8 @@
                     <th class="col-sm-3">标题</th>
                     <th class="col-sm-3">名称</th>
                     <th>菜单</th>
+                    <th>图标</th>
+                    <th>排序</th>
                     <th class="col-sm-2">操作</th>
                 </tr>
                 @foreach ($menus as $menu)
@@ -30,6 +32,8 @@
                         <td>{{ $menu->spacer }}{{ $menu->display_name }}</td>
                         <td>{{ $menu->name }}</td>
                         <td>{!! $menu->is_menu ? '<span class="label label-success">是</span>' : '<span class="label label-default">否</span>' !!}</td>
+                        <td>{!! $menu->icon ? '<i class="fa ' . $menu->icon . '"></i>' : '' !!}</td>
+                        <td>{{ $menu->sort }}</td>
                         <td>
                             <a href="{{ route('admin.system.menu.edit', ['id' => $menu->id]) }}"
                                class="btn btn-default btn-xs"><i class="fa fa-pencil"></i> 编辑</a>

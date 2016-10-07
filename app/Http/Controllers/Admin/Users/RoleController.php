@@ -64,8 +64,8 @@ class RoleController extends BaseController
      */
     public function getEdit($id)
     {
-        $this->role = app(RoleRepository::class)->find($id);
-        return $this->render('users.role.edit');
+        $role = app(RoleRepository::class)->find($id);
+        return $this->render('users.role.edit', compact('role'));
     }
 
     /**
@@ -96,10 +96,10 @@ class RoleController extends BaseController
      */
     public function getAuthorize($id)
     {
-        $this->role        = app(RoleRepository::class)->find($id);
-        $this->permList    = app(PermissionRepository::class)->getPermRouteList(1);
-        $this->rolePermIds = $this->role->perms()->getRelatedIds();
-        return $this->render('users.role.authorize');
+        $role        = app(RoleRepository::class)->find($id);
+        $permList    = app(PermissionRepository::class)->getPermRouteList();
+        $rolePermIds = $role->perms()->getRelatedIds();
+        return $this->render('users.role.authorize', compact('role', 'permList', 'rolePermIds'));
     }
 
     /**

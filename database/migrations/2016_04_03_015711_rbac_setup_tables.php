@@ -45,7 +45,7 @@ class RbacSetupTables extends Migration
             $table->string('display_name', 200)->comment('显示名称');
             $table->string('name', 100)->comment('名称');
             $table->tinyInteger('is_menu')->comment('是否作为菜单')->default('1');
-            $table->tinyInteger('sort')->comment('排序');
+            $table->tinyInteger('sort')->unsigned()->comment('排序');
             $table->string('description')->nullable()->comment('描述');
             $table->timestamps();
             $table->index('pid');

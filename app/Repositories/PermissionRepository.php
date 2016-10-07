@@ -91,26 +91,16 @@ class PermissionRepository extends Repository
     /**
      * 获取权限列表
      *
-     * @param int $parentId
      *
      * @return \Illuminate\Support\Collection|null
      */
-    public function getPermRouteList($parentId)
+    public function getPermRouteList()
     {
         if ($this->permList) {
             return $this->permList;
         }
 
-        $all = $this->getAll();
-
-        $routes = collect([]);
-        foreach ($all as $route) {
-            if ($route->is_perm) {
-                $routes->push($route);
-            }
-        }
-        $this->setAllNodes($routes);
-        return $this->permList = $this->getLayerOfDescendants($parentId);
+        return $this->permList = $this->getLayerOfDescendants(0);
     }
 
     public function getMenuList()
@@ -131,12 +121,12 @@ class PermissionRepository extends Repository
         return $this->menuList = $this->getLayerOfDescendants(0);
     }
 
-    public function getRouteInfoById($id)
+    public function getInfoById($id)
     {
         return $this->getSelf($id);
     }
 
-    public function getRouteInfoByName($name)
+    public function getInfoByName($name)
     {
         $all = $this->getAll();
         $key = $all->search(function ($item) use ($name) {
@@ -152,7 +142,7 @@ class PermissionRepository extends Repository
 
     public function getParentTreeAndSelfById($id)
     {
-        $self = $this->getRouteInfoById($id);
+        $self = $this->getInfoById($id);
         if ($self) {
             $parent = $this->getParentTree($self->id);
             $parent->push($self);
@@ -163,7 +153,7 @@ class PermissionRepository extends Repository
 
     public function getParentTreeAndSelfByName($name)
     {
-        $self   = $this->getRouteInfoByName($name);
+        $self   = $this->getInfoByName($name);
         if ($self) {
             $parent = $this->getParentTree($self->id);
             $parent->push($self);
@@ -173,19 +163,10 @@ class PermissionRepository extends Repository
 
     }
 
-    public function createRoute(Request $request)
+    public function saveMenu(Request $request, $id = 0)
     {
         $input = $request->input();
-        $this->checkRoute($input);
-        $this->create($input);
-        return true;
-    }
-
-    public function updateRoute(Request $request, $id)
-    {
-        $input = $request->input();
-        $this->checkRoute($input);
-        $this->update($input, $id);
+        $this->updateOrCreate(['id' => $id], $input);
         return true;
     }
 

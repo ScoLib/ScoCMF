@@ -31,15 +31,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin',], function () {
                 ->name('admin.system.menu.postAdd');
 
             // 编辑路由
-            Route::get('admin/system/menu/{id}/edit', 'MenuController@getEdit')
+            Route::get('menu/{id}/edit', 'MenuController@getEdit')
                 ->name('admin.system.menu.edit');
 
             // 保存编辑菜单
-            Route::post('admin/system/menu/{id}/edit', 'MenuController@postEdit')
+            Route::post('menu/{id}/edit', 'MenuController@postEdit')
                 ->name('admin.system.menu.postEdit');
 
             // 删除菜单
-            Route::get('admin/system/menu/{id}/delete', 'MenuController@getDelete')
+            Route::get('menu/{id}/delete', 'MenuController@getDelete')
                 ->name('admin.system.menu.delete');
         });
 

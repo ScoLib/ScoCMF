@@ -58,7 +58,7 @@ class BaseController extends Controller
         $this->leftMenu = app(PermissionRepository::class)->getMenuList();
         $parentTree = app(PermissionRepository::class)->getParentTreeAndSelfByName(Route::currentRouteName());
         if ($parentTree) {
-            $this->currentMenuNames = $parentTree->pluck('name');
+            $this->currentMenuIds = $parentTree->pluck('id');
         }
     }
 

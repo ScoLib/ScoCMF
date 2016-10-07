@@ -15,7 +15,7 @@
                         <label>
                             <input class="top-perm" type="checkbox" name="perms[]"
                                    value="{{ $perm->id }}" {{ $rolePermIds->contains($perm->id) ? 'checked' : '' }}>
-                            {{ $perm->title }}
+                            {{ $perm->display_name }}
                         </label>
                     </div>
 
@@ -26,7 +26,7 @@
                                     <input class="top-perm sub-perm-{{ $child->pid }}"
                                            type="checkbox" name="perms[]"
                                            value="{{ $child->id }}" {{ $rolePermIds->contains($child->id) ? 'checked' : '' }}>
-                                    {{ $child->title }}
+                                    {{ $child->display_name }}
                                 </label>
                             </div>
                             @if (!$child->child->isEmpty())
@@ -39,7 +39,7 @@
                                                 <input class="sub-perm-{{ $child->pid }} sub-perm-{{ $subchild->pid }}"
                                                        type="checkbox" name="perms[]"
                                                        value="{{ $subchild->id }}" {{ $rolePermIds->contains($subchild->id) ? 'checked' : '' }}>
-                                                {{ $subchild->title }}
+                                                {{ $subchild->display_name }}
                                             </label>
                                         </div>
                                     @endforeach
