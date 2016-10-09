@@ -7,9 +7,11 @@
         <div class="box-header">
             <h3 class="box-title">菜单列表</h3>
             <div class="box-tools pull-right">
+                @permission('admin.system.menu.add')
                 <a href="{{ route('admin.system.menu.add') }}" class="btn btn-default btn-xs">
                     <i class="fa fa-plus"></i>
                 </a>
+                @endpermission
 
             </div>
 

@@ -8,3 +8,5 @@ Homestead.yaml
 /composer.lock
 /_ide_helper.php
 
+/public/css/admin.css
+/public/js/admin.js

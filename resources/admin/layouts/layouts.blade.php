@@ -3,7 +3,6 @@
 <head>
     @include('admin::layouts.partials.htmlheader')
 
-    <link rel="stylesheet" href="{{ asset('css/skins/skin-green.min.css') }}">
     <style>
         .tooltip {
             font-size: 13px;
@@ -174,9 +173,7 @@
 <!-- SlimScroll -->
 <script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('js/app.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('js/demo.js') }}"></script>
+<script src="{{ elixir('js/admin.js', '') }}"></script>
 
 <script src="{{ asset('layer/layer.js') }}"></script>
 @yield('script')

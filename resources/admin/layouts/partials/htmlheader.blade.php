@@ -11,7 +11,7 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
 <!-- Theme style -->
-<link rel="stylesheet" href="{{ asset('css/AdminLTE.css') }}">
+<link rel="stylesheet" href="{{ elixir('css/admin.css', '') }}">
 @yield('css')
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
