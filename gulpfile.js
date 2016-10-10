@@ -2,20 +2,8 @@ const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
- | file for our application, as well as publishing vendor resources.
- |
- */
-elixir.config.sourcemaps = false;
-elixir.config.versioning = {
-    buildFolder: ''
-};
+var jsuglify = require('gulp-uglify');
+var rename = require('gulp-rename');
 
 var node_path = 'node_modules';
 
@@ -23,16 +11,30 @@ var paths = {
     'jquery': node_path + '/jquery',
     'bootstrap': node_path + '/bootstrap',
     'icheck': node_path + '/icheck',
-    'jquery.validation': node_path + '/jquery-validation',
+    'jqueryvalidation': node_path + '/jquery-validation',
     'fontawesome': node_path + '/font-awesome',
 };
+
+elixir.config.sourcemaps = false;
+elixir.config.versioning = {
+    buildFolder: ''
+};
+
+elixir.extend('jsminify', function () {
+    new elixir.Task('jsminify', function () {
+        return gulp.src(['resources/assets/js/admin.js', paths.jqueryvalidation + '/dist/jquery.validate.js'])
+            .pipe(rename({suffix: '.min'}))
+            .pipe(jsuglify())
+            .pipe(gulp.dest('public/js'));
+    });
+});
 
 elixir(mix => {
     mix.less([
         'AdminLTE/AdminLTE.less', 'AdminLTE/skins/skin-green.less'
     ], 'public/css/admin.css')
-        .scripts(paths.jquery + '/dist/jquery.min.js', 'public/js/jquery.min.js')
-        .scripts(paths.jquery.validation + '/dist/jquery.validate.js', 'public/js/jquery.validate.js')
+        .copy(paths.jquery + '/dist/jquery.min.js', 'public/js/jquery.min.js')
+        // .copy(paths.jqueryvalidation + '/dist/jquery.validate.js', 'public/js/jquery.validate.js')
 
         .copy(paths.icheck + '/icheck.min.js', 'public/icheck/icheck.min.js')
         .copy(paths.icheck + '/skins', 'public/icheck/skins')
@@ -45,6 +47,11 @@ elixir(mix => {
         .copy(paths.fontawesome + '/css/font-awesome.min.css', 'public/font-awesome/css/font-awesome.min.css')
 
         .copy('resources/assets/fonts', 'public/fonts')
-        .webpack('admin.js')
-        .version(['css/admin.css', 'js/admin.js']);
+        // .copy('resources/assets/js', 'public/js')
+        .jsminify()
+        // .webpack('admin.js')
+        // .webpack('jquery.validate.js', 'public/js/jquery.validate.min.js', 'public/js')
+        .version(['css/admin.css', 'js/admin.min.js'])
+        
+        ;
 });

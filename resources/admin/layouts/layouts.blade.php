@@ -173,7 +173,7 @@
 <!-- SlimScroll -->
 <script src="{{ asset('js/jquery.slimscroll.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ elixir('js/admin.js', '') }}"></script>
+<script src="{{ elixir('js/admin.min.js', '') }}"></script>
 
 <script src="{{ asset('layer/layer.js') }}"></script>
 @yield('script')
