@@ -5,7 +5,7 @@
 @section('body')
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Sco</b>CMF</a>
+            <a href="{{ route('admin.index') }}"><b>Sco</b>CMF</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
