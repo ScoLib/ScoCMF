@@ -175,7 +175,6 @@ return [
         Mews\Captcha\CaptchaServiceProvider::class,
         Bosnadev\Repositories\Providers\RepositoryProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,

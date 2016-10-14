@@ -20,7 +20,6 @@
         "php": ">=5.6.4",
         "laravel/framework": "5.3.*",
         "mews/captcha": "^2.1",
-        "davejamesmiller/laravel-breadcrumbs": "^3.0",
         "scolib/tree": "1.*",
         "scolib/repositories": "dev-master",
         "predis/predis": "^1.1",

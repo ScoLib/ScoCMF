@@ -142,11 +142,20 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+            @yield('right_button')
+
             <h1>
                 @yield('title')
                 <small>@yield('small_title')</small>
             </h1>
-            {!! Breadcrumbs::renderIfExists(isset($breadcrumbs) ? $breadcrumbs : '') !!}
+            @if(isset($breadcrumb))
+                <ol class="breadcrumb">
+                    @foreach($breadcrumb as $entry)
+                        <li><a href="{{ $entry['url'] }}">{{ $entry['label'] }}</a></li>
+                    @endforeach
+                    <li class="active">{{ $title }}</li>
+                </ol>
+            @endif
         </section>
 
         <!-- Main content -->
