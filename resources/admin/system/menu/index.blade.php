@@ -2,20 +2,19 @@
 
 @section('title', '菜单管理')
 
+@section('right_button')
+    <div class="pull-right">
+        @permission('admin.system.menu.add')
+        <button type="button" class="btn btn-default" title="添加菜单"
+                data-toggle="modal" data-target="#menu-add">
+            <span class="fa fa-plus"></span> 添加菜单
+        </button>
+        @endpermission
+    </div>
+@endsection
+
 @section('content')
     <div class="box">
-        <div class="box-header">
-            <h3 class="box-title">菜单列表</h3>
-            <div class="box-tools pull-right">
-                @permission('admin.system.menu.add')
-                <a href="{{ route('admin.system.menu.add') }}" class="btn btn-default btn-xs">
-                    <i class="fa fa-plus"></i>
-                </a>
-                @endpermission
-
-            </div>
-
-        </div>
         <!-- /.box-header -->
         <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
@@ -55,4 +54,5 @@
         </div>
 
     </div>
+    @include('admin::system.menu.dialog')
 @endsection
