@@ -22,8 +22,8 @@ class SiteController extends BaseController
      */
     public function getIndex()
     {
-        $this->configs = app(ConfigRepository::class)->getConfigs();
-        return $this->render('system.site.index');
+        $configs = app(ConfigRepository::class)->getConfigs();
+        return $this->render('system.site.index', compact('configs'));
     }
 
     /**

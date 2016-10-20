@@ -16,37 +16,11 @@ abstract class Controller extends BaseController
      *
      * @type array
      */
-    protected $params = [];
+    protected $viewParameters = [];
 
-    /**
-     * 设置视图参数值
-     *
-     * @param string $name  参数名
-     * @param mixed  $value 值
-     */
-    public function __set($name, $value)
+    protected function setViewParameter($array)
     {
-        if (!property_exists($this, $name)) {
-            $this->params[$name] = $value;
-        }
-
-    }
-
-    public function __get($name)
-    {
-        if (property_exists($this, $name)) {
-            return $this->$name;
-        } else {
-            return isset($this->params[$name]) ? $this->params[$name] : null;
-        }
-
-    }
-
-    protected function setParam($name, $value)
-    {
-        if (!is_numeric($name)) {
-            $this->params[$name] = $value;
-        }
+        $this->viewParameters = array_merge($this->viewParameters, $array);
     }
 
     /**
@@ -59,8 +33,8 @@ abstract class Controller extends BaseController
      */
     protected function render($view, $params = [])
     {
-        if (!empty($this->params)) {
-            $params = array_merge($this->params, $params);
+        if (!empty($this->viewParameters)) {
+            $params = array_merge($this->viewParameters, $params);
         }
         return view($view, $params);
     }

@@ -31,9 +31,10 @@ class BaseController extends Controller
         parent::__construct();
 
         Event::listen([Authenticated::class, Login::class], function ($event) {
-            $this->user = $event->user;
-            if ($this->user && !request()->ajax()) {
-                $this->setParam('user', $this->user);
+            $user = $event->user;
+            if ($user && !request()->ajax()) {
+                $this->user = $user;
+                $this->setViewParameter(compact('user'));
                 $this->getLeftMenu();
                 //$this->breadcrumbs();
             }
@@ -55,11 +56,13 @@ class BaseController extends Controller
      */
     private function getLeftMenu()
     {
-        $this->leftMenu = app(PermissionRepository::class)->getMenuList();
+        $leftMenu = app(PermissionRepository::class)->getMenuList();
         $parentTree = app(PermissionRepository::class)->getParentTreeAndSelfByName(Route::currentRouteName());
+        $currentMenuIds = 0;
         if ($parentTree) {
-            $this->currentMenuIds = $parentTree->pluck('id');
+            $currentMenuIds = $parentTree->pluck('id');
         }
+        $this->setViewParameter(compact('leftMenu', 'currentMenuIds'));
     }
 
     /**

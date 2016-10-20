@@ -16,6 +16,8 @@ if (typeof jQuery === "undefined") {
   throw new Error("AdminLTE requires jQuery");
 }
 
+window.Vue = require('vue');
+
 /* AdminLTE
  *
  * @type Object

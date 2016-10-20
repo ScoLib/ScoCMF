@@ -23,8 +23,8 @@ class RoleController extends BaseController
      */
     public function getIndex()
     {
-        $this->roles = app(RoleRepository::class)->getAllRoles();
-        return $this->render('users.role.index');
+        $roles = app(RoleRepository::class)->getAllRoles();
+        return $this->render('users.role.index', compact('roles'));
     }
 
     /**

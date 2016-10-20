@@ -22,7 +22,7 @@ elixir.config.versioning = {
 
 elixir.extend('jsminify', function () {
     new elixir.Task('jsminify', function () {
-        return gulp.src(['resources/assets/js/admin.js', paths.jqueryvalidation + '/dist/jquery.validate.js'])
+        return gulp.src(['public/js/admin.js', paths.jqueryvalidation + '/dist/jquery.validate.js'])
             .pipe(rename({suffix: '.min'}))
             .pipe(jsuglify())
             .pipe(gulp.dest('public/js'));
@@ -48,8 +48,8 @@ elixir(mix => {
 
         .copy('resources/assets/fonts', 'public/fonts')
         // .copy('resources/assets/js', 'public/js')
+        .webpack('admin.js')
         .jsminify()
-        // .webpack('admin.js')
         // .webpack('jquery.validate.js', 'public/js/jquery.validate.min.js', 'public/js')
         .version(['css/admin.css', 'js/admin.min.js'])
         

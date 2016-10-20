@@ -21,9 +21,9 @@ class UserController extends BaseController
      */
     public function getIndex()
     {
-        $this->roles = app(RoleRepository::class)->getAllRoles();
-        $this->users = app(UserRepository::class)->paginate(15);
-        return $this->render('users.user.index');
+        $roles = app(RoleRepository::class)->getAllRoles();
+        $users = app(UserRepository::class)->paginate(15);
+        return $this->render('users.user.index', compact('roles', 'users'));
     }
 
     /**
@@ -33,8 +33,8 @@ class UserController extends BaseController
      */
     public function getAdd()
     {
-        $this->roles = app(RoleRepository::class)->getAllRoles();
-        return $this->render('users.user.add');
+        $roles = app(RoleRepository::class)->getAllRoles();
+        return $this->render('users.user.add', compact('roles'));
     }
 
     /**
@@ -66,10 +66,10 @@ class UserController extends BaseController
      */
     public function getEdit($uid)
     {
-        $this->userInfo = app(UserRepository::class)->find($uid);
-        $this->userRoleIds = $this->userInfo->roles()->getRelatedIds();
-        $this->roles    = app(RoleRepository::class)->getAllRoles();
-        return $this->render('users.user.edit');
+        $userInfo    = app(UserRepository::class)->find($uid);
+        $userRoleIds = $userInfo->roles()->getRelatedIds();
+        $roles       = app(RoleRepository::class)->getAllRoles();
+        return $this->render('users.user.edit', compact('userInfo', 'userRoleIds', 'roles'));
     }
 
     /**
