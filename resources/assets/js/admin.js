@@ -11,12 +11,14 @@
  * @license MIT <http://opensource.org/licenses/MIT>
  */
 
+if (typeof window.Vue == 'undefined') {
+  window.Vue = require('vue');
+}
+
 //Make sure jQuery has been loaded before app.js
 if (typeof jQuery === "undefined") {
   throw new Error("AdminLTE requires jQuery");
 }
-
-window.Vue = require('vue');
 
 /* AdminLTE
  *

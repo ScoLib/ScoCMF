@@ -47,7 +47,7 @@ elixir(mix => {
         .copy(paths.fontawesome + '/css/font-awesome.min.css', 'public/font-awesome/css/font-awesome.min.css')
 
         .copy('resources/assets/fonts', 'public/fonts')
-        // .copy('resources/assets/js', 'public/js')
+        .copy('resources/assets/js/admin', 'public/js/admin')
         .webpack('admin.js')
         .jsminify()
         // .webpack('jquery.validate.js', 'public/js/jquery.validate.min.js', 'public/js')

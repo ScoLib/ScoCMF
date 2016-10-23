@@ -6,7 +6,7 @@
     <div class="pull-right">
         @permission('admin.system.menu.add')
         <button type="button" class="btn btn-default" title="添加菜单"
-                data-toggle="modal" data-target="#menu-add">
+                data-toggle="modal" data-target="#menu-add" v-on:click="createMenu">
             <span class="fa fa-plus"></span> 添加菜单
         </button>
         @endpermission
@@ -55,4 +55,10 @@
 
     </div>
     @include('admin::system.menu.dialog')
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/admin/system.menu.js') }}"></script>
+
+    <script></script>
 @endsection
